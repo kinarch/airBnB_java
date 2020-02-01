@@ -1,5 +1,6 @@
 package richard.airbnb.menu;
 
+import richard.airbnb.logements.Appartement;
 import richard.airbnb.logements.Logement;
 import richard.airbnb.logements.Maison;
 import richard.airbnb.reservations.Reservation;
@@ -27,9 +28,11 @@ public class Menu {
         scanner.useDelimiter("\n");
 
         //  EXEMPLES
-        listeHotes.add(new Hote("truc", "bidule", 20, 48));
-        listeLogements.add(new Maison(listeHotes.get(0), "quelque part", 40, 200, 5, 200, true));
-        listeVoyageurs.add(new Voyageur("voyageur", "du temp", 30));
+        listeHotes.add(new Hote("Albert", "Einstein", 76, 48));
+        listeHotes.add(new Hote("Friedrich", "Nietzsche", 55, 12));
+        listeLogements.add(new Maison(listeHotes.get(0), "Quelque part", 40, 200, 5, 200, true));
+        listeLogements.add(new Appartement(listeHotes.get(1), "Monde imaginaire", 80, 150, 20, 5, 50));
+        listeVoyageurs.add(new Voyageur("Voyageur", "du Temp", 30));
         listeVoyageurs.add(new Voyageur("Doctor", "Who", 100));
 
         listerMenu();
