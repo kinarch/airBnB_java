@@ -19,15 +19,18 @@ public class GestionLogements {
     static void listerLogement() throws Exception {
 
         System.out.println("--------------------");
+        System.out.println("Liste des Logements");
+
         if (listeLogements.size() > 0) {
             for (int i = 0; i < listeLogements.size(); i++) {
                 Logement logement = listeLogements.get(i);
-                System.out.println("n°" + i + " : ");
+                System.out.print("n°" + i + " : ");
                 logement.afficher();
             }
         } else {
             System.out.println("Aucun logement enregistré.");
         }
+
         System.out.println("Saisir une option :");
         System.out.println("1 : Ajouter un logement");
         System.out.println("2 : Supprimer un logement");
@@ -64,7 +67,7 @@ public class GestionLogements {
             System.out.println("2 : Appartement");
             System.out.println("3 : Retour");
 
-            typeLogement = Menu.scanner.nextInt();
+            typeLogement = Menu.choix(3);
 
             if (typeLogement == RETOUR) {
                 listerLogement();
@@ -85,19 +88,19 @@ public class GestionLogements {
             String adresse = Menu.scanner.next();
 
             System.out.print("Superficie : ");
-            superficie = Menu.choix(Integer.MAX_VALUE);
+            superficie = Menu.choix();
 
             System.out.print("Tarif journalier : ");
-            tarifParNuit = Menu.choix(100000);
+            tarifParNuit = Menu.choix();
 
-            System.out.println("Nombre maximum de voyageurs :");
-            voyageurMax = Menu.choix(20);
+            System.out.print("Nombre maximum de voyageurs :");
+            voyageurMax = Menu.choix();
 
             Logement newLogement = null;
             switch (typeLogement) {
                 case TYPE_MAISON:
                     System.out.print("superficie du jardin :");
-                    int superficieJardin = Menu.choix(10000);
+                    int superficieJardin = Menu.choix();
                     System.out.println();
 
                     System.out.print("Piscine ? (0 non, 1 oui)");
@@ -109,11 +112,11 @@ public class GestionLogements {
                     break;
                 case TYPE_APPARTEMENT:
                     System.out.print("Saisissez le numéro de l'étage :");
-                    int numeroEtage = Menu.choix(10);
+                    int numeroEtage = Menu.choix();
                     System.out.println();
 
                     System.out.print("Superficie du balcon ? (0 : pas de balcon)");
-                    int superficieBalcon = Menu.choix(500);
+                    int superficieBalcon = Menu.choix();
                     System.out.println();
 
                     listeLogements.add(new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));

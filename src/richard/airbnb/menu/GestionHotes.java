@@ -12,6 +12,8 @@ class GestionHotes {
     static void listerHotes() throws Exception {
 
         System.out.println("--------------------");
+        System.out.println("Liste des hotes");
+
         if (listeHotes.size() > 0) {
             for (int i = 0; i < listeHotes.size(); i++) {
                 Hote hote = listeHotes.get(i);
@@ -22,6 +24,7 @@ class GestionHotes {
         } else {
             System.out.println("Aucun hote enregistré.");
         }
+
         System.out.println("Saisir une option :");
         System.out.println("1 : Ajouter un hote");
         System.out.println("2 : Supprimer un hote");
@@ -47,17 +50,17 @@ class GestionHotes {
         int age;
         int delaiReponse;
 
-        System.out.println("Prénom : ");
+        System.out.print("Prénom : ");
         prenom = Menu.scanner.next();
 
-        System.out.println("Nom : ");
+        System.out.print("Nom : ");
         nom = Menu.scanner.next();
 
-        System.out.println("Age : ");
+        System.out.print("Age : ");
         age = Menu.choix(140);
 
-        System.out.println("Delai de réponse : ");
-        delaiReponse = Menu.choix(72);
+        System.out.print("Delai de réponse : ");
+        delaiReponse = Menu.choix();
 
         Hote newHote = new Hote(prenom, nom, age, delaiReponse);
         listeHotes.add(newHote);

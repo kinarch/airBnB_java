@@ -14,6 +14,7 @@ public class GestionVoyageurs {
 
         System.out.println("--------------------");
         System.out.println("Liste des voyageurs");
+
         if (listeVoyageurs.size() > 0) {
             for (int i = 0; i < listeVoyageurs.size(); i++) {
                 Voyageur voyageur = listeVoyageurs.get(i);
@@ -24,6 +25,7 @@ public class GestionVoyageurs {
         } else {
             System.out.println("Aucun voyageur enregistré.");
         }
+
         System.out.println("Saisir une option :");
         System.out.println("1 : Ajouter un voyageur");
         System.out.println("2 : Supprimer un voyageur");
@@ -48,13 +50,13 @@ public class GestionVoyageurs {
         String nom;
         int age;
 
-        System.out.println("Prénom : ");
+        System.out.print("Prénom : ");
         prenom = Menu.scanner.next();
 
-        System.out.println("Nom : ");
+        System.out.print("Nom : ");
         nom = Menu.scanner.next();
 
-        System.out.println("Age : ");
+        System.out.print("Age : ");
         age = Menu.choix(140);
 
         Voyageur newVoyageur = new Voyageur(prenom, nom, age);

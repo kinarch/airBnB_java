@@ -21,6 +21,8 @@ public class GestionReservation {
     static void listerReservation() throws Exception {
 
         System.out.println("--------------------");
+        System.out.println("Liste des reservations");
+
         if (listeReservations.size() > 0) {
             for (int i = 0; i < listeReservations.size(); i++) {
                 Reservation reservation = listeReservations.get(i);
@@ -30,6 +32,7 @@ public class GestionReservation {
         } else {
             System.out.println("Aucune reservation enregistrée.");
         }
+
         System.out.println("Saisir une option :");
         System.out.println("1 : Ajouter une reservation");
         System.out.println("2 : Supprimer une reservation");
@@ -95,7 +98,14 @@ public class GestionReservation {
 
             Sejour sejour;
 
-            if (nbNuit < NB_NUIT_POUR_SEJOUR_LONG) {
+            if (nbNuit >= NB_NUIT_POUR_SEJOUR_LONG) {
+                //  sejour long
+                sejour = new SejourLong(
+                        dateArrivee,
+                        nbNuit,
+                        logement,
+                        nbVoyageurs);
+            } else {
                 //  sejour cours
                 sejour = new SejourCourt(
                         dateArrivee,
@@ -103,13 +113,6 @@ public class GestionReservation {
                         logement,
                         nbVoyageurs
                 );
-            } else {
-                //  sejour long
-                sejour = new SejourLong(
-                        dateArrivee,
-                        nbNuit,
-                        logement,
-                        nbVoyageurs);
             }
 
             try {
