@@ -30,9 +30,9 @@ public class Menu {
 
         //  EXEMPLES
         listeHotes.add(new Hote("Albert", "Einstein", 76, 48));
-        listeHotes.add(new Hote("Friedrich", "Nietzsche", 55, 12));
+        listeHotes.add(new Hote("Friedrich", "Nietzsche", 55, 1));
         listeLogements.add(new Maison(listeHotes.get(0), "Quelque part", 40, 200, 5, 200, true));
-        listeLogements.add(new Appartement(listeHotes.get(1), "Dans un Monde imaginaire", 80, 150, 20, 5, 50));
+        listeLogements.add(new Appartement(listeHotes.get(1), "Dans un Monde imaginaire", 80, 150, 20, 5, 0));
         listeVoyageurs.add(new Voyageur("Voyageur", "du Temp", 30));
         listeVoyageurs.add(new Voyageur("Doctor", "Who", 100));
 

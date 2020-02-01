@@ -9,6 +9,8 @@ public class Appartement extends Logement {
 
     public Appartement(Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax, int numeroEtage, int superficieBalcon) {
         super(hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
+        this.numeroEtage = numeroEtage;
+        this.superficieBalcon = superficieBalcon;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class Appartement extends Logement {
         System.out.println("superficie : " + getSuperficieTotal() + "m²");
         System.out.print("Balcon : ");
         if (superficieBalcon > 0) {
-            System.out.println("OUi (" + superficieBalcon + ").");
+            System.out.println("Oui (" + superficieBalcon + "m²).");
         } else {
             System.out.println("Non.");
         }
