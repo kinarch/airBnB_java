@@ -4,10 +4,12 @@ import richard.airbnb.utilisateurs.Hote;
 
 import java.util.ArrayList;
 
-class GestionHotes {
+class GestionHotes extends Gestion {
 
     private static ArrayList<Hote> listeHotes = Menu.listeHotes;
-    private static int MAX_VALUE_OPTION = 3;
+
+    private GestionHotes() {
+    }
 
     static void listerHotes() throws Exception {
 
@@ -30,14 +32,14 @@ class GestionHotes {
         System.out.println("2 : Supprimer un hote");
         System.out.println("3 : Retour");
 
-        switch (Menu.choix(MAX_VALUE_OPTION)) {
-            case 1:
+        switch (Menu.choix(NB_OPTIONS)) {
+            case AJOUTER:
                 ajouterHote();
                 break;
-            case 2:
+            case SUPPRIMER:
                 supprimerHote();
                 break;
-            case 3:
+            case RETOUR:
                 Menu.listerMenu();
                 break;
         }

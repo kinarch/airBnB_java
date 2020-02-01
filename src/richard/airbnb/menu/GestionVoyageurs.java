@@ -4,10 +4,12 @@ import richard.airbnb.utilisateurs.Voyageur;
 
 import java.util.ArrayList;
 
-public class GestionVoyageurs {
+class GestionVoyageurs extends Gestion {
 
     private static final ArrayList<Voyageur> listeVoyageurs = Menu.listeVoyageurs;
-    private static final int MAX_VALUE_OPTION = 3;
+
+    private GestionVoyageurs() {
+    }
 
     static void listerVoyageur() throws Exception {
 
@@ -31,14 +33,14 @@ public class GestionVoyageurs {
         System.out.println("2 : Supprimer un voyageur");
         System.out.println("3 : Retour");
 
-        switch (Menu.choix(MAX_VALUE_OPTION)) {
-            case 1:
+        switch (Menu.choix(NB_OPTIONS)) {
+            case AJOUTER:
                 ajouterVoyageur();
                 break;
-            case 2:
+            case SUPPRIMER:
                 supprimerVoyageur();
                 break;
-            case 3:
+            case RETOUR:
                 Menu.listerMenu();
                 break;
         }

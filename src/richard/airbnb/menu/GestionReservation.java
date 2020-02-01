@@ -11,12 +11,14 @@ import richard.airbnb.utilisateurs.Voyageur;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class GestionReservation {
+class GestionReservation extends Gestion {
 
     private static ArrayList<Reservation> listeReservations = Menu.listeReservations;
-    private static int MAX_VALUE_OPTION = 3;
     private static int MAX_NB_NUITS = 60;
     private static int NB_NUIT_POUR_SEJOUR_LONG = 6;
+
+    private GestionReservation() {
+    }
 
     static void listerReservation() throws Exception {
 
@@ -38,14 +40,14 @@ public class GestionReservation {
         System.out.println("2 : Supprimer une reservation");
         System.out.println("3 : Retour");
 
-        switch (Menu.choix(MAX_VALUE_OPTION)) {
-            case 1:
+        switch (Menu.choix(NB_OPTIONS)) {
+            case AJOUTER:
                 ajouterReservation();
                 break;
-            case 2:
+            case SUPPRIMER:
                 supprimerReservation();
                 break;
-            case 3:
+            case RETOUR:
                 Menu.listerMenu();
                 break;
         }

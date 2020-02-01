@@ -17,6 +17,9 @@ public class Menu {
     static final ArrayList<Voyageur> listeVoyageurs = new ArrayList<>();
     static final ArrayList<Reservation> listeReservations = new ArrayList<>();
 
+    private Menu() {
+    }
+
     public static void main(String[] args) throws Exception {
         System.out.println("Bienvenue chez AirBnB");
 

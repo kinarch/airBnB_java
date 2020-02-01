@@ -7,14 +7,15 @@ import richard.airbnb.utilisateurs.Hote;
 
 import java.util.ArrayList;
 
-public class GestionLogements {
+class GestionLogements extends Gestion {
 
-    private static final int MAX_VALUE_OPTION = 3;
     private static final int TYPE_MAISON = 1;
     private static final int TYPE_APPARTEMENT = 2;
-    private static final int RETOUR = 3;
     private static final ArrayList<Logement> listeLogements = Menu.listeLogements;
     private static final ArrayList<Hote> listeHotes = Menu.listeHotes;
+
+    private GestionLogements() {
+    }
 
     static void listerLogement() throws Exception {
 
@@ -36,14 +37,14 @@ public class GestionLogements {
         System.out.println("2 : Supprimer un logement");
         System.out.println("3 : Retour");
 
-        switch (Menu.choix(MAX_VALUE_OPTION)) {
-            case 1:
+        switch (Menu.choix(NB_OPTIONS)) {
+            case AJOUTER:
                 ajouterLogement();
                 break;
-            case 2:
+            case SUPPRIMER:
                 supprimerLogement();
                 break;
-            case 3:
+            case RETOUR:
                 Menu.listerMenu();
                 break;
         }
