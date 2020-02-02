@@ -9,7 +9,7 @@ public class Voyageur extends Personne {
      * @param nom    son nom
      * @param age    son age
      */
-    public Voyageur(String prenom, String nom, int age) {
+    public Voyageur(String prenom, String nom, int age) throws Exception {
         super(prenom, nom, age);
     }
 }

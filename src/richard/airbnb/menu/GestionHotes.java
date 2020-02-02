@@ -3,6 +3,7 @@ package richard.airbnb.menu;
 import richard.airbnb.utilisateurs.Hote;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 class GestionHotes extends Gestion {
 
@@ -11,7 +12,7 @@ class GestionHotes extends Gestion {
     private GestionHotes() {
     }
 
-    static void listerHotes() throws Exception {
+    static void listerHotes() {
 
         System.out.println("--------------------");
         System.out.println("Liste des hotes");
@@ -34,10 +35,28 @@ class GestionHotes extends Gestion {
 
         switch (Menu.choix(NB_OPTIONS)) {
             case AJOUTER:
-                ajouterHote();
+                try {
+                    ajouterHote();
+                }  catch (InputMismatchException e) {
+                    System.out.println(e.getMessage());
+                    Menu.scanner.next();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    listerHotes();
+                }
                 break;
             case SUPPRIMER:
-                supprimerHote();
+                try {
+                    supprimerHote();
+                } catch (InputMismatchException e) {
+                    Menu.scanner.next();
+                    System.out.println(e.getMessage());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    listerHotes();
+                }
                 break;
             case RETOUR:
                 Menu.listerMenu();
@@ -59,35 +78,30 @@ class GestionHotes extends Gestion {
         nom = Menu.scanner.next();
 
         System.out.print("Age : ");
-        age = Menu.choix(140);
+        age = Menu.scanner.nextInt();
 
         System.out.print("Delai de réponse : ");
-        delaiReponse = Menu.choix();
+        delaiReponse = Menu.scanner.nextInt();
 
         Hote newHote = new Hote(prenom, nom, age, delaiReponse);
         listeHotes.add(newHote);
-
-        listerHotes();
     }
 
     static void supprimerHote() throws Exception {
 
         if (!listeHotes.isEmpty()) {
-            System.out.println("Numéro de l'hote à supprimer :");
-            int indexHote = 0;
-            if (listeHotes.size() > 1) {
-                indexHote = Menu.choix(listeHotes.size() - 1);
+            System.out.println("Numéro de l'hote à supprimer (entre 0 et " + (listeHotes.size() - 1) + ") : ");
+            int indexHote = Menu.scanner.nextInt();
+            if (indexHote >= listeHotes.size()) {
+                throw new Exception("Aucun hote ne correspond au numéro " + indexHote + ".");
             }
-            System.out.println("Etes-vous certains de supprimer l'hote n°" + indexHote);
-            System.out.print("(0 : non, 1 : oui) ");
-            int estSur = Menu.choix(1);
-            if (estSur == 1) {
+            System.out.println("Etes-vous certains de supprimer l'hote n°" + indexHote + " (0 : non, 1 : oui) : ");
+            int estSur = Menu.scanner.nextInt();
+            if (estSur > 1) {
                 listeHotes.remove(indexHote);
             }
         } else {
             System.out.println("Aucun hote à supprimer.");
         }
-
-        listerHotes();
     }
 }

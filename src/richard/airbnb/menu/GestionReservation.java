@@ -20,7 +20,7 @@ class GestionReservation extends Gestion {
     private GestionReservation() {
     }
 
-    static void listerReservation() throws Exception {
+    static void listerReservation() {
 
         System.out.println("--------------------");
         System.out.println("Liste des reservations");
@@ -42,10 +42,10 @@ class GestionReservation extends Gestion {
 
         switch (Menu.choix(NB_OPTIONS)) {
             case AJOUTER:
-                ajouterReservation();
+//                ajouterReservation();
                 break;
             case SUPPRIMER:
-                supprimerReservation();
+//                supprimerReservation();
                 break;
             case RETOUR:
                 Menu.listerMenu();

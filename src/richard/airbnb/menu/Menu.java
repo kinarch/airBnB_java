@@ -43,44 +43,30 @@ public class Menu {
 
 
     /**
-     * Permet à l'utilisateur de choisir un entier compris entre minValue et maxValue.
+     * Permet à l'utilisateur de choisir un entier compris entre 1 et maxValue.
      * Retourne ce choix.
      *
-     * @param minValue int
      * @param maxValue int
      * @return userInput int
      */
-    static int choix(int minValue, int maxValue) {
+    static int choix(int maxValue) {
 
         int userInput = 0;
-        boolean isAcceptedValue = false;
 
         do {
             try {
-                if (maxValue < Integer.MAX_VALUE) {
-                    System.out.print("(entre " + minValue + " et " + maxValue + ") : ");
-                }
+                System.out.print("Entre un chiffre entre 1 et " + maxValue + " : ");
                 userInput = scanner.nextInt();
-                isAcceptedValue = (userInput <= maxValue && userInput >= minValue);
             } catch (Exception e) {
                 String s = scanner.next();
                 System.out.println("'" + s + "' est une valeur incorecte.");
             }
-        } while (!isAcceptedValue);
+        } while (userInput < 1 || userInput > maxValue);
 
         return userInput;
     }
 
-    static int choix(int maxValue) {
-        int minValue = maxValue == 1 ? 0 : 1;
-        return choix(minValue, maxValue);
-    }
-
-    static int choix() {
-        return choix(0, Integer.MAX_VALUE);
-    }
-
-    static void listerMenu() throws Exception {
+    static void listerMenu() {
 
         final int maxOptionValue = 5;
 

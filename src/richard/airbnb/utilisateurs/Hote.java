@@ -11,8 +11,11 @@ public class Hote extends Personne {
      * @param nom    son nom
      * @param age    son age
      */
-    public Hote(String prenom, String nom, int age, int delaiDeReponse) {
+    public Hote(String prenom, String nom, int age, int delaiDeReponse) throws Exception {
         super(prenom, nom, age);
+        if (delaiDeReponse < 0) {
+            throw new Exception("Delai de réponse négatif.");
+        }
         this.delaiDeReponse = delaiDeReponse;
     }
 

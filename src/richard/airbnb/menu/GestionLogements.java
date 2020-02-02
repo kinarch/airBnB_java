@@ -17,7 +17,7 @@ class GestionLogements extends Gestion {
     private GestionLogements() {
     }
 
-    static void listerLogement() throws Exception {
+    static void listerLogement() {
 
         System.out.println("--------------------");
         System.out.println("Liste des Logements");
@@ -39,10 +39,10 @@ class GestionLogements extends Gestion {
 
         switch (Menu.choix(NB_OPTIONS)) {
             case AJOUTER:
-                ajouterLogement();
+//                ajouterLogement();
                 break;
             case SUPPRIMER:
-                supprimerLogement();
+//                supprimerLogement();
                 break;
             case RETOUR:
                 Menu.listerMenu();
@@ -89,23 +89,22 @@ class GestionLogements extends Gestion {
             String adresse = Menu.scanner.next();
 
             System.out.print("Superficie : ");
-            superficie = Menu.choix();
+            superficie = Menu.scanner.nextInt();
 
             System.out.print("Tarif journalier : ");
-            tarifParNuit = Menu.choix();
+            tarifParNuit = Menu.scanner.nextInt();
 
             System.out.print("Nombre maximum de voyageurs :");
-            voyageurMax = Menu.choix();
+            voyageurMax = Menu.scanner.nextInt();
 
-            Logement newLogement = null;
             switch (typeLogement) {
                 case TYPE_MAISON:
                     System.out.print("superficie du jardin :");
-                    int superficieJardin = Menu.choix();
+                    int superficieJardin = Menu.scanner.nextInt();
                     System.out.println();
 
                     System.out.print("Piscine ? (0 non, 1 oui)");
-                    boolean possedePiscine = Menu.choix(1) > 0;
+                    boolean possedePiscine = Menu.scanner.nextInt() > 0;
                     System.out.println();
 
                     listeLogements.add(new Maison(hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
@@ -113,11 +112,11 @@ class GestionLogements extends Gestion {
                     break;
                 case TYPE_APPARTEMENT:
                     System.out.print("Saisissez le numéro de l'étage :");
-                    int numeroEtage = Menu.choix();
+                    int numeroEtage = Menu.scanner.nextInt();
                     System.out.println();
 
                     System.out.print("Superficie du balcon ? (0 : pas de balcon)");
-                    int superficieBalcon = Menu.choix();
+                    int superficieBalcon = Menu.scanner.nextInt();
                     System.out.println();
 
                     listeLogements.add(new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));

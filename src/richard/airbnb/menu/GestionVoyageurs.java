@@ -11,7 +11,7 @@ class GestionVoyageurs extends Gestion {
     private GestionVoyageurs() {
     }
 
-    static void listerVoyageur() throws Exception {
+    static void listerVoyageur() {
 
 
         System.out.println("--------------------");
@@ -35,10 +35,18 @@ class GestionVoyageurs extends Gestion {
 
         switch (Menu.choix(NB_OPTIONS)) {
             case AJOUTER:
-                ajouterVoyageur();
+                try {
+                    ajouterVoyageur();
+                } catch (Exception e) {
+
+                }
                 break;
             case SUPPRIMER:
-                supprimerVoyageur();
+                try {
+                    supprimerVoyageur();
+                } catch (Exception e) {
+                    
+                }
                 break;
             case RETOUR:
                 Menu.listerMenu();
@@ -59,7 +67,7 @@ class GestionVoyageurs extends Gestion {
         nom = Menu.scanner.next();
 
         System.out.print("Age : ");
-        age = Menu.choix(140);
+        age = Menu.scanner.nextInt();
 
         Voyageur newVoyageur = new Voyageur(prenom, nom, age);
         listeVoyageurs.add(newVoyageur);
