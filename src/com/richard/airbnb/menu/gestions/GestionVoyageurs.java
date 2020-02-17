@@ -13,6 +13,9 @@ public final class GestionVoyageurs extends Gestion {
     private GestionVoyageurs() {
     }
 
+    /**
+     * Initialise le menu de la gestion des voyageurs.
+     */
     public static void init() {
 
 
@@ -49,6 +52,11 @@ public final class GestionVoyageurs extends Gestion {
         }
     }
 
+    /**
+     * Permet à l'utilisateur d'ajouter un voyageur à la liste.
+     *
+     * @throws Exception
+     */
     private static void add() throws Exception {
 
         System.out.println("=> Ajouter un voyageur.");
@@ -70,6 +78,12 @@ public final class GestionVoyageurs extends Gestion {
         voyageurList.add(newVoyageur);
     }
 
+    /**
+     * Permet à l'utlisateur de choisir l'index du voyageur à supprimer de la liste.
+     *
+     * @throws IndexOutOfBoundsException
+     * @throws InputMismatchException
+     */
     private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer un voyageur.");
@@ -94,6 +108,9 @@ public final class GestionVoyageurs extends Gestion {
         }
     }
 
+    /**
+     * Permet à l'utilisateur d'afficher la liste dans la console.
+     */
     private static void display() {
         if (voyageurList.size() > 0) {
             for (int i = 0; i < voyageurList.size(); i++) {
@@ -107,6 +124,9 @@ public final class GestionVoyageurs extends Gestion {
         }
     }
 
+    /**
+     * Retour au menu initial.
+     */
     private static void back() {
         Menu.init();
     }

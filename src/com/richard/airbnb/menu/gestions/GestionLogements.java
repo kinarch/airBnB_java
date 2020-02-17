@@ -19,7 +19,7 @@ public final class GestionLogements extends Gestion {
     }
 
     /**
-     * Menu des logements.
+     * Initialise le menu de la gestion des logements.
      */
     public static void init() {
 
@@ -66,6 +66,11 @@ public final class GestionLogements extends Gestion {
     }
 
 
+    /**
+     * Permet à l'utilisateur d'ajouter un logement a la liste.
+     *
+     * @throws Exception si l'utilisateur tente une saisie incorrect ou de créer un hote aux attributs impossible.
+     */
     private static void add() throws Exception {
 
         System.out.println("=> Ajouter un logement.");
@@ -150,7 +155,13 @@ public final class GestionLogements extends Gestion {
         }
     }
 
-    static void delete() throws IndexOutOfBoundsException, InputMismatchException {
+    /**
+     * Permet a l'utilisateur de choisir l'index du logement à supprimer de la liste.
+     *
+     * @throws IndexOutOfBoundsException
+     * @throws InputMismatchException
+     */
+    private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer un logement.");
 
@@ -174,6 +185,9 @@ public final class GestionLogements extends Gestion {
         }
     }
 
+    /**
+     * Permet a l'utilisateur d'afficher la liste dans la console
+     */
     private static void display() {
         if (logementList.size() > 0) {
             for (int i = 0; i < logementList.size(); i++) {
@@ -186,6 +200,9 @@ public final class GestionLogements extends Gestion {
         }
     }
 
+    /**
+     * Retour au menu initial.
+     */
     private static void back() {
         Menu.init();
     }

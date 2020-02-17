@@ -22,6 +22,9 @@ public final class GestionReservation extends Gestion {
     private GestionReservation() {
     }
 
+    /**
+     * Initialise le menu de la gestion des réservation.
+     */
     public static void init() {
 
         System.out.println("---------- ----------");
@@ -66,6 +69,11 @@ public final class GestionReservation extends Gestion {
         }
     }
 
+    /**
+     * Permet à l'utilisateur d'ajouter une réservation à la liste.
+     *
+     * @throws Exception
+     */
     private static void add() throws Exception {
 
         System.out.println("=> Ajouter une réservation.");
@@ -165,6 +173,12 @@ public final class GestionReservation extends Gestion {
         }
     }
 
+    /**
+     * Permet à l'utilisateur de choisir l'index de la réservation à supprimer de la liste.
+     *
+     * @throws IndexOutOfBoundsException
+     * @throws InputMismatchException
+     */
     private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer une réservation.");
@@ -189,6 +203,9 @@ public final class GestionReservation extends Gestion {
         }
     }
 
+    /**
+     * Permet à l'utilisateur d'afficher la liste dans la console.
+     */
     private static void display() {
         if (reservationList.size() > 0) {
             for (int i = 0; i < reservationList.size(); i++) {
@@ -201,6 +218,9 @@ public final class GestionReservation extends Gestion {
         }
     }
 
+    /**
+     * Retour au menu initial.
+     */
     private static void back() {
         Menu.init();
     }

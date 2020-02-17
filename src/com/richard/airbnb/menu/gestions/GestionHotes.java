@@ -13,6 +13,9 @@ public final class GestionHotes extends Gestion {
     private GestionHotes() {
     }
 
+    /**
+     * Initialise le menu de la gestion des hotes
+     */
     public static void init() {
 
         System.out.println("---------- ----------");
@@ -51,6 +54,8 @@ public final class GestionHotes extends Gestion {
     }
 
     /**
+     * Permet a l'utilisateur d'ajouter un hote à la liste
+     *
      * @throws Exception si l'utilisateur tente une saisie incorrect ou de créer un hote aux attributs impossible.
      */
     static void add() throws Exception {
@@ -79,7 +84,7 @@ public final class GestionHotes extends Gestion {
     }
 
     /**
-     * Supprimer dans la liste.
+     * Permet à l'utilisateur de choisir l'index de l'hote à supprimer de la liste.
      *
      * @throws IndexOutOfBoundsException si l'utilisateur tente d'entrer un numéro en dehors des index la liste
      * @throws InputMismatchException    si l'utilisateur tente une saisie alphabétique.
@@ -104,6 +109,9 @@ public final class GestionHotes extends Gestion {
         }
     }
 
+    /**
+     * Permet à l'utilisateur d'afficher la liste dans la console
+     */
     private static void display() {
         if (hoteList.size() > 0) {
             for (int i = 0; i < hoteList.size(); i++) {
@@ -117,6 +125,9 @@ public final class GestionHotes extends Gestion {
         }
     }
 
+    /**
+     * Retour au menu initial.
+     */
     private static void back() {
         Menu.init();
     }
