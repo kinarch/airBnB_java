@@ -69,7 +69,7 @@ public class Menu {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(" ~~ " + TITLE + " ~~ ");
+        System.out.println("********** " + TITLE + " **********");
         listerMenu();
 
         scanner.close();

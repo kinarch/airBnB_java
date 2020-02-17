@@ -27,7 +27,7 @@ public final class AirBnBXMLParser {
         final Document document = builder.parse(new File(path));
 
         //  Affichage du prologue
-        System.out.println("* * * * * * * * * * DOCUMENT * * * * * * * * *");
+        System.out.println("********** Document **********");
         System.out.println("version : " + document.getXmlVersion());
         System.out.println("encodage : " + document.getXmlEncoding());
         System.out.println("standalone : " + document.getXmlStandalone());
