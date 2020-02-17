@@ -1,7 +1,7 @@
-package com.richard.airbnb.menu.gestion;
+package com.richard.airbnb.menu.gestions;
 
-import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Logement;
+import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Maison;
 import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.menu.Menu;
@@ -9,9 +9,9 @@ import com.richard.airbnb.menu.Menu;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-public class GestionLogements extends Gestion {
+public final class GestionLogements extends Gestion {
 
-    public static final ArrayList<Logement> listeLogements = new ArrayList<>();
+    public static final ArrayList<Logement> logementList = Menu.logementList;
     private static final int TYPE_MAISON = 1;
     private static final int TYPE_APPARTEMENT = 2;
 
@@ -26,9 +26,9 @@ public class GestionLogements extends Gestion {
         System.out.println("---------- ----------");
         System.out.println("Liste des Logements");
 
-        if (listeLogements.size() > 0) {
-            for (int i = 0; i < listeLogements.size(); i++) {
-                Logement logement = listeLogements.get(i);
+        if (logementList.size() > 0) {
+            for (int i = 0; i < logementList.size(); i++) {
+                Logement logement = logementList.get(i);
                 System.out.print("* n°" + i + " : ");
                 logement.afficher();
             }
@@ -76,7 +76,7 @@ public class GestionLogements extends Gestion {
 
         System.out.println("=> Ajouter un logement.");
 
-        final ArrayList<Hote> listeHotes = GestionHotes.listeHotes;
+        final ArrayList<Hote> listeHotes = GestionHotes.hoteList;
 
         if (!listeHotes.isEmpty()) {
 
@@ -98,7 +98,7 @@ public class GestionLogements extends Gestion {
                 listerLogement();
             }
 
-            if (listeLogements.size() == 1) {
+            if (logementList.size() == 1) {
                 System.out.println("Un seul hote trouvé, voulez-vous le validé ? (0 : non, 1 ou plus : oui).");
                 if (Menu.scanner.nextInt() > 0) {
                     indexHote = 0;
@@ -113,7 +113,7 @@ public class GestionLogements extends Gestion {
                 }
             }
 
-            hote = GestionHotes.listeHotes.get(indexHote);
+            hote = GestionHotes.hoteList.get(indexHote);
             hote.afficher();
             System.out.println();
 
@@ -139,7 +139,7 @@ public class GestionLogements extends Gestion {
                     boolean possedePiscine = Menu.scanner.nextInt() > 0;
                     System.out.println();
 
-                    listeLogements.add(new Maison(hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
+                    logementList.add(new Maison(hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
                     System.out.println("Votre maison a été ajouté avec succès");
                     break;
                 case TYPE_APPARTEMENT:
@@ -151,7 +151,7 @@ public class GestionLogements extends Gestion {
                     int superficieBalcon = Menu.scanner.nextInt();
                     System.out.println();
 
-                    listeLogements.add(new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));
+                    logementList.add(new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));
                     System.out.println("Votre appartement a été ajouté avec succès");
                     break;
             }
@@ -165,12 +165,12 @@ public class GestionLogements extends Gestion {
 
         System.out.println("=> Supprimer un logement.");
 
-        if (!listeLogements.isEmpty()) {
+        if (!logementList.isEmpty()) {
 
             int index = 0;
 
-            if (listeLogements.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (listeLogements.size() - 1) + ") : ");
+            if (logementList.size() > 1) {
+                System.out.println("Numéro ? (entre 0 et " + (logementList.size() - 1) + ") : ");
                 index = Menu.scanner.nextInt();
             } else {
                 System.out.println("Un seul logement enregistré.");
@@ -178,7 +178,7 @@ public class GestionLogements extends Gestion {
 
             System.out.println("Etes-vous certains de supprimer le logement n°" + index + " (0 : non | plus : oui) : ");
             if (Menu.scanner.nextInt() > 1) {
-                listeLogements.remove(index);
+                logementList.remove(index);
             }
         } else {
             System.out.println("Aucun logement à supprimer.");

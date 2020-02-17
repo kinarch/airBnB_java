@@ -1,4 +1,4 @@
-package com.richard.airbnb.menu.gestion;
+package com.richard.airbnb.menu.gestions;
 
 import com.richard.airbnb.models.logements.Logement;
 import com.richard.airbnb.models.reservations.Reservation;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 
-public class GestionReservation extends Gestion {
+public final class GestionReservation extends Gestion {
 
-    static final ArrayList<Reservation> listeReservations = new ArrayList<>();
+    static final ArrayList<Reservation> reservationList = Menu.reservationList;
     private static int MAX_NB_NUITS = 60;
     private static int NB_NUIT_POUR_SEJOUR_LONG = 6;
 
@@ -27,9 +27,9 @@ public class GestionReservation extends Gestion {
         System.out.println("---------- ----------");
         System.out.println("Liste des reservations");
 
-        if (listeReservations.size() > 0) {
-            for (int i = 0; i < listeReservations.size(); i++) {
-                Reservation reservation = listeReservations.get(i);
+        if (reservationList.size() > 0) {
+            for (int i = 0; i < reservationList.size(); i++) {
+                Reservation reservation = reservationList.get(i);
                 System.out.println("* n°" + i + " : ");
                 reservation.afficher();
             }
@@ -77,9 +77,9 @@ public class GestionReservation extends Gestion {
 
         System.out.println("=> Ajouter une réservation.");
 
-        if (GestionVoyageurs.listeVoyageurs.isEmpty()) {
+        if (GestionVoyageurs.voyageurList.isEmpty()) {
             System.out.println("Aucun voyageur enregistré, réservation d'un sejour impossible.");
-        } else if (GestionLogements.listeLogements.isEmpty()) {
+        } else if (GestionLogements.logementList.isEmpty()) {
             System.out.println("Aucun logement enregistré, réservation d'un sejour impossible.");
         } else {
 
@@ -89,7 +89,7 @@ public class GestionReservation extends Gestion {
 
             //  voyageur
             System.out.print("Numéro du voyageur : ");
-            final ArrayList<Voyageur> listeVoyageurs = GestionVoyageurs.listeVoyageurs;
+            final ArrayList<Voyageur> listeVoyageurs = GestionVoyageurs.voyageurList;
             if (listeVoyageurs.size() == 1) {
                 indexVoyageur = 0;
                 System.out.println("Un seul voyageur trouvé.");
@@ -101,7 +101,7 @@ public class GestionReservation extends Gestion {
             System.out.println();
 
             //  logement
-            final ArrayList<Logement> listeLogements = GestionLogements.listeLogements;
+            final ArrayList<Logement> listeLogements = GestionLogements.logementList;
             System.out.print("Numéro du logement : ");
             if (listeLogements.size() == 1) {
                 System.out.println("Un seul logement trouvé, voulez-vous le valider ? (0 : non, 1 ou plus : oui).");
@@ -165,7 +165,7 @@ public class GestionReservation extends Gestion {
                         sejour,
                         voyageur,
                         new MaDate());
-                listeReservations.add(newReservation);
+                reservationList.add(newReservation);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -176,20 +176,20 @@ public class GestionReservation extends Gestion {
 
         System.out.println("=> Supprimer une réservation.");
 
-        if (!listeReservations.isEmpty()) {
+        if (!reservationList.isEmpty()) {
 
             int index = 0;
 
-            if (listeReservations.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (listeReservations.size() - 1) + ") : ");
-                index = Menu.choix(listeReservations.size());
+            if (reservationList.size() > 1) {
+                System.out.println("Numéro ? (entre 0 et " + (reservationList.size() - 1) + ") : ");
+                index = Menu.choix(reservationList.size());
             } else {
                 System.out.println("Une seul réservation enregistré.");
             }
 
             System.out.println("Etes-vous certains de supprimer la réservation n°" + index + " (0 : non | plus : oui) : ");
             if (Menu.scanner.nextInt() > 1) {
-                listeReservations.remove(index);
+                reservationList.remove(index);
             }
         } else {
             System.out.println("Aucune reservation à supprimer.");

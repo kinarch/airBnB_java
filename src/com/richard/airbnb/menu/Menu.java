@@ -1,10 +1,10 @@
 package com.richard.airbnb.menu;
 
 
-import com.richard.airbnb.menu.gestion.GestionHotes;
-import com.richard.airbnb.menu.gestion.GestionLogements;
-import com.richard.airbnb.menu.gestion.GestionReservation;
-import com.richard.airbnb.menu.gestion.GestionVoyageurs;
+import com.richard.airbnb.menu.gestions.GestionHotes;
+import com.richard.airbnb.menu.gestions.GestionLogements;
+import com.richard.airbnb.menu.gestions.GestionReservation;
+import com.richard.airbnb.menu.gestions.GestionVoyageurs;
 import com.richard.airbnb.models.logements.Logement;
 import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
@@ -26,15 +26,18 @@ public class Menu {
     private Menu() {
     }
 
-    public static void main(String[] args) throws Exception {
-
-        System.out.println("Bienvenue chez AirBnB");
+    public static void main(String[] args) {
 
         scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
 
         try {
             AirBnBXMLParser.parseList("res/logements.xml", hoteList, logementList);
+            /*
+                exemple voyageurs
+             */
+            voyageurList.add(new Voyageur("Voyageur", "du Temp", 30));
+            voyageurList.add(new Voyageur("Doctor", "Who", 100));
         } catch (Exception e) {
             e.printStackTrace();
             return;
@@ -58,9 +61,9 @@ public class Menu {
             System.out.println();
         }
 
-//        GestionVoyageurs.listeVoyageurs.add(new Voyageur("Voyageur", "du Temp", 30));
-//        GestionVoyageurs.listeVoyageurs.add(new Voyageur("Doctor", "Who", 100));
+        System.out.println();
 
+        System.out.println("Bienvenue chez AirBnB");
         listerMenu();
 
         scanner.close();

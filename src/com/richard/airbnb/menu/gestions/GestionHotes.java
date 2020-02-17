@@ -1,14 +1,14 @@
-package com.richard.airbnb.menu.gestion;
+package com.richard.airbnb.menu.gestions;
 
-import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.menu.Menu;
+import com.richard.airbnb.models.utilisateurs.Hote;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-public class GestionHotes extends Gestion {
+public final class GestionHotes extends Gestion {
 
-    public static final ArrayList<Hote> listeHotes = new ArrayList<>();
+    public static final ArrayList<Hote> hoteList = Menu.hoteList;
 
     private GestionHotes() {
     }
@@ -21,9 +21,9 @@ public class GestionHotes extends Gestion {
         System.out.println("---------- ----------");
         System.out.println("Liste des hotes");
 
-        if (listeHotes.size() > 0) {
-            for (int i = 0; i < listeHotes.size(); i++) {
-                Hote hote = listeHotes.get(i);
+        if (hoteList.size() > 0) {
+            for (int i = 0; i < hoteList.size(); i++) {
+                Hote hote = hoteList.get(i);
                 System.out.print("* n°" + i + " : ");
                 hote.afficher();
                 System.out.println();
@@ -41,9 +41,11 @@ public class GestionHotes extends Gestion {
             switch (Menu.choix(3)) {
                 case AJOUTER:
                     ajouterHote();
+                    listerHotes();
                     break;
                 case SUPPRIMER:
                     supprimerHote();
+                    listerHotes();
                     break;
                 case RETOUR:
                     Menu.listerMenu();
@@ -54,8 +56,6 @@ public class GestionHotes extends Gestion {
             System.out.println("Une erreur de saisie est survenue (" + error + ").");
         } catch (Exception ex) {
             System.out.println("Une erreur est survenue : " + ex.getMessage());
-        } finally {
-            listerHotes();
         }
     }
 
@@ -84,7 +84,7 @@ public class GestionHotes extends Gestion {
         delaiReponse = Menu.scanner.nextInt();
 
         Hote newHote = new Hote(prenom, nom, age, delaiReponse);
-        listeHotes.add(newHote);
+        hoteList.add(newHote);
     }
 
     /**
@@ -97,12 +97,12 @@ public class GestionHotes extends Gestion {
 
         System.out.println("=> Supprimer un hôte.");
 
-        if (!listeHotes.isEmpty()) {
+        if (!hoteList.isEmpty()) {
 
             int index = 0;
 
-            if (listeHotes.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (listeHotes.size() - 1) + ") : ");
+            if (hoteList.size() > 1) {
+                System.out.println("Numéro ? (entre 0 et " + (hoteList.size() - 1) + ") : ");
                 index = Menu.scanner.nextInt();
             } else {
                 System.out.println("Un seul hote enregistré.");
@@ -110,7 +110,7 @@ public class GestionHotes extends Gestion {
 
             System.out.println("Etes-vous certains de supprimer l'hote n°" + index + " (0 : non | plus : oui) : ");
             if (Menu.scanner.nextInt() > 1) {
-                listeHotes.remove(index);
+                hoteList.remove(index);
             }
         } else {
             System.out.println("Aucun hote à supprimer.");

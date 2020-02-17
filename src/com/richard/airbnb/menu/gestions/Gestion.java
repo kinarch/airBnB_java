@@ -1,4 +1,4 @@
-package com.richard.airbnb.menu.gestion;
+package com.richard.airbnb.menu.gestions;
 
 abstract class Gestion {
     static final int AJOUTER = 1;

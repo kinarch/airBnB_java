@@ -1,4 +1,4 @@
-package com.richard.airbnb.menu.gestion;
+package com.richard.airbnb.menu.gestions;
 
 import com.richard.airbnb.models.utilisateurs.Voyageur;
 import com.richard.airbnb.menu.Menu;
@@ -6,9 +6,9 @@ import com.richard.airbnb.menu.Menu;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-public class GestionVoyageurs extends Gestion {
+public final class GestionVoyageurs extends Gestion {
 
-    public static final ArrayList<Voyageur> listeVoyageurs = new ArrayList<>();
+    public static final ArrayList<Voyageur> voyageurList = Menu.voyageurList;
 
     private GestionVoyageurs() {
     }
@@ -19,9 +19,9 @@ public class GestionVoyageurs extends Gestion {
         System.out.println("---------- ----------");
         System.out.println("Liste des voyageurs");
 
-        if (listeVoyageurs.size() > 0) {
-            for (int i = 0; i < listeVoyageurs.size(); i++) {
-                Voyageur voyageur = listeVoyageurs.get(i);
+        if (voyageurList.size() > 0) {
+            for (int i = 0; i < voyageurList.size(); i++) {
+                Voyageur voyageur = voyageurList.get(i);
                 System.out.print("* n°" + i + " : ");
                 voyageur.afficher();
                 System.out.println();
@@ -39,9 +39,11 @@ public class GestionVoyageurs extends Gestion {
             switch (Menu.choix(3)) {
                 case AJOUTER:
                     ajouterVoyageur();
+                    listerVoyageur();
                     break;
                 case SUPPRIMER:
                     supprimerVoyageur();
+                    listerVoyageur();
                     break;
                 case RETOUR:
                     Menu.listerMenu();
@@ -52,8 +54,6 @@ public class GestionVoyageurs extends Gestion {
             System.out.println("Une erreur de saisie est survenue (" + error + ").");
         } catch (Exception ex) {
             System.out.println("Une erreur est survenue : " + ex.getMessage());
-        } finally {
-            listerVoyageur();
         }
     }
 
@@ -75,21 +75,19 @@ public class GestionVoyageurs extends Gestion {
         age = Menu.scanner.nextInt();
 
         Voyageur newVoyageur = new Voyageur(prenom, nom, age);
-        listeVoyageurs.add(newVoyageur);
-
-        listerVoyageur();
+        voyageurList.add(newVoyageur);
     }
 
     static void supprimerVoyageur() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer un voyageur.");
 
-        if (!listeVoyageurs.isEmpty()) {
+        if (!voyageurList.isEmpty()) {
 
             int index = 0;
 
-            if (listeVoyageurs.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (listeVoyageurs.size() - 1) + ") : ");
+            if (voyageurList.size() > 1) {
+                System.out.println("Numéro ? (entre 0 et " + (voyageurList.size() - 1) + ") : ");
                 index = Menu.scanner.nextInt();
             } else {
                 System.out.println("Un seul voyageur enregistré.");
@@ -97,7 +95,7 @@ public class GestionVoyageurs extends Gestion {
 
             System.out.println("Etes-vous certains de supprimer le voyageur n°" + index + " (0 : non | plus : oui) : ");
             if (Menu.scanner.nextInt() > 1) {
-                listeVoyageurs.remove(index);
+                voyageurList.remove(index);
             }
         } else {
             System.out.println("Aucun voyageur à supprimer.");
