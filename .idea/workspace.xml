@@ -51,7 +51,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="richard.airbnb.menu.Menu" />
+      <option name="MAIN_CLASS_NAME" value="com.richard.airbnb.menu.Menu" />
       <module name="AirBnB" />
       <extension name="coverage">
         <pattern>
@@ -95,18 +95,18 @@
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="139" y="84" key="#Notifications/0.0.1473.864@0.0.1473.864" timestamp="1580559772027" />
-    <state x="369" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580506370818">
+    <state x="369" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581955124333">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state x="369" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1473.864@0.0.1473.864" timestamp="1580506370818" />
+    <state x="369" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1473.864@0.0.1473.864" timestamp="1581955124333" />
     <state x="304" y="147" key="#com.intellij.ide.util.MemberChooser" timestamp="1581951506650">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="304" y="147" key="#com.intellij.ide.util.MemberChooser/0.0.1473.864@0.0.1473.864" timestamp="1581951506650" />
-    <state x="645" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1580506368813">
+    <state x="645" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581955122243">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state x="645" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1473.864@0.0.1473.864" timestamp="1580506368813" />
+    <state x="645" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1473.864@0.0.1473.864" timestamp="1581955122243" />
     <state x="365" y="93" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1580304968806">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
@@ -127,22 +127,22 @@
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="361" y="186" key="FileChooserDialogImpl/0.0.1473.864@0.0.1473.864" timestamp="1581941814354" />
-    <state width="1430" height="172" key="GridCell.Tab.0.bottom" timestamp="1581953009109">
+    <state width="1430" height="172" key="GridCell.Tab.0.bottom" timestamp="1581955180650">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1430" height="172" key="GridCell.Tab.0.bottom/0.0.1473.864@0.0.1473.864" timestamp="1581953009109" />
-    <state width="1430" height="172" key="GridCell.Tab.0.center" timestamp="1581953009109">
+    <state width="1430" height="172" key="GridCell.Tab.0.bottom/0.0.1473.864@0.0.1473.864" timestamp="1581955180650" />
+    <state width="1430" height="172" key="GridCell.Tab.0.center" timestamp="1581955180650">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1430" height="172" key="GridCell.Tab.0.center/0.0.1473.864@0.0.1473.864" timestamp="1581953009109" />
-    <state width="1430" height="172" key="GridCell.Tab.0.left" timestamp="1581953009109">
+    <state width="1430" height="172" key="GridCell.Tab.0.center/0.0.1473.864@0.0.1473.864" timestamp="1581955180650" />
+    <state width="1430" height="172" key="GridCell.Tab.0.left" timestamp="1581955180650">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1430" height="172" key="GridCell.Tab.0.left/0.0.1473.864@0.0.1473.864" timestamp="1581953009109" />
-    <state width="1430" height="172" key="GridCell.Tab.0.right" timestamp="1581953009109">
+    <state width="1430" height="172" key="GridCell.Tab.0.left/0.0.1473.864@0.0.1473.864" timestamp="1581955180650" />
+    <state width="1430" height="172" key="GridCell.Tab.0.right" timestamp="1581955180650">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1430" height="172" key="GridCell.Tab.0.right/0.0.1473.864@0.0.1473.864" timestamp="1581953009109" />
+    <state width="1430" height="172" key="GridCell.Tab.0.right/0.0.1473.864@0.0.1473.864" timestamp="1581955180650" />
     <state width="1018" height="251" key="GridCell.Tab.1.bottom" timestamp="1580566069770">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
