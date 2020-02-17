@@ -58,7 +58,6 @@ public class Menu {
         for (Logement l : logementList) {
             System.out.print("* ");
             l.afficher();
-            System.out.println();
         }
 
         System.out.println();

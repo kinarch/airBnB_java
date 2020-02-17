@@ -107,7 +107,7 @@ public final class AirBnBXMLParser {
                     final Element nodePossedePiscine = (Element) nodeLogement.getElementsByTagName("possedePiscine").item(0);
                     //  récupération des valeurs d'une maison
                     final int superficieJardin = Integer.parseInt(nodeSuperficieJardin.getTextContent());
-                    final boolean possedePiscine = Boolean.parseBoolean(nodePossedePiscine.getTextContent());
+                    final boolean possedePiscine = Integer.parseInt(nodePossedePiscine.getTextContent()) == 1;
                     //  instanciation
                     logement = new Maison(hote, adresse, tarifParNuit, superficie, nbVoyageursMax, superficieJardin, possedePiscine);
                 }
