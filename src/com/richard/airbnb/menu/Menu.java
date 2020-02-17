@@ -48,16 +48,16 @@ public class Menu {
         //  Affichage en console
 
         System.out.println("# HOTES LIST");
-        for (Hote h : hoteList) {
-            System.out.print("* ");
-            h.afficher();
+        for (int i = 0; i < hoteList.size(); i++) {
+            System.out.print(i + ") ");
+            hoteList.get(i).afficher();
             System.out.println();
         }
 
         System.out.println("# LOGEMENTS LIST");
-        for (Logement l : logementList) {
-            System.out.print("* ");
-            l.afficher();
+        for (int i = 0; i < logementList.size(); i++) {
+            System.out.print(i + ") ");
+            logementList.get(i).afficher();
         }
 
         System.out.println();
