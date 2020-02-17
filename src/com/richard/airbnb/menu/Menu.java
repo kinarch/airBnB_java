@@ -47,14 +47,14 @@ public class Menu {
 
         //  Affichage en console
 
-        System.out.println("#   HOTES LIST");
+        System.out.println("# HOTES LIST");
         for (Hote h : hoteList) {
             System.out.print("* ");
             h.afficher();
             System.out.println();
         }
 
-        System.out.println("#   LOGEMENTS LIST");
+        System.out.println("# LOGEMENTS LIST");
         for (Logement l : logementList) {
             System.out.print("* ");
             l.afficher();
