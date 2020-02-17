@@ -22,58 +22,51 @@ public final class GestionReservation extends Gestion {
     private GestionReservation() {
     }
 
-    public static void listerReservation() {
+    public static void init() {
 
         System.out.println("---------- ----------");
         System.out.println("Liste des reservations");
-
-        if (reservationList.size() > 0) {
-            for (int i = 0; i < reservationList.size(); i++) {
-                Reservation reservation = reservationList.get(i);
-                System.out.println("* n°" + i + " : ");
-                reservation.afficher();
-            }
-        } else {
-            System.out.println("Aucune reservation enregistrée.");
-        }
-
         System.out.println("Saisir une option :");
-        System.out.println("1 : Ajouter une reservation");
-        System.out.println("2 : Supprimer une reservation");
-        System.out.println("3 : Retour");
+        System.out.println(ADD + " : Ajouter un reservation");
+        System.out.println(DELETE + " : Supprimer un reservation");
+        System.out.println(DISPLAY + " : Afficher la liste");
+        System.out.println(BACK + " : Retour");
 
-        switch (Menu.choix(3)) {
-            case AJOUTER:
+        switch (Menu.choose(N_OPTIONS)) {
+            case ADD:
                 try {
-                    ajouterReservation();
+                    add();
                 } catch (InputMismatchException e) {
                     Menu.scanner.next();
                     System.out.println("Une erreur de saisie est survenue lors de l'ajout d'une réservation.");
                 } catch (Exception e) {
                     System.out.println("Une erreur est survenue lors de l'ajout d'une réservation : " + e.getMessage());
                 } finally {
-                    listerReservation();
+                    init();
                 }
                 break;
-            case SUPPRIMER:
+            case DELETE:
                 try {
-                    supprimerReservation();
+                    delete();
                 } catch (InputMismatchException e) {
                     Menu.scanner.next();
                     System.out.println("Une erreur de saisie est survenue lors de la suppression d'une réservation.");
                 } catch (Exception e) {
                     System.out.println("Une erreur est survenue lors de la suppression d'une réservation : " + e.getMessage());
                 } finally {
-                    listerReservation();
+                    init();
                 }
                 break;
-            case RETOUR:
-                Menu.listerMenu();
+            case DISPLAY:
+                display();
+                break;
+            case BACK:
+                back();
                 break;
         }
     }
 
-    static void ajouterReservation() throws Exception {
+    private static void add() throws Exception {
 
         System.out.println("=> Ajouter une réservation.");
 
@@ -94,7 +87,7 @@ public final class GestionReservation extends Gestion {
                 indexVoyageur = 0;
                 System.out.println("Un seul voyageur trouvé.");
             } else {
-                indexVoyageur = Menu.choix(listeVoyageurs.size() - 1);
+                indexVoyageur = Menu.choose(listeVoyageurs.size() - 1);
             }
             Voyageur voyageur = listeVoyageurs.get(indexVoyageur);
             voyageur.afficher();
@@ -124,22 +117,22 @@ public final class GestionReservation extends Gestion {
             //  date arrivée
             System.out.println("Date d'arrivée : ");
             System.out.print("jour : ");
-            int day = Menu.choix(MaDate.MAX_DAY);
+            int day = Menu.choose(MaDate.MAX_DAY);
 
             System.out.print("mois : ");
-            int month = Menu.choix(MaDate.MAX_MONTH);
+            int month = Menu.choose(MaDate.MAX_MONTH);
 
             System.out.print("année : ");
-            int year = Menu.choix(2100);
+            int year = Menu.choose(2100);
 
             dateArrivee = new MaDate(day, month, year);
             System.out.println(dateArrivee);
 
             System.out.print("Nombre de nuit(s) (max 60 jours) : ");
-            int nbNuit = Menu.choix(MAX_NB_NUITS);
+            int nbNuit = Menu.choose(MAX_NB_NUITS);
 
             System.out.print("Nombre de voyageurs : ");
-            int nbVoyageurs = Menu.choix(logement.getNbVoyageursMax());
+            int nbVoyageurs = Menu.choose(logement.getNbVoyageursMax());
 
             Sejour sejour;
 
@@ -172,7 +165,7 @@ public final class GestionReservation extends Gestion {
         }
     }
 
-    static void supprimerReservation() throws IndexOutOfBoundsException, InputMismatchException {
+    private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer une réservation.");
 
@@ -182,7 +175,7 @@ public final class GestionReservation extends Gestion {
 
             if (reservationList.size() > 1) {
                 System.out.println("Numéro ? (entre 0 et " + (reservationList.size() - 1) + ") : ");
-                index = Menu.choix(reservationList.size());
+                index = Menu.choose(reservationList.size());
             } else {
                 System.out.println("Une seul réservation enregistré.");
             }
@@ -194,5 +187,21 @@ public final class GestionReservation extends Gestion {
         } else {
             System.out.println("Aucune reservation à supprimer.");
         }
+    }
+
+    private static void display() {
+        if (reservationList.size() > 0) {
+            for (int i = 0; i < reservationList.size(); i++) {
+                Reservation reservation = reservationList.get(i);
+                System.out.println("* n°" + i + " : ");
+                reservation.afficher();
+            }
+        } else {
+            System.out.println("Aucune reservation enregistrée.");
+        }
+    }
+
+    private static void back() {
+        Menu.init();
     }
 }

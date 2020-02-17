@@ -13,40 +13,30 @@ public final class GestionVoyageurs extends Gestion {
     private GestionVoyageurs() {
     }
 
-    public static void listerVoyageur() {
+    public static void init() {
 
 
         System.out.println("---------- ----------");
         System.out.println("Liste des voyageurs");
-
-        if (voyageurList.size() > 0) {
-            for (int i = 0; i < voyageurList.size(); i++) {
-                Voyageur voyageur = voyageurList.get(i);
-                System.out.print("* n°" + i + " : ");
-                voyageur.afficher();
-                System.out.println();
-            }
-        } else {
-            System.out.println("Aucun voyageur enregistré.");
-        }
-
         System.out.println("Saisir une option :");
-        System.out.println("1 : Ajouter un voyageur");
-        System.out.println("2 : Supprimer un voyageur");
-        System.out.println("3 : Retour");
+        System.out.println(ADD + " : Ajouter un voyageur");
+        System.out.println(DELETE + " : Supprimer un voyageur");
+        System.out.println(DISPLAY + " : Afficher la liste");
+        System.out.println(BACK + " : Retour");
 
         try {
-            switch (Menu.choix(3)) {
-                case AJOUTER:
-                    ajouterVoyageur();
-                    listerVoyageur();
+            switch (Menu.choose(N_OPTIONS)) {
+                case ADD:
+                    add();
                     break;
-                case SUPPRIMER:
-                    supprimerVoyageur();
-                    listerVoyageur();
+                case DELETE:
+                    delete();
                     break;
-                case RETOUR:
-                    Menu.listerMenu();
+                case DISPLAY:
+                    display();
+                    break;
+                case BACK:
+                    back();
                     break;
             }
         } catch (InputMismatchException ex) {
@@ -54,10 +44,12 @@ public final class GestionVoyageurs extends Gestion {
             System.out.println("Une erreur de saisie est survenue (" + error + ").");
         } catch (Exception ex) {
             System.out.println("Une erreur est survenue : " + ex.getMessage());
+        } finally {
+            init();
         }
     }
 
-    static void ajouterVoyageur() throws Exception {
+    private static void add() throws Exception {
 
         System.out.println("=> Ajouter un voyageur.");
 
@@ -78,7 +70,7 @@ public final class GestionVoyageurs extends Gestion {
         voyageurList.add(newVoyageur);
     }
 
-    static void supprimerVoyageur() throws IndexOutOfBoundsException, InputMismatchException {
+    private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer un voyageur.");
 
@@ -100,6 +92,23 @@ public final class GestionVoyageurs extends Gestion {
         } else {
             System.out.println("Aucun voyageur à supprimer.");
         }
+    }
+
+    private static void display() {
+        if (voyageurList.size() > 0) {
+            for (int i = 0; i < voyageurList.size(); i++) {
+                Voyageur voyageur = voyageurList.get(i);
+                System.out.print("* n°" + i + " : ");
+                voyageur.afficher();
+                System.out.println();
+            }
+        } else {
+            System.out.println("Aucun voyageur enregistré.");
+        }
+    }
+
+    private static void back() {
+        Menu.init();
     }
 
 }

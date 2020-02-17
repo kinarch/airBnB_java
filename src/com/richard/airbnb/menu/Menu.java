@@ -9,7 +9,6 @@ import com.richard.airbnb.models.logements.Logement;
 import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
-import com.richard.airbnb.tools.ASCIIArtGenerator;
 import com.richard.airbnb.tools.AirBnBXMLParser;
 
 
@@ -70,7 +69,7 @@ public class Menu {
             e.printStackTrace();
         }
         System.out.println("********** " + TITLE + " **********");
-        listerMenu();
+        init();
 
         scanner.close();
     }
@@ -83,7 +82,7 @@ public class Menu {
      * @param maxValue int
      * @return userInput int
      */
-    public static int choix(int maxValue) {
+    public static int choose(int maxValue) {
 
         int userInput = 0;
 
@@ -99,7 +98,7 @@ public class Menu {
         return userInput;
     }
 
-    public static void listerMenu() {
+    public static void init() {
 
         //  console list display
         System.out.println("Saisir une option : ");
@@ -109,21 +108,22 @@ public class Menu {
         System.out.println("4 : Liste des reservations");
         System.out.println("5 : Fermer le programme");
 
-        switch (choix(5)) {
+        switch (choose(5)) {
             case 1:
-                GestionHotes.listerHotes();
+                GestionHotes.init();
                 break;
             case 2:
-                GestionLogements.listerLogement();
+                GestionLogements.init();
                 break;
             case 3:
-                GestionVoyageurs.listerVoyageur();
+                GestionVoyageurs.init();
                 break;
             case 4:
-                GestionReservation.listerReservation();
+                GestionReservation.init();
                 break;
             case 5:
                 System.out.println("A bientôt.");
+//                System.exit(0);
                 break;
         }
     }
