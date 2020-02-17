@@ -42,23 +42,21 @@ public final class AirBnBXMLParser {
 
             if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
-                //  --  NODE ELEMENT
-
-                final Element nodeLogement = (Element) nodeList.item(i);
+                final Element eltLogement = (Element) nodeList.item(i);
 
                 //  --  HOTE
 
                 //  Récupération des noeuds de l'hote
-                final Element nodeHote = (Element) nodeLogement.getElementsByTagName("hote").item(0);
-                final Element nodeHoteNom = (Element) nodeHote.getElementsByTagName("nom").item(0);
-                final Element nodeHotePrenom = (Element) nodeHote.getElementsByTagName("prenom").item(0);
-                final Element nodeHoteAge = (Element) nodeHote.getElementsByTagName("age").item(0);
-                final Element nodeHoteDelaiReponse = (Element) nodeHote.getElementsByTagName("delaiReponse").item(0);
+                final Element eltHote = (Element) eltLogement.getElementsByTagName("hote").item(0);
+                final Element eltHoteNom = (Element) eltHote.getElementsByTagName("nom").item(0);
+                final Element eltHotePrenom = (Element) eltHote.getElementsByTagName("prenom").item(0);
+                final Element eltHoteAge = (Element) eltHote.getElementsByTagName("age").item(0);
+                final Element eltHoteDelaiReponse = (Element) eltHote.getElementsByTagName("delaiReponse").item(0);
                 //  Récupération des valeurs
-                final String hoteNom = nodeHoteNom.getTextContent();
-                final String hotePrenom = nodeHotePrenom.getTextContent();
-                final int hoteAge = Integer.parseInt(nodeHoteAge.getTextContent());
-                final int hoteDelaiReponse = Integer.parseInt(nodeHoteDelaiReponse.getTextContent());
+                final String hoteNom = eltHoteNom.getTextContent();
+                final String hotePrenom = eltHotePrenom.getTextContent();
+                final int hoteAge = Integer.parseInt(eltHoteAge.getTextContent());
+                final int hoteDelaiReponse = Integer.parseInt(eltHoteDelaiReponse.getTextContent());
                 //  Instanciation de l'hote
                 final Hote hote = new Hote(hoteNom, hotePrenom, hoteAge, hoteDelaiReponse);
                 //  Ajout de l'hote
@@ -75,39 +73,39 @@ public final class AirBnBXMLParser {
 
                 //  --  LOGEMENT
 
-                //  Récupération des noeuds du logement
-                final Element nodeTarifParNuit = (Element) nodeLogement.getElementsByTagName("tarifParNuit").item(0);
-                final Element nodeAdresse = (Element) nodeLogement.getElementsByTagName("adresse").item(0);
-                final Element nodeSuperficie = (Element) nodeLogement.getElementsByTagName("superficie").item(0);
-                final Element nodeNbVoyageursMax = (Element) nodeLogement.getElementsByTagName("nbVoyageursMax").item(0);
+                //  Récupération des elements du noeud logement
+                final Element eltAdresse = (Element) eltLogement.getElementsByTagName("adresse").item(0);
+                final Element eltTarifParNuit = (Element) eltLogement.getElementsByTagName("tarifParNuit").item(0);
+                final Element eltSuperficie = (Element) eltLogement.getElementsByTagName("superficie").item(0);
+                final Element eltNbVoyageursMax = (Element) eltLogement.getElementsByTagName("nbVoyageursMax").item(0);
                 //  Récupération des valeurs du logement
-                final String adresse = nodeAdresse.getTextContent();
-                final int tarifParNuit = Integer.parseInt(nodeTarifParNuit.getTextContent());
-                final int superficie = Integer.parseInt(nodeSuperficie.getTextContent());
-                final int nbVoyageursMax = Integer.parseInt(nodeNbVoyageursMax.getTextContent());
+                final String adresse = eltAdresse.getTextContent();
+                final int tarifParNuit = Integer.parseInt(eltTarifParNuit.getTextContent());
+                final int superficie = Integer.parseInt(eltSuperficie.getTextContent());
+                final int nbVoyageursMax = Integer.parseInt(eltNbVoyageursMax.getTextContent());
 
                 //  Création du logement
                 Logement logement = null;
 
                 //  Appartement ?
-                if (nodeLogement.getNodeName().equals("Appartement")) {
+                if (eltLogement.getNodeName().equals("Appartement")) {
                     //  récupération des noeuds d'un appartement
-                    final Element nodeNumeroEtage = (Element) nodeLogement.getElementsByTagName("numeroEtage").item(0);
-                    final Element nodeSuperficieBalcon = (Element) nodeLogement.getElementsByTagName("superficieBalcon").item(0);
+                    final Element eltNumeroEtage = (Element) eltLogement.getElementsByTagName("numeroEtage").item(0);
+                    final Element eltSuperficieBalcon = (Element) eltLogement.getElementsByTagName("superficieBalcon").item(0);
                     //  récupération des valeurs d'un appartement
-                    final int numeroEtage = Integer.parseInt(nodeNumeroEtage.getTextContent());
-                    final int superficieBalcon = Integer.parseInt(nodeSuperficieBalcon.getTextContent());
+                    final int numeroEtage = Integer.parseInt(eltNumeroEtage.getTextContent());
+                    final int superficieBalcon = Integer.parseInt(eltSuperficieBalcon.getTextContent());
                     //  instanciation
                     logement = new Appartement(hote, adresse, tarifParNuit, superficie, nbVoyageursMax, numeroEtage, superficieBalcon);
                 }
                 //  Maison ?
-                else if (nodeLogement.getNodeName().equals("Maison")) {
+                else if (eltLogement.getNodeName().equals("Maison")) {
                     //  récupération des noeuds d'une maison
-                    final Element nodeSuperficieJardin = (Element) nodeLogement.getElementsByTagName("superficieJardin").item(0);
-                    final Element nodePossedePiscine = (Element) nodeLogement.getElementsByTagName("possedePiscine").item(0);
+                    final Element eltSuperficieJardin = (Element) eltLogement.getElementsByTagName("superficieJardin").item(0);
+                    final Element eltPossedePiscine = (Element) eltLogement.getElementsByTagName("possedePiscine").item(0);
                     //  récupération des valeurs d'une maison
-                    final int superficieJardin = Integer.parseInt(nodeSuperficieJardin.getTextContent());
-                    final boolean possedePiscine = Integer.parseInt(nodePossedePiscine.getTextContent()) == 1;
+                    final int superficieJardin = Integer.parseInt(eltSuperficieJardin.getTextContent());
+                    final boolean possedePiscine = Integer.parseInt(eltPossedePiscine.getTextContent()) == 1;
                     //  instanciation
                     logement = new Maison(hote, adresse, tarifParNuit, superficie, nbVoyageursMax, superficieJardin, possedePiscine);
                 }

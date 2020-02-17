@@ -9,6 +9,7 @@ import com.richard.airbnb.models.logements.Logement;
 import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
+import com.richard.airbnb.tools.ASCIIArtGenerator;
 import com.richard.airbnb.tools.AirBnBXMLParser;
 
 
@@ -17,6 +18,7 @@ import java.util.Scanner;
 
 public class Menu {
 
+    private static final String TITLE = "Bienvue chez AirBnB";
     public static Scanner scanner;
     public static ArrayList<Hote> hoteList = new ArrayList<>();
     public static ArrayList<Logement> logementList = new ArrayList<>();
@@ -45,16 +47,14 @@ public class Menu {
 
         //  Affichage en console
 
-        System.out.println("HOTES LIST");
+        System.out.println("#   HOTES LIST");
         for (Hote h : hoteList) {
             System.out.print("* ");
             h.afficher();
             System.out.println();
         }
 
-        System.out.println();
-
-        System.out.println("LOGEMENTS LIST");
+        System.out.println("#   LOGEMENTS LIST");
         for (Logement l : logementList) {
             System.out.print("* ");
             l.afficher();
@@ -62,7 +62,14 @@ public class Menu {
 
         System.out.println();
 
-        System.out.println("Bienvenue chez AirBnB");
+        try {
+//            ASCIIArtGenerator.printTextArt("BIENVENUE", 10);
+//            ASCIIArtGenerator.printTextArt("CHEZ", 10);
+//            ASCIIArtGenerator.printTextArt("AIRBNB", 10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(" ~~ " + TITLE + " ~~ ");
         listerMenu();
 
         scanner.close();
