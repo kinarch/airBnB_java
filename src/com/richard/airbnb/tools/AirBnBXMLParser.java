@@ -43,10 +43,10 @@ public final class AirBnBXMLParser {
         builder.setErrorHandler(errHandler);
 
         //  Affichage du prologue
-        System.out.println("********** Document XML **********");
-        System.out.println("version : " + document.getXmlVersion());
-        System.out.println("encodage : " + document.getXmlEncoding());
-        System.out.println("standalone : " + document.getXmlStandalone());
+//        System.out.println("********** Document XML **********");
+//        System.out.println("version : " + document.getXmlVersion());
+//        System.out.println("encodage : " + document.getXmlEncoding());
+//        System.out.println("standalone : " + document.getXmlStandalone());
 
         //  Préparation de l'arborescende des noeuds sous forme de liste
         final Element root = document.getDocumentElement();

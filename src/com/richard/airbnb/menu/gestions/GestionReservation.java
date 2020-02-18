@@ -17,7 +17,7 @@ public final class GestionReservation extends Gestion {
 
     private static final ArrayList<Reservation> reservationList = Menu.reservationList;
     private static int MAX_NB_NUITS = 60;
-    private static int NB_NUIT_POUR_SEJOUR_LONG = 6;
+    private static int NB_NUIT_POUR_SEJOUR_LONG = 7;
 
     private GestionReservation() {
     }
@@ -133,14 +133,14 @@ public final class GestionReservation extends Gestion {
         System.out.println(dateArrivee);
 
         System.out.print("Nombre de nuit(s) (max 60 jours) : ");
-        int nbNuit = Menu.choose(MAX_NB_NUITS);
+        int nbNuit = Menu.scanner.nextInt();
 
         System.out.print("Nombre de voyageurs : ");
-        int nbVoyageurs = Menu.choose(logement.getNbVoyageursMax());
+        int nbVoyageurs = Menu.scanner.nextInt();
 
         Sejour sejour;
 
-        if (nbNuit > NB_NUIT_POUR_SEJOUR_LONG) {
+        if (nbNuit >= NB_NUIT_POUR_SEJOUR_LONG) {
             //  sejour long
             sejour = new SejourLong(
                     dateArrivee,
@@ -157,15 +157,9 @@ public final class GestionReservation extends Gestion {
             );
         }
 
-        try {
-            Reservation newReservation = new Reservation(
-                    sejour,
-                    voyageur,
-                    new MaDate());
-            reservationList.add(newReservation);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        Reservation newReservation = new Reservation(sejour, voyageur, new MaDate());
+        reservationList.add(newReservation);
+        Menu.writeReservation("res/reservations.txt");
     }
 
     /**

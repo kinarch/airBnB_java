@@ -14,6 +14,8 @@ import org.xml.sax.SAXException;
 
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -32,11 +34,17 @@ public final class Menu {
     private Menu() {
     }
 
+    /*
+        TODO ...
+        -   Faire la methode qui parse le XML avec XPath ?
+        -   Faire la methode qui écrit dans un fichier texte les réservations.
+     */
     public static void main(String[] args) {
 
         scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
 
+        //  Parser le fichier xml et préparer les listes
         try {
             AirBnBXMLParser.parseListDOM("res/logements.xml", hoteList, logementList);
             /*
@@ -57,39 +65,31 @@ public final class Menu {
 
         //  Affichage en console
 
-        System.out.println("# HOTES LIST");
-        if (hoteList.isEmpty()) {
-            System.out.println("Empty.");
-        } else {
-            for (int i = 0; i < hoteList.size(); i++) {
-                System.out.print(i + ") ");
-                hoteList.get(i).afficher();
-                System.out.println();
-            }
-        }
+//        System.out.println("# HOTES LIST");
+//        if (hoteList.isEmpty()) {
+//            System.out.println("Empty.");
+//        } else {
+//            for (int i = 0; i < hoteList.size(); i++) {
+//                System.out.print(i + ") ");
+//                hoteList.get(i).afficher();
+//                System.out.println();
+//            }
+//        }
+//
+//        System.out.println("# LOGEMENTS LIST");
+//        if (logementList.isEmpty()) {
+//            System.out.println("Empty.");
+//        } else {
+//            for (int i = 0; i < logementList.size(); i++) {
+//                System.out.print(i + ") ");
+//                logementList.get(i).afficher();
+//            }
+//        }
+//
+//        System.out.println();
 
-        System.out.println("# LOGEMENTS LIST");
-        if (logementList.isEmpty()) {
-            System.out.println("Empty.");
-        } else {
-            for (int i = 0; i < logementList.size(); i++) {
-                System.out.print(i + ") ");
-                logementList.get(i).afficher();
-            }
-        }
-
-        System.out.println();
-
-        try {
-//            ASCIIArtGenerator.printTextArt("BIENVENUE", 10);
-//            ASCIIArtGenerator.printTextArt("CHEZ", 10);
-//            ASCIIArtGenerator.printTextArt("AIRBNB", 10);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         System.out.println("********** " + TITLE + " **********");
         init();
-
         scanner.close();
     }
 
@@ -121,7 +121,6 @@ public final class Menu {
                 break;
             case 5:
                 System.out.println("A bientôt.");
-//                System.exit(0);
                 break;
         }
     }
@@ -148,5 +147,46 @@ public final class Menu {
         } while (userInput < 1 || userInput > maxValue);
 
         return userInput;
+    }
+
+    /*
+        TODO ... Ecrire dans un fichier texte
+     */
+
+    /**
+     * Ecrit un nouveau fichier texte avec les réservations.
+     * @param filePath le chemin du fichier texte.
+     * @param append si le fichier doit être écraser si celui ci existe.
+     */
+    public static void writeReservation(String filePath, boolean append) {
+
+        String nVoyageurTitle = "Numéro du Voyageur : ";
+        String nLogementTitle = "Numéro du Logement : ";
+        String dateArriveTitle = "Date d'arrivée (DD/MM/YYYY) : ";
+        String nNuitTitle = "Nombre de nuits : ";
+        String nPersonneTitle = "Nombre de personnes : ";
+
+        try {
+
+            FileWriter writer = new FileWriter(filePath, append);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+            for (Logement r : logementList) {
+                bufferedWriter.write("Truc");
+//                bufferedWriter.write("\r\n");
+            }
+
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Ecrit un nouveau fichier texte avec les réservations.
+     * Si le fichier existe, l'écrase.
+     */
+    public static void writeReservation(String filePath) {
+        writeReservation(filePath, false);
     }
 }

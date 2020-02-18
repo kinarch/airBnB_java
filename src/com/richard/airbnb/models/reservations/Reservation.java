@@ -21,7 +21,7 @@ public class Reservation {
      */
     public Reservation(Sejour sejour, Voyageur voyageur, Date dateDeReservation) throws Exception {
 
-        if (sejour  == null || voyageur == null || dateDeReservation == null) {
+        if (sejour == null || voyageur == null || dateDeReservation == null) {
             throw new Exception("Impossible de créer une réservation car l'un des arguments est nul.");
         }
 
@@ -44,6 +44,7 @@ public class Reservation {
         this.dateDeReservation = dateDeReservation;
     }
 
+
     /**
      * Affiche les information du voyageur et du sejour
      */
@@ -52,5 +53,16 @@ public class Reservation {
         voyageur.afficher();
         System.out.print(" a fait une réserversation chez ");
         sejour.afficher();
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "identifiant=" + identifiant +
+                ", sejour=" + sejour +
+                ", voyageur=" + voyageur +
+                ", estValidee=" + estValidee +
+                ", dateDeReservation=" + dateDeReservation +
+                '}';
     }
 }

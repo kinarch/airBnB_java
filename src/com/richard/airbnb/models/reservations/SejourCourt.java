@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class SejourCourt extends Sejour implements ConditionsTarifairesInterface {
 
-    static final int MAX_NUITS = 6;
+    public static final int MAX_NUITS = 6;
 
     public SejourCourt(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) throws Exception {
         super(dateArrivee, nbNuits, logement, nbVoyageurs);
