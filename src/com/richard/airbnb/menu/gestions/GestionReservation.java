@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
 
 public final class GestionReservation extends Gestion {
 
-    static final ArrayList<Reservation> reservationList = Menu.reservationList;
+    private static final ArrayList<Reservation> reservationList = Menu.reservationList;
     private static int MAX_NB_NUITS = 60;
     private static int NB_NUIT_POUR_SEJOUR_LONG = 6;
 
@@ -35,37 +35,30 @@ public final class GestionReservation extends Gestion {
         System.out.println(DISPLAY + " : Afficher la liste");
         System.out.println(BACK + " : Retour");
 
-        switch (Menu.choose(N_OPTIONS)) {
-            case ADD:
-                try {
-                    add();
-                } catch (InputMismatchException e) {
-                    Menu.scanner.next();
-                    System.out.println("Une erreur de saisie est survenue lors de l'ajout d'une réservation.");
-                } catch (Exception e) {
-                    System.out.println("Une erreur est survenue lors de l'ajout d'une réservation : " + e.getMessage());
-                } finally {
-                    init();
+        int userInput = Menu.choose(N_OPTIONS);
+        if (userInput == BACK) {
+            back();
+        } else {
+            try {
+                switch (userInput) {
+                    case ADD:
+                        add();
+                        break;
+                    case DELETE:
+                        delete();
+                        break;
+                    case DISPLAY:
+                        display();
+                        break;
                 }
-                break;
-            case DELETE:
-                try {
-                    delete();
-                } catch (InputMismatchException e) {
-                    Menu.scanner.next();
-                    System.out.println("Une erreur de saisie est survenue lors de la suppression d'une réservation.");
-                } catch (Exception e) {
-                    System.out.println("Une erreur est survenue lors de la suppression d'une réservation : " + e.getMessage());
-                } finally {
-                    init();
-                }
-                break;
-            case DISPLAY:
-                display();
-                break;
-            case BACK:
-                back();
-                break;
+            } catch (InputMismatchException ex) {
+                String input = Menu.scanner.next();
+                System.out.println("Une erreur de saisie est survenue (input : " + input + ").");
+            } catch (Exception ex) {
+                System.out.println("Une erreur est survenue : " + ex.getMessage());
+            } finally {
+                init();
+            }
         }
     }
 
@@ -78,98 +71,100 @@ public final class GestionReservation extends Gestion {
 
         System.out.println("=> Ajouter une réservation.");
 
-        if (GestionVoyageurs.voyageurList.isEmpty()) {
+        final ArrayList<Logement> logementList = Menu.logementList;
+        final ArrayList<Voyageur> voyageurList = Menu.voyageurList;
+
+        if (voyageurList.isEmpty()) {
             System.out.println("Aucun voyageur enregistré, réservation d'un sejour impossible.");
-        } else if (GestionLogements.logementList.isEmpty()) {
+            return;
+        } else if (logementList.isEmpty()) {
             System.out.println("Aucun logement enregistré, réservation d'un sejour impossible.");
+            return;
+        }
+
+        int indexVoyageur;
+        int indexLogement;
+        Date dateArrivee;
+
+        //  voyageur
+        System.out.print("Numéro du voyageur : ");
+        if (voyageurList.size() == 1) {
+            indexVoyageur = 0;
+            System.out.println("Un seul voyageur trouvé.");
         } else {
+            System.out.println("Numéro du voyageur entre 0 et " + (voyageurList.size() - 1) + " : ");
+            indexVoyageur = Menu.scanner.nextInt();
+        }
 
-            int indexVoyageur;
-            int indexLogement;
-            Date dateArrivee;
+        Voyageur voyageur = voyageurList.get(indexVoyageur);
+        voyageur.afficher();
+        System.out.println();
 
-            //  voyageur
-            System.out.print("Numéro du voyageur : ");
-            final ArrayList<Voyageur> listeVoyageurs = GestionVoyageurs.voyageurList;
-            if (listeVoyageurs.size() == 1) {
-                indexVoyageur = 0;
-                System.out.println("Un seul voyageur trouvé.");
+        //  logement
+        System.out.print("Numéro du logement : ");
+        if (logementList.size() == 1) {
+            System.out.println("Un seul logement trouvé. L'enregister ? (0 : non, 1 ou plus : oui).");
+            System.out.println(logementList.get(0));
+            if (Menu.scanner.nextInt() > 0) {
+                indexLogement = 0;
             } else {
-                indexVoyageur = Menu.choose(listeVoyageurs.size() - 1);
+                return;
             }
-            Voyageur voyageur = listeVoyageurs.get(indexVoyageur);
-            voyageur.afficher();
-            System.out.println();
+        } else {
+            System.out.println("Numéro du logement entre 0 et " + (logementList.size() - 1) + " : ");
+            indexLogement = Menu.scanner.nextInt();
+        }
 
-            //  logement
-            final ArrayList<Logement> listeLogements = GestionLogements.logementList;
-            System.out.print("Numéro du logement : ");
-            if (listeLogements.size() == 1) {
-                System.out.println("Un seul logement trouvé, voulez-vous le valider ? (0 : non, 1 ou plus : oui).");
-                System.out.println(listeLogements.get(0));
-                if (Menu.scanner.nextInt() > 0) {
-                    indexLogement = 0;
-                } else {
-                    return;
-                }
-            } else {
-                System.out.println("Saisissez le numéro d'un hôte entre 0 et " + (listeLogements.size() - 1) + " : ");
-                indexLogement = Menu.scanner.nextInt();
-                if (indexLogement >= listeLogements.size() || indexLogement < 0) {
-                    throw new Exception("Erreur lors de la saisie du numéro de l'hote.");
-                }
-            }
-            Logement logement = listeLogements.get(indexLogement);
-            logement.afficher();
+        Logement logement = logementList.get(indexLogement);
+        logement.afficher();
 
-            //  date arrivée
-            System.out.println("Date d'arrivée : ");
-            System.out.print("jour : ");
-            int day = Menu.choose(MaDate.MAX_DAY);
+        //  date arrivée
+        System.out.println("Date d'arrivée : ");
+        System.out.print("jour : ");
+        int day = Menu.choose(MaDate.MAX_DAY);
 
-            System.out.print("mois : ");
-            int month = Menu.choose(MaDate.MAX_MONTH);
+        System.out.print("mois : ");
+        int month = Menu.choose(MaDate.MAX_MONTH);
 
-            System.out.print("année : ");
-            int year = Menu.choose(2100);
+        System.out.print("année : ");
+        int year = Menu.choose(2100);
 
-            dateArrivee = new MaDate(day, month, year);
-            System.out.println(dateArrivee);
+        dateArrivee = new MaDate(day, month, year);
+        System.out.println(dateArrivee);
 
-            System.out.print("Nombre de nuit(s) (max 60 jours) : ");
-            int nbNuit = Menu.choose(MAX_NB_NUITS);
+        System.out.print("Nombre de nuit(s) (max 60 jours) : ");
+        int nbNuit = Menu.choose(MAX_NB_NUITS);
 
-            System.out.print("Nombre de voyageurs : ");
-            int nbVoyageurs = Menu.choose(logement.getNbVoyageursMax());
+        System.out.print("Nombre de voyageurs : ");
+        int nbVoyageurs = Menu.choose(logement.getNbVoyageursMax());
 
-            Sejour sejour;
+        Sejour sejour;
 
-            if (nbNuit > NB_NUIT_POUR_SEJOUR_LONG) {
-                //  sejour long
-                sejour = new SejourLong(
-                        dateArrivee,
-                        nbNuit,
-                        logement,
-                        nbVoyageurs);
-            } else {
-                //  sejour cours
-                sejour = new SejourCourt(
-                        dateArrivee,
-                        nbNuit,
-                        logement,
-                        nbVoyageurs
-                );
-            }
+        if (nbNuit > NB_NUIT_POUR_SEJOUR_LONG) {
+            //  sejour long
+            sejour = new SejourLong(
+                    dateArrivee,
+                    nbNuit,
+                    logement,
+                    nbVoyageurs);
+        } else {
+            //  sejour cours
+            sejour = new SejourCourt(
+                    dateArrivee,
+                    nbNuit,
+                    logement,
+                    nbVoyageurs
+            );
+        }
 
-            try {
-                Reservation newReservation = new Reservation(
-                        sejour,
-                        voyageur,
-                        new MaDate());
-                reservationList.add(newReservation);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            Reservation newReservation = new Reservation(
+                    sejour,
+                    voyageur,
+                    new MaDate());
+            reservationList.add(newReservation);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

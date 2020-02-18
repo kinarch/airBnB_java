@@ -10,8 +10,11 @@ import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
 import com.richard.airbnb.tools.AirBnBXMLParser;
+import org.xml.sax.SAXException;
 
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,9 +44,15 @@ public final class Menu {
              */
             voyageurList.add(new Voyageur("Voyageur", "du Temp", 30));
             voyageurList.add(new Voyageur("Doctor", "Who", 100));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
+        } catch (ParserConfigurationException ex) {
+            System.out.println("Erreur fatale lors de la configuration du parseur.");
+        } catch (SAXException ex) {
+            System.out.println();
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         //  Affichage en console

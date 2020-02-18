@@ -27,28 +27,30 @@ public final class GestionVoyageurs extends Gestion {
         System.out.println(DISPLAY + " : Afficher la liste");
         System.out.println(BACK + " : Retour");
 
-        try {
-            switch (Menu.choose(N_OPTIONS)) {
-                case ADD:
-                    add();
-                    break;
-                case DELETE:
-                    delete();
-                    break;
-                case DISPLAY:
-                    display();
-                    break;
-                case BACK:
-                    back();
-                    break;
+        int userInput = Menu.choose(N_OPTIONS);
+        if (userInput == BACK) {
+            back();
+        } else {
+            try {
+                switch (userInput) {
+                    case ADD:
+                        add();
+                        break;
+                    case DELETE:
+                        delete();
+                        break;
+                    case DISPLAY:
+                        display();
+                        break;
+                }
+            } catch (InputMismatchException ex) {
+                String input = Menu.scanner.next();
+                System.out.println("Une erreur de saisie est survenue (input : " + input + ").");
+            } catch (Exception ex) {
+                System.out.println("Une erreur est survenue : " + ex.getMessage());
+            } finally {
+                init();
             }
-        } catch (InputMismatchException ex) {
-            String error = Menu.scanner.next();
-            System.out.println("Une erreur de saisie est survenue (" + error + ").");
-        } catch (Exception ex) {
-            System.out.println("Une erreur est survenue : " + ex.getMessage());
-        } finally {
-            init();
         }
     }
 

@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 
 public final class GestionLogements extends Gestion {
 
-    public static final ArrayList<Logement> logementList = Menu.logementList;
+    private static final ArrayList<Logement> logementList = Menu.logementList;
     private static final int TYPE_MAISON = 1;
     private static final int TYPE_APPARTEMENT = 2;
 
@@ -31,37 +31,30 @@ public final class GestionLogements extends Gestion {
         System.out.println(DISPLAY + " : Afficher la liste");
         System.out.println(BACK + " : Retour");
 
-        switch (Menu.choose(N_OPTIONS)) {
-            case ADD:
-                try {
-                    add();
-                } catch (InputMismatchException e) {
-                    Menu.scanner.next();
-                    System.out.println("Une erreur de saisie est survenue lors de l'ajout d'un logement.");
-                } catch (Exception e) {
-                    System.out.println("Une erreur est survenue lors de l'ajout d'un logement : " + e.getMessage());
-                } finally {
-                    init();
+        int userInput = Menu.choose(N_OPTIONS);
+        if (userInput == BACK) {
+            back();
+        } else {
+            try {
+                switch (userInput) {
+                    case ADD:
+                        add();
+                        break;
+                    case DELETE:
+                        delete();
+                        break;
+                    case DISPLAY:
+                        display();
+                        break;
                 }
-                break;
-            case DELETE:
-                try {
-                    delete();
-                } catch (InputMismatchException e) {
-                    Menu.scanner.next();
-                    System.out.println("Une erreur de saisie est survenue lors de la suppression d'un logement.");
-                } catch (Exception e) {
-                    System.out.println("Une erreur est survenue lors de l'ajout d'un logement : " + e.getMessage());
-                } finally {
-                    init();
-                }
-                break;
-            case DISPLAY:
-                display();
-                break;
-            case BACK:
-                back();
-                break;
+            } catch (InputMismatchException ex) {
+                String input = Menu.scanner.next();
+                System.out.println("Une erreur de saisie est survenue (input : " + input + ").");
+            } catch (Exception ex) {
+                System.out.println("Une erreur est survenue : " + ex.getMessage());
+            } finally {
+                init();
+            }
         }
     }
 
@@ -75,9 +68,9 @@ public final class GestionLogements extends Gestion {
 
         System.out.println("=> Ajouter un logement.");
 
-        final ArrayList<Hote> listeHotes = GestionHotes.hoteList;
+        final ArrayList<Hote> hoteList = Menu.hoteList;
 
-        if (!listeHotes.isEmpty()) {
+        if (!hoteList.isEmpty()) {
 
             Hote hote;
             int indexHote;
@@ -97,22 +90,19 @@ public final class GestionLogements extends Gestion {
                 return;
             }
 
-            if (logementList.size() == 1) {
-                System.out.println("Un seul hote trouvé, voulez-vous le validé ? (0 : non, 1 ou plus : oui).");
+            if (hoteList.size() == 1) {
+                System.out.println("Un seul hote trouvé. L'enregister ? (0 : non, 1 ou plus : oui).");
                 if (Menu.scanner.nextInt() > 0) {
                     indexHote = 0;
                 } else {
                     return;
                 }
             } else {
-                System.out.println("Saisissez le numéro d'un hôte entre 0 et " + (listeHotes.size() - 1) + " : ");
+                System.out.println("Numéro de l'hôte entre 0 et " + (hoteList.size() - 1) + " : ");
                 indexHote = Menu.scanner.nextInt();
-                if (indexHote >= listeHotes.size() || indexHote < 0) {
-                    throw new Exception("Erreur lors de la saisie du numéro de l'hote.");
-                }
             }
 
-            hote = GestionHotes.hoteList.get(indexHote);
+            hote = hoteList.get(indexHote);
             hote.afficher();
             System.out.println();
 
