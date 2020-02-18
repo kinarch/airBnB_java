@@ -8,11 +8,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,12 +27,20 @@ public final class AirBnBXMLParser {
     private AirBnBXMLParser() {
     }
 
-    public static void parseList(String path, ArrayList<Hote> hoteList, ArrayList<Logement> logementList) throws Exception {
+    public static void parseListDOM(String filePath, ArrayList<Hote> hoteList, ArrayList<Logement> logementList) throws Exception {
 
         //  Preparation du document
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
-        final Document document = builder.parse(new File(path));
+        final Document document = builder.parse(new File(filePath));
+
+        //  Vérification du fichier
+        factory.setValidating(true);
+
+        //  création de notre objet d'erreurs
+        final ErrorHandler errHandler = new AirBnBErrorHandler();
+        //  Affectation de notre objet au document pour interception des erreurs éventuelles
+        builder.setErrorHandler(errHandler);
 
         //  Affichage du prologue
         System.out.println("********** Document XML **********");
@@ -60,9 +73,8 @@ public final class AirBnBXMLParser {
                 final String hotePrenom = eltHotePrenom.getTextContent();
                 final int hoteAge = Integer.parseInt(eltHoteAge.getTextContent());
                 final int hoteDelaiReponse = Integer.parseInt(eltHoteDelaiReponse.getTextContent());
-                //  Instanciation de l'hote
-                final Hote hote = new Hote(hoteNom, hotePrenom, hoteAge, hoteDelaiReponse);
                 //  Ajout de l'hote
+                final Hote hote = new Hote(hoteNom, hotePrenom, hoteAge, hoteDelaiReponse);
                 boolean addHote = true;
                 for (Hote h : hoteList) {
                     if (h.equals(hote)) {
@@ -115,8 +127,87 @@ public final class AirBnBXMLParser {
 
                 //  ajout du logement
                 logementList.add(logement);
+                boolean addLogement = true;
+                for (Logement l : logementList) {
+                    if (l.equals(logement)) {
+                        addLogement = false;
+                        break;
+                    }
+                }
+                if (addLogement) {
+                    logementList.add(logement);
+                }
             }
         }
+        //  end...
+        System.out.println("Parse completed.");
+    }
+
+    //  TODO... Essayer de finir cette methode avec XPath
+    public static void parseListXPath(String filePath, ArrayList<Hote> hoteList, ArrayList<Logement> logementList) throws Exception {
+
+        //  Preparation du document
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        final File fileXML = new File(filePath);
+        final Document xml = builder.parse(fileXML);
+        final Element root = xml.getDocumentElement();
+        final XPathFactory xpf = XPathFactory.newInstance();
+        final XPath path = xpf.newXPath();
+
+        //  Préparation de l'arborescende des noeuds sous forme de liste
+        final NodeList nodeList = root.getChildNodes();
+        final int nbNodes = nodeList.getLength();
+
+        for (int i = 0; i < nbNodes; i++) {
+
+            if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+
+                String typeLogement = nodeList.item(i).getNodeName() + "[" + i + "]";
+
+                System.out.println(typeLogement);
+                //  HOTE
+                //  Récupération des informations de l'hote
+                String hoteNom = (String) path.evaluate("//" + typeLogement + "/hote/nom[1]", root, XPathConstants.STRING);
+                String hotePrenom = (String) path.evaluate("//" + typeLogement + "/hote/prenom[1]", root, XPathConstants.STRING);
+                int hoteAge = ((Double) path.evaluate("//" + typeLogement + "/hote/age[1]", root, XPathConstants.NUMBER)).intValue();
+                int hoteDelaiReponse = ((Double) path.evaluate("//" + typeLogement + "/hote/delaiReponse[1]", root, XPathConstants.NUMBER)).intValue();
+
+                //  Ajout de l'hote
+                final Hote hote = new Hote(hoteNom, hotePrenom, hoteAge, hoteDelaiReponse);
+                boolean addHote = true;
+                for (Hote h : hoteList) {
+                    if (h.equals(hote)) {
+                        addHote = false;
+                        break;
+                    }
+                }
+                if (addHote) {
+                    hoteList.add(hote);
+                    hote.afficher();
+                }
+            }
+        }
+
+        /*
+            <Appartement name="Appartement 1">
+                <hote>
+                    <nom>Bardu</nom>
+                    <prenom>Peter</prenom>
+                    <age>31</age>
+                    <delaiReponse>12</delaiReponse>
+                </hote>
+                <tarifParNuit>50</tarifParNuit>
+                <adresse>81 rue Colbert, Tours</adresse>
+                <superficie>58</superficie>
+                <nbVoyageursMax>4</nbVoyageursMax>
+                <numeroEtage>2</numeroEtage>
+                <superficieBalcon>10</superficieBalcon>
+            </Appartement>
+         */
+
         //  end...
         System.out.println("Parse completed.");
     }

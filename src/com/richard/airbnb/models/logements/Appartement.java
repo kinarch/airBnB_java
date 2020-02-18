@@ -2,6 +2,8 @@ package com.richard.airbnb.models.logements;
 
 import com.richard.airbnb.models.utilisateurs.Hote;
 
+import java.util.Objects;
+
 public class Appartement extends Logement {
 
     private final int numeroEtage;
@@ -33,5 +35,20 @@ public class Appartement extends Logement {
         } else {
             System.out.println("Non.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Appartement that = (Appartement) o;
+        return numeroEtage == that.numeroEtage &&
+                superficieBalcon == that.superficieBalcon;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numeroEtage, superficieBalcon);
     }
 }

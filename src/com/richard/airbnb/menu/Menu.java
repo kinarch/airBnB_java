@@ -38,36 +38,44 @@ public final class Menu {
         scanner.useDelimiter("\n");
 
         try {
-            AirBnBXMLParser.parseList("res/logements.xml", hoteList, logementList);
+            AirBnBXMLParser.parseListDOM("res/logements.xml", hoteList, logementList);
             /*
                 exemple voyageurs
              */
             voyageurList.add(new Voyageur("Voyageur", "du Temp", 30));
             voyageurList.add(new Voyageur("Doctor", "Who", 100));
         } catch (ParserConfigurationException ex) {
-            System.out.println("Erreur fatale lors de la configuration du parseur.");
+            System.out.println("[error] " + "ParserConfigurationException");
         } catch (SAXException ex) {
-            System.out.println();
-            ex.printStackTrace();
+            System.out.println("[error] " + "SAXException");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("[error] " + "IOException");
         } catch (Exception ex) {
+            System.out.println("[Error] " + ex.getMessage());
             ex.printStackTrace();
         }
 
         //  Affichage en console
 
         System.out.println("# HOTES LIST");
-        for (int i = 0; i < hoteList.size(); i++) {
-            System.out.print(i + ") ");
-            hoteList.get(i).afficher();
-            System.out.println();
+        if (hoteList.isEmpty()) {
+            System.out.println("Empty.");
+        } else {
+            for (int i = 0; i < hoteList.size(); i++) {
+                System.out.print(i + ") ");
+                hoteList.get(i).afficher();
+                System.out.println();
+            }
         }
 
         System.out.println("# LOGEMENTS LIST");
-        for (int i = 0; i < logementList.size(); i++) {
-            System.out.print(i + ") ");
-            logementList.get(i).afficher();
+        if (logementList.isEmpty()) {
+            System.out.println("Empty.");
+        } else {
+            for (int i = 0; i < logementList.size(); i++) {
+                System.out.print(i + ") ");
+                logementList.get(i).afficher();
+            }
         }
 
         System.out.println();

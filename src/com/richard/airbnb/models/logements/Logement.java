@@ -2,6 +2,8 @@ package com.richard.airbnb.models.logements;
 
 import com.richard.airbnb.models.utilisateurs.Hote;
 
+import java.util.Objects;
+
 public abstract class Logement {
 
     private final Hote hote;
@@ -55,5 +57,22 @@ public abstract class Logement {
 
     public int getNbVoyageursMax() {
         return nbVoyageursMax;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Logement logement = (Logement) o;
+        return tarifParNuit == logement.tarifParNuit &&
+                superficie == logement.superficie &&
+                nbVoyageursMax == logement.nbVoyageursMax &&
+                hote.equals(logement.hote) &&
+                adresse.equals(logement.adresse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
     }
 }

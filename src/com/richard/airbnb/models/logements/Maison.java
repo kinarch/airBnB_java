@@ -2,6 +2,8 @@ package com.richard.airbnb.models.logements;
 
 import com.richard.airbnb.models.utilisateurs.Hote;
 
+import java.util.Objects;
+
 public class Maison extends Logement {
 
     private final int superficieJardin;
@@ -34,5 +36,20 @@ public class Maison extends Logement {
     @Override
     public int getSuperficieTotal() {
         return super.getSuperficie() + superficieJardin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Maison maison = (Maison) o;
+        return superficieJardin == maison.superficieJardin &&
+                possedePiscine == maison.possedePiscine;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), superficieJardin, possedePiscine);
     }
 }

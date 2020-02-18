@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 
 public final class GestionVoyageurs extends Gestion {
 
-    public static final ArrayList<Voyageur> voyageurList = Menu.voyageurList;
+    private static final ArrayList<Voyageur> voyageurList = Menu.voyageurList;
 
     private GestionVoyageurs() {
     }

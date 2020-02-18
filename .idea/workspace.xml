@@ -99,10 +99,10 @@
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="369" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1473.864@0.0.1473.864" timestamp="1581955124333" />
-    <state x="304" y="147" key="#com.intellij.ide.util.MemberChooser" timestamp="1581970950224">
+    <state x="304" y="147" key="#com.intellij.ide.util.MemberChooser" timestamp="1582021399432">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state x="304" y="147" key="#com.intellij.ide.util.MemberChooser/0.0.1473.864@0.0.1473.864" timestamp="1581970950224" />
+    <state x="304" y="147" key="#com.intellij.ide.util.MemberChooser/0.0.1473.864@0.0.1473.864" timestamp="1582021399432" />
     <state x="645" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581955122243">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
@@ -127,22 +127,22 @@
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="361" y="186" key="FileChooserDialogImpl/0.0.1473.864@0.0.1473.864" timestamp="1581941814354" />
-    <state width="1116" height="39" key="GridCell.Tab.0.bottom" timestamp="1582013528531">
+    <state width="1430" height="180" key="GridCell.Tab.0.bottom" timestamp="1582021499212">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1116" height="39" key="GridCell.Tab.0.bottom/0.0.1473.864@0.0.1473.864" timestamp="1582013528531" />
-    <state width="1116" height="39" key="GridCell.Tab.0.center" timestamp="1582013528531">
+    <state width="1430" height="180" key="GridCell.Tab.0.bottom/0.0.1473.864@0.0.1473.864" timestamp="1582021499212" />
+    <state width="1430" height="180" key="GridCell.Tab.0.center" timestamp="1582021499212">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1116" height="39" key="GridCell.Tab.0.center/0.0.1473.864@0.0.1473.864" timestamp="1582013528531" />
-    <state width="1116" height="39" key="GridCell.Tab.0.left" timestamp="1582013528531">
+    <state width="1430" height="180" key="GridCell.Tab.0.center/0.0.1473.864@0.0.1473.864" timestamp="1582021499212" />
+    <state width="1430" height="180" key="GridCell.Tab.0.left" timestamp="1582021499212">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1116" height="39" key="GridCell.Tab.0.left/0.0.1473.864@0.0.1473.864" timestamp="1582013528531" />
-    <state width="1116" height="39" key="GridCell.Tab.0.right" timestamp="1582013528531">
+    <state width="1430" height="180" key="GridCell.Tab.0.left/0.0.1473.864@0.0.1473.864" timestamp="1582021499212" />
+    <state width="1430" height="180" key="GridCell.Tab.0.right" timestamp="1582021499212">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
-    <state width="1116" height="39" key="GridCell.Tab.0.right/0.0.1473.864@0.0.1473.864" timestamp="1582013528531" />
+    <state width="1430" height="180" key="GridCell.Tab.0.right/0.0.1473.864@0.0.1473.864" timestamp="1582021499212" />
     <state width="1018" height="251" key="GridCell.Tab.1.bottom" timestamp="1580566069770">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
@@ -199,5 +199,10 @@
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="518" y="174" width="672" height="678" key="search.everywhere.popup/0.0.1473.864@0.0.1473.864" timestamp="1581970465286" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AirBnB$Menu.ic" NAME="Menu Coverage Results" MODIFIED="1582019714953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>richard.airbnb.*</FILTER>
+    </SUITE>
   </component>
 </project>
