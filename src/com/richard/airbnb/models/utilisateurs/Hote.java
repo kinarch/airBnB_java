@@ -23,13 +23,20 @@ public class Hote extends Personne {
 
     public void afficher() {
         super.afficher();
-        System.out.print(" qui s'engage à répondre dans ");
-        if (delaiDeReponse <= 1) {
-            System.out.print("l'heure.");
-        }
-        else {
-            System.out.print("les " + delaiDeReponse + " heures.");
-        }
+//        System.out.print(" qui s'engage à répondre dans ");
+//        if (delaiDeReponse <= 1) {
+//            System.out.print("l'heure.");
+//        } else {
+//            System.out.print("les " + delaiDeReponse + " heures.");
+//        }
+    }
+
+    @Override
+    public String toString() {
+        String s = super.toString();
+        s += " qui s'engage à répondre dans ";
+        s += (delaiDeReponse == 1 ? "l'heure." : "les " + delaiDeReponse + " heures.");
+        return s;
     }
 
     @Override
@@ -38,7 +45,9 @@ public class Hote extends Personne {
             return false;
         }
         Hote hote = (Hote) o;
-        return delaiDeReponse == hote.delaiDeReponse;
+        return (
+                this.delaiDeReponse == hote.delaiDeReponse
+        );
     }
 
     @Override

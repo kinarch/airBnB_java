@@ -28,12 +28,8 @@ public final class GestionReservation extends Gestion {
     public static void init() {
 
         System.out.println("---------- ----------");
-        System.out.println("Liste des reservations");
-        System.out.println("Saisir une option :");
-        System.out.println(ADD + " : Ajouter un reservation");
-        System.out.println(DELETE + " : Supprimer un reservation");
-        System.out.println(DISPLAY + " : Afficher la liste");
-        System.out.println(BACK + " : Retour");
+        System.out.println("# Gestion des reservations");
+        Gestion.displayOptions();
 
         int userInput = Menu.choose(N_OPTIONS);
         if (userInput == BACK) {
@@ -157,9 +153,10 @@ public final class GestionReservation extends Gestion {
             );
         }
 
-        Reservation newReservation = new Reservation(sejour, voyageur, new MaDate());
-        reservationList.add(newReservation);
-        Menu.writeReservation("res/reservations.txt");
+        Reservation reservation = new Reservation(sejour, voyageur, new MaDate());
+        Gestion.add(reservationList, reservation);
+//        reservationList.add(reservation);
+//        Menu.writeReservation("res/reservations.txt");
     }
 
     /**
@@ -171,46 +168,47 @@ public final class GestionReservation extends Gestion {
     private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer une réservation.");
-
-        if (!reservationList.isEmpty()) {
-
-            int index = 0;
-
-            if (reservationList.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (reservationList.size() - 1) + ") : ");
-                index = Menu.choose(reservationList.size());
-            } else {
-                System.out.println("Une seul réservation enregistré.");
-            }
-
-            System.out.println("Etes-vous certains de supprimer la réservation n°" + index + " (0 : non | plus : oui) : ");
-            if (Menu.scanner.nextInt() > 1) {
-                reservationList.remove(index);
-            }
-        } else {
-            System.out.println("Aucune reservation à supprimer.");
-        }
+        Gestion.delete(reservationList);
+//        if (!reservationList.isEmpty()) {
+//
+//            int index = 0;
+//
+//            if (reservationList.size() > 1) {
+//                System.out.println("Numéro ? (entre 0 et " + (reservationList.size() - 1) + ") : ");
+//                index = Menu.choose(reservationList.size());
+//            } else {
+//                System.out.println("Une seul réservation enregistré.");
+//            }
+//
+//            System.out.println("Etes-vous certains de supprimer la réservation n°" + index + " (0 : non | plus : oui) : ");
+//            if (Menu.scanner.nextInt() > 1) {
+//                reservationList.remove(index);
+//            }
+//        } else {
+//            System.out.println("Aucune reservation à supprimer.");
+//        }
     }
 
     /**
      * Permet à l'utilisateur d'afficher la liste dans la console.
      */
     private static void display() {
-        if (reservationList.size() > 0) {
-            for (int i = 0; i < reservationList.size(); i++) {
-                Reservation reservation = reservationList.get(i);
-                System.out.println("* n°" + i + " : ");
-                reservation.afficher();
-            }
-        } else {
-            System.out.println("Aucune reservation enregistrée.");
-        }
+        Gestion.display(reservationList);
+//        if (reservationList.size() > 0) {
+//            for (int i = 0; i < reservationList.size(); i++) {
+//                Reservation reservation = reservationList.get(i);
+//                System.out.println("* n°" + i + " : ");
+//                reservation.afficher();
+//            }
+//        } else {
+//            System.out.println("Aucune reservation enregistrée.");
+//        }
     }
 
     /**
      * Retour au menu initial.
      */
-    private static void back() {
-        Menu.init();
+    protected static void back() {
+        Gestion.back();
     }
 }

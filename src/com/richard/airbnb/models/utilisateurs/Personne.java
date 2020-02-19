@@ -42,7 +42,13 @@ public abstract class Personne {
      * Afficher dans la console le prenom, nom et age de la Personne.
      */
     public void afficher() {
-        System.out.print(prenom + " " + nom + " (" + age + "ans)");
+        System.out.println(toString());
+//        System.out.print(prenom + " " + nom + " (" + age + "ans)");
+    }
+
+    @Override
+    public String toString() {
+        return prenom + " " + nom + " (" + age + "ans)";
     }
 
     @Override
@@ -54,9 +60,11 @@ public abstract class Personne {
             return false;
         }
         Personne personne = (Personne) o;
-        return age == personne.age &&
-                prenom.equals(personne.prenom) &&
-                nom.equals(personne.nom);
+        return (
+                this.age == personne.age &&
+                this.prenom.equals(personne.prenom) &&
+                this.nom.equals(personne.nom)
+        );
     }
 
     @Override

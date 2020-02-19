@@ -11,6 +11,7 @@ public abstract class Logement {
     private final int tarifParNuit;
     private final int superficie;
     private final int nbVoyageursMax;
+    private String nom;
 
     public Logement(Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax) throws Exception {
         if (hote == null) {
@@ -57,6 +58,14 @@ public abstract class Logement {
 
     public int getNbVoyageursMax() {
         return nbVoyageursMax;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     @Override

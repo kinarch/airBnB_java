@@ -24,12 +24,8 @@ public final class GestionLogements extends Gestion {
     public static void init() {
 
         System.out.println("---------- ----------");
-        System.out.println("Gestion des Logements");
-        System.out.println("Saisir une option :");
-        System.out.println(ADD + " : Ajouter un logement");
-        System.out.println(DELETE + " : Supprimer un logement");
-        System.out.println(DISPLAY + " : Afficher la liste");
-        System.out.println(BACK + " : Retour");
+        System.out.println("# Gestion des Logements");
+        Gestion.displayOptions();
 
         int userInput = Menu.choose(N_OPTIONS);
         if (userInput == BACK) {
@@ -126,8 +122,7 @@ public final class GestionLogements extends Gestion {
                     System.out.print("Piscine ? (0 non, 1 oui)");
                     boolean possedePiscine = Menu.scanner.nextInt() > 0;
 
-                    logementList.add(new Maison(hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
-                    System.out.println("Votre maison a été ajouté avec succès");
+                    Gestion.add(logementList, new Maison(hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
                     break;
                 case TYPE_APPARTEMENT:
                     System.out.print("Saisissez le numéro de l'étage :");
@@ -136,8 +131,7 @@ public final class GestionLogements extends Gestion {
                     System.out.print("Superficie du balcon ? (0 : pas de balcon)");
                     int superficieBalcon = Menu.scanner.nextInt();
 
-                    logementList.add(new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));
-                    System.out.println("Votre appartement a été ajouté avec succès");
+                    Gestion.add(logementList, new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));
                     break;
             }
         } else {
@@ -154,46 +148,48 @@ public final class GestionLogements extends Gestion {
     private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer un logement.");
+        Gestion.delete(logementList);
 
-        if (!logementList.isEmpty()) {
-
-            int index = 0;
-
-            if (logementList.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (logementList.size() - 1) + ") : ");
-                index = Menu.scanner.nextInt();
-            } else {
-                System.out.println("Un seul logement enregistré.");
-            }
-
-            System.out.println("Etes-vous certains de supprimer le logement n°" + index + " (0 : non | plus : oui) : ");
-            if (Menu.scanner.nextInt() > 1) {
-                logementList.remove(index);
-            }
-        } else {
-            System.out.println("Aucun logement à supprimer.");
-        }
+//        if (!logementList.isEmpty()) {
+//
+//            int index = 0;
+//
+//            if (logementList.size() > 1) {
+//                System.out.println("Numéro ? (entre 0 et " + (logementList.size() - 1) + ") : ");
+//                index = Menu.scanner.nextInt();
+//            } else {
+//                System.out.println("Un seul logement enregistré.");
+//            }
+//
+//            System.out.println("Etes-vous certains de supprimer le logement n°" + index + " (0 : non | plus : oui) : ");
+//            if (Menu.scanner.nextInt() > 1) {
+//                logementList.remove(index);
+//            }
+//        } else {
+//            System.out.println("Aucun logement à supprimer.");
+//        }
     }
 
     /**
      * Permet a l'utilisateur d'afficher la liste dans la console
      */
     private static void display() {
-        if (logementList.size() > 0) {
-            for (int i = 0; i < logementList.size(); i++) {
-                Logement logement = logementList.get(i);
-                System.out.print("* n°" + i + " : ");
-                logement.afficher();
-            }
-        } else {
-            System.out.println("Aucun logement enregistré.");
-        }
+        Gestion.display(logementList);
+//        if (logementList.size() > 0) {
+//            for (int i = 0; i < logementList.size(); i++) {
+//                Logement logement = logementList.get(i);
+//                System.out.print("* n°" + i + " : ");
+//                logement.afficher();
+//            }
+//        } else {
+//            System.out.println("Aucun logement enregistré.");
+//        }
     }
 
     /**
      * Retour au menu initial.
      */
-    private static void back() {
-        Menu.init();
+    protected static void back() {
+        Gestion.back();
     }
 }

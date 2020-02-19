@@ -20,17 +20,28 @@ public class Maison extends Logement {
 
     @Override
     public void afficher() {
-        getHote().afficher();
-        System.out.println();
-        System.out.println("Le logement est une maison situé " + getAdresse() + ".");
-        System.out.println("superficie : " + getSuperficieTotal() + "m²");
-        System.out.print("Jardin : ");
-        if (superficieJardin > 0) {
-            System.out.println("Oui (" + superficieJardin + "m²).");
-        } else {
-            System.out.println("Non.");
-        }
-        System.out.println("Piscine : " + (possedePiscine ? "Oui." : "Non."));
+        System.out.println(toString());
+//        getHote().afficher();
+//        System.out.println();
+//        System.out.println("Le logement est une maison situé " + getAdresse() + ".");
+//        System.out.println("superficie : " + getSuperficieTotal() + "m²");
+//        System.out.print("Jardin : ");
+//        if (superficieJardin > 0) {
+//            System.out.println("Oui (" + superficieJardin + "m²).");
+//        } else {
+//            System.out.println("Non.");
+//        }
+//        System.out.println("Piscine : " + (possedePiscine ? "Oui." : "Non."));
+    }
+
+    @Override
+    public String toString() {
+        String s = getHote().toString() + "\n\r";
+        s += "Le logement est une maison situé " + getAdresse() + "." + "\n\r";
+        s += "superficie : " + getSuperficieTotal() + "m²" + "\n\r";
+        s += "Jardin : " + (superficieJardin > 0 ? "Oui (" + superficieJardin + "m²)." : "Non.") + "\n\r";
+        s += "Piscine : " + (possedePiscine ? "Oui." : "Non.");
+        return s;
     }
 
     @Override

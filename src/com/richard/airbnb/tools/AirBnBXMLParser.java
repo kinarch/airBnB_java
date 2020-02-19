@@ -9,17 +9,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
 
-import javax.xml.XMLConstants;
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public final class AirBnBXMLParser {
@@ -27,12 +24,21 @@ public final class AirBnBXMLParser {
     private AirBnBXMLParser() {
     }
 
+    /**
+     * Parse le fichier xml et rempli la liste d'hotes et de logements.
+     *
+     * @param filePath     le chemin du fichier
+     * @param hoteList     la liste des hotes
+     * @param logementList la liste des logements
+     * @throws Exception
+     */
     public static void parseListDOM(String filePath, ArrayList<Hote> hoteList, ArrayList<Logement> logementList) throws Exception {
 
         //  Preparation du document
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        final File file = new File(filePath);
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
-        final Document document = builder.parse(new File(filePath));
+        final Document document = builder.parse(file);
 
         //  Vérification du fichier
         factory.setValidating(true);
@@ -75,14 +81,7 @@ public final class AirBnBXMLParser {
                 final int hoteDelaiReponse = Integer.parseInt(eltHoteDelaiReponse.getTextContent());
                 //  Ajout de l'hote
                 final Hote hote = new Hote(hoteNom, hotePrenom, hoteAge, hoteDelaiReponse);
-                boolean addHote = true;
-                for (Hote h : hoteList) {
-                    if (h.equals(hote)) {
-                        addHote = false;
-                        break;
-                    }
-                }
-                if (addHote) {
+                if (!hoteList.contains(hote)) {
                     hoteList.add(hote);
                 }
 
@@ -120,21 +119,20 @@ public final class AirBnBXMLParser {
                     final Element eltPossedePiscine = (Element) eltLogement.getElementsByTagName("possedePiscine").item(0);
                     //  récupération des valeurs d'une maison
                     final int superficieJardin = Integer.parseInt(eltSuperficieJardin.getTextContent());
-                    final boolean possedePiscine = Integer.parseInt(eltPossedePiscine.getTextContent()) == 1;
+                    final boolean possedePiscine = eltPossedePiscine.getTextContent().equals("1");
                     //  instanciation
                     logement = new Maison(hote, adresse, tarifParNuit, superficie, nbVoyageursMax, superficieJardin, possedePiscine);
                 }
 
+                //  Préparation du nom du logement
+                String nameAtt = "name";
+                if (eltLogement.hasAttribute(nameAtt) && logement != null) {
+                    logement.setNom(eltLogement.getAttribute(nameAtt));
+                }
+
                 //  ajout du logement
                 logementList.add(logement);
-                boolean addLogement = true;
-                for (Logement l : logementList) {
-                    if (l.equals(logement)) {
-                        addLogement = false;
-                        break;
-                    }
-                }
-                if (addLogement) {
+                if (!logementList.contains(logement)) {
                     logementList.add(logement);
                 }
             }
@@ -177,16 +175,8 @@ public final class AirBnBXMLParser {
 
                 //  Ajout de l'hote
                 final Hote hote = new Hote(hoteNom, hotePrenom, hoteAge, hoteDelaiReponse);
-                boolean addHote = true;
-                for (Hote h : hoteList) {
-                    if (h.equals(hote)) {
-                        addHote = false;
-                        break;
-                    }
-                }
-                if (addHote) {
+                if (!hoteList.contains(hote)) {
                     hoteList.add(hote);
-                    hote.afficher();
                 }
             }
         }

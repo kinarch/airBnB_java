@@ -49,20 +49,11 @@ public class Reservation {
      * Affiche les information du voyageur et du sejour
      */
     public void afficher() {
-        System.out.println("Reservation n°" + identifiant);
-        voyageur.afficher();
-        System.out.print(" a fait une réserversation chez ");
-        sejour.afficher();
+        System.out.println(toString());
     }
 
     @Override
     public String toString() {
-        return "Reservation{" +
-                "identifiant=" + identifiant +
-                ", sejour=" + sejour +
-                ", voyageur=" + voyageur +
-                ", estValidee=" + estValidee +
-                ", dateDeReservation=" + dateDeReservation +
-                '}';
+        return "Réservation n°" + identifiant + "\n\r" + voyageur.toString() + " a fait une réservation chez " + sejour.toString();
     }
 }

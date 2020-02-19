@@ -20,12 +20,8 @@ public final class GestionVoyageurs extends Gestion {
 
 
         System.out.println("---------- ----------");
-        System.out.println("Liste des voyageurs");
-        System.out.println("Saisir une option :");
-        System.out.println(ADD + " : Ajouter un voyageur");
-        System.out.println(DELETE + " : Supprimer un voyageur");
-        System.out.println(DISPLAY + " : Afficher la liste");
-        System.out.println(BACK + " : Retour");
+        System.out.println("# Gestion des voyageurs");
+        Gestion.displayOptions();
 
         int userInput = Menu.choose(N_OPTIONS);
         if (userInput == BACK) {
@@ -59,7 +55,7 @@ public final class GestionVoyageurs extends Gestion {
      *
      * @throws Exception
      */
-    private static void add() throws Exception {
+    protected static void add() throws Exception {
 
         System.out.println("=> Ajouter un voyageur.");
 
@@ -76,8 +72,8 @@ public final class GestionVoyageurs extends Gestion {
         System.out.print("Age : ");
         age = Menu.scanner.nextInt();
 
-        Voyageur newVoyageur = new Voyageur(prenom, nom, age);
-        voyageurList.add(newVoyageur);
+        Voyageur voyageur = new Voyageur(prenom, nom, age);
+        Gestion.add(voyageurList, voyageur);
     }
 
     /**
@@ -86,51 +82,51 @@ public final class GestionVoyageurs extends Gestion {
      * @throws IndexOutOfBoundsException
      * @throws InputMismatchException
      */
-    private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
+    protected static void delete() throws IndexOutOfBoundsException, InputMismatchException {
 
         System.out.println("=> Supprimer un voyageur.");
+        Gestion.delete(voyageurList);
 
-        if (!voyageurList.isEmpty()) {
-
-            int index = 0;
-
-            if (voyageurList.size() > 1) {
-                System.out.println("Numéro ? (entre 0 et " + (voyageurList.size() - 1) + ") : ");
-                index = Menu.scanner.nextInt();
-            } else {
-                System.out.println("Un seul voyageur enregistré.");
-            }
-
-            System.out.println("Etes-vous certains de supprimer le voyageur n°" + index + " (0 : non | plus : oui) : ");
-            if (Menu.scanner.nextInt() > 1) {
-                voyageurList.remove(index);
-            }
-        } else {
-            System.out.println("Aucun voyageur à supprimer.");
-        }
+//        if (!voyageurList.isEmpty()) {
+//
+//            int index = 0;
+//
+//            if (voyageurList.size() > 1) {
+//                System.out.println("Numéro ? (entre 0 et " + (voyageurList.size() - 1) + ") : ");
+//                index = Menu.scanner.nextInt();
+//            } else {
+//                System.out.println("Un seul voyageur enregistré.");
+//            }
+//
+//            System.out.println("Etes-vous certains de supprimer le voyageur n°" + index + " (0 : non | plus : oui) : ");
+//            if (Menu.scanner.nextInt() > 1) {
+//                voyageurList.remove(index);
+//            }
+//        } else {
+//            System.out.println("Aucun voyageur à supprimer.");
+//        }
     }
 
     /**
      * Permet à l'utilisateur d'afficher la liste dans la console.
      */
-    private static void display() {
-        if (voyageurList.size() > 0) {
-            for (int i = 0; i < voyageurList.size(); i++) {
-                Voyageur voyageur = voyageurList.get(i);
-                System.out.print("* n°" + i + " : ");
-                voyageur.afficher();
-                System.out.println();
-            }
-        } else {
-            System.out.println("Aucun voyageur enregistré.");
-        }
+    protected static void display() {
+        Gestion.display(voyageurList);
+//        if (voyageurList.size() > 0) {
+//            for (int i = 0; i < voyageurList.size(); i++) {
+//                Voyageur voyageur = voyageurList.get(i);
+//                System.out.print("* n°" + i + " : ");
+//                voyageur.afficher();
+//            }
+//        } else {
+//            System.out.println("Aucun voyageur enregistré.");
+//        }
     }
 
     /**
      * Retour au menu initial.
      */
-    private static void back() {
-        Menu.init();
+    protected static void back() {
+        Gestion.back();
     }
-
 }

@@ -56,11 +56,18 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterface 
      */
     @Override
     public void afficher() {
-        super.afficher();
-        System.out.print("Le prix de se séjour est de " + getTarif() + "€.");
-        if (beneficiePromotion()) {
-            System.out.println(" (" + promotion + "€ de promotion)");
-        }
-        System.out.println("--->    Sejour long");
+        System.out.println(toString());
+//        System.out.print("Le prix de se séjour est de " + getTarif() + "€.");
+//        if (beneficiePromotion()) {
+//            System.out.println(" (" + promotion + "€ de promotion)");
+//        }
+//        System.out.println("--->    Sejour long");
+    }
+
+    @Override
+    public String toString() {
+        String s = super.toString() + "\n\r" + "Le prix de se séjour est de " + getTarif() + "€.";
+        s += (beneficiePromotion() ? " (" + promotion + "€ de promotion)" : "");
+        return s;
     }
 }

@@ -5,15 +5,15 @@ import com.richard.airbnb.menu.gestions.GestionHotes;
 import com.richard.airbnb.menu.gestions.GestionLogements;
 import com.richard.airbnb.menu.gestions.GestionReservation;
 import com.richard.airbnb.menu.gestions.GestionVoyageurs;
+import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Logement;
+import com.richard.airbnb.models.logements.Maison;
 import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
+import com.richard.airbnb.tools.ASCIIArtGenerator;
 import com.richard.airbnb.tools.AirBnBXMLParser;
-import org.xml.sax.SAXException;
 
-
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public final class Menu {
 
-    private static final String TITLE = "Bienvue chez AirBnB";
+    private static final String TITLE = "AirBnB";
     public static Scanner scanner;
 
     //  la liste pour chaque gestion
@@ -34,10 +34,17 @@ public final class Menu {
     private Menu() {
     }
 
+
     /*
         TODO ...
-        -   Faire la methode qui parse le XML avec XPath ?
+        -   Faire la methode qui parse le XML avec XPath ? Recursive ?
         -   Faire la methode qui écrit dans un fichier texte les réservations.
+     */
+    /**
+     * [ M A I N ]
+     * Methode principale a l'execution de l'application du Menu
+     *
+     * @param args
      */
     public static void main(String[] args) {
 
@@ -52,43 +59,66 @@ public final class Menu {
              */
             voyageurList.add(new Voyageur("Voyageur", "du Temp", 30));
             voyageurList.add(new Voyageur("Doctor", "Who", 100));
-        } catch (ParserConfigurationException ex) {
-            System.out.println("[error] " + "ParserConfigurationException");
-        } catch (SAXException ex) {
-            System.out.println("[error] " + "SAXException");
-        } catch (IOException ex) {
-            System.out.println("[error] " + "IOException");
         } catch (Exception ex) {
             System.out.println("[Error] " + ex.getMessage());
             ex.printStackTrace();
         }
 
-        //  Affichage en console
+        try {
+            ASCIIArtGenerator.printTextArt("A i r B & B", 5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-//        System.out.println("# HOTES LIST");
-//        if (hoteList.isEmpty()) {
-//            System.out.println("Empty.");
-//        } else {
-//            for (int i = 0; i < hoteList.size(); i++) {
-//                System.out.print(i + ") ");
-//                hoteList.get(i).afficher();
-//                System.out.println();
-//            }
-//        }
-//
-//        System.out.println("# LOGEMENTS LIST");
-//        if (logementList.isEmpty()) {
-//            System.out.println("Empty.");
-//        } else {
-//            for (int i = 0; i < logementList.size(); i++) {
-//                System.out.print(i + ") ");
-//                logementList.get(i).afficher();
-//            }
-//        }
-//
-//        System.out.println();
+        Maison maison = getMaisonByName("Maison 1234");
+        Appartement appartement = getAppartementByName("Neverland");
 
-        System.out.println("********** " + TITLE + " **********");
+        Maison logement = (Maison) getLogementByName("Maison 1");
+        Maison maison2 = getLogementByNameWithGenericity("Maison 2");
+        Appartement appartement2 = getLogementByNameWithGenericity("Appartement 1234");
+
+        System.out.println();
+        System.out.println("MAISON 1 : getMaisonByName(Maison 1)");
+        if (maison != null) {
+            maison.afficher();
+        } else {
+            System.out.println("Pas de maison");
+        }
+
+        System.out.println();
+        System.out.println("MAISON 1 : getLogementByName(Maison 1)");
+        if (logement != null) {
+            logement.afficher();
+        } else {
+            System.out.println("Pas de logement");
+        }
+
+
+        System.out.println();
+        System.out.println("APP 1 : getAppartementByName(Neverland)");
+        if (appartement != null) {
+            appartement.afficher();
+        } else {
+            System.out.println("Pas d'appartement");
+        }
+
+        System.out.println();
+        System.out.println("MAISON 2 : getLogementByNameWithGenericity(Maison 2)");
+        if (maison2 != null) {
+            maison2.afficher();
+        } else {
+            System.out.println("Pas de logement générique");
+        }
+
+        System.out.println();
+        System.out.println("APP 2 : getLogementByNameWithGenericity(Appartement 2)");
+        if (appartement2 != null) {
+            appartement2.afficher();
+        } else {
+            System.out.println("Pas de logement générique");
+        }
+
+//        System.out.println("********** " + TITLE + " **********");
         init();
         scanner.close();
     }
@@ -109,6 +139,7 @@ public final class Menu {
         switch (choose(5)) {
             case 1:
                 GestionHotes.init();
+
                 break;
             case 2:
                 GestionLogements.init();
@@ -155,8 +186,9 @@ public final class Menu {
 
     /**
      * Ecrit un nouveau fichier texte avec les réservations.
+     *
      * @param filePath le chemin du fichier texte.
-     * @param append si le fichier doit être écraser si celui ci existe.
+     * @param append   si le fichier doit être écraser si celui ci existe.
      */
     public static void writeReservation(String filePath, boolean append) {
 
@@ -171,8 +203,12 @@ public final class Menu {
             FileWriter writer = new FileWriter(filePath, append);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
-            for (Logement r : logementList) {
-                bufferedWriter.write("Truc");
+            for (Reservation r : reservationList) {
+                bufferedWriter.write(nVoyageurTitle);
+                bufferedWriter.write(nLogementTitle);
+                bufferedWriter.write(dateArriveTitle);
+                bufferedWriter.write(nNuitTitle);
+                bufferedWriter.write(nPersonneTitle);
 //                bufferedWriter.write("\r\n");
             }
 
@@ -188,5 +224,45 @@ public final class Menu {
      */
     public static void writeReservation(String filePath) {
         writeReservation(filePath, false);
+    }
+
+    /*
+        TODO ... GENERICITY
+     */
+
+    public static Maison getMaisonByName(String name) {
+        for (Logement l : logementList) {
+            if (l.getNom().equals(name) && l instanceof Maison) {
+                return (Maison) l;
+            }
+        }
+        return null;
+    }
+
+    public static Appartement getAppartementByName(String name) {
+        for (Logement l : logementList) {
+            if (l.getNom().equals(name) && l instanceof Appartement) {
+                return (Appartement) l;
+            }
+        }
+        return null;
+    }
+
+    public static Logement getLogementByName (String name) {
+        for (Logement l : logementList) {
+            if (l.getNom().equals(name)) {
+                return l;
+            }
+        }
+        return null;
+    }
+
+    public static <T extends Logement> T getLogementByNameWithGenericity (String name) {
+        for (Logement l : logementList) {
+            if (l.getNom().equals(name)) {
+                return (T) l;
+            }
+        }
+        return null;
     }
 }
