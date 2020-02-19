@@ -94,7 +94,7 @@ public final class GestionHotes extends Gestion {
      * Permet à l'utilisateur d'afficher la liste dans la console
      */
     protected static void display() {
-        System.out.println("=> Affichage des hotes.");
+        System.out.println("=> Afficher les hotes.");
         Gestion.display(hoteList);
     }
 

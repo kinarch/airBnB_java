@@ -43,7 +43,6 @@ public abstract class Personne {
      */
     public void afficher() {
         System.out.println(toString());
-//        System.out.print(prenom + " " + nom + " (" + age + "ans)");
     }
 
     @Override
@@ -53,7 +52,7 @@ public abstract class Personne {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)  {
+        if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
@@ -62,8 +61,8 @@ public abstract class Personne {
         Personne personne = (Personne) o;
         return (
                 this.age == personne.age &&
-                this.prenom.equals(personne.prenom) &&
-                this.nom.equals(personne.nom)
+                        this.prenom.equals(personne.prenom) &&
+                        this.nom.equals(personne.nom)
         );
     }
 

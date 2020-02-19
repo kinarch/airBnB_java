@@ -83,50 +83,23 @@ public final class GestionVoyageurs extends Gestion {
      * @throws InputMismatchException
      */
     protected static void delete() throws IndexOutOfBoundsException, InputMismatchException {
-
         System.out.println("=> Supprimer un voyageur.");
         Gestion.delete(voyageurList);
-
-//        if (!voyageurList.isEmpty()) {
-//
-//            int index = 0;
-//
-//            if (voyageurList.size() > 1) {
-//                System.out.println("Numéro ? (entre 0 et " + (voyageurList.size() - 1) + ") : ");
-//                index = Menu.scanner.nextInt();
-//            } else {
-//                System.out.println("Un seul voyageur enregistré.");
-//            }
-//
-//            System.out.println("Etes-vous certains de supprimer le voyageur n°" + index + " (0 : non | plus : oui) : ");
-//            if (Menu.scanner.nextInt() > 1) {
-//                voyageurList.remove(index);
-//            }
-//        } else {
-//            System.out.println("Aucun voyageur à supprimer.");
-//        }
     }
 
     /**
      * Permet à l'utilisateur d'afficher la liste dans la console.
      */
     protected static void display() {
+        System.out.println("=> Afficher les voyageurs.");
         Gestion.display(voyageurList);
-//        if (voyageurList.size() > 0) {
-//            for (int i = 0; i < voyageurList.size(); i++) {
-//                Voyageur voyageur = voyageurList.get(i);
-//                System.out.print("* n°" + i + " : ");
-//                voyageur.afficher();
-//            }
-//        } else {
-//            System.out.println("Aucun voyageur enregistré.");
-//        }
     }
 
     /**
      * Retour au menu initial.
      */
     protected static void back() {
+        System.out.println("=> Retour.");
         Gestion.back();
     }
 }

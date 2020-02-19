@@ -10,12 +10,15 @@ import static java.lang.System.out;
 abstract class Gestion {
 
     //  OPTIONS
-    static final int N_OPTIONS = 4;
-    static final int ADD = 1;
-    static final int DELETE = 2;
-    static final int DISPLAY = 3;
-    static final int BACK = 4;
+    protected static final int N_OPTIONS = 4;
+    protected static final int ADD = 1;
+    protected static final int DELETE = 2;
+    protected static final int DISPLAY = 3;
+    protected static final int BACK = 4;
 
+    /**
+     * Affichage des options en console
+     */
     protected static void displayOptions() {
         out.println("Saisir une option :");
         out.println(ADD + " : Ajouter");
@@ -39,11 +42,10 @@ abstract class Gestion {
      * Supprime un éléments de la liste
      *
      * @param list
-     * @param <T>
      * @throws IndexOutOfBoundsException
      * @throws InputMismatchException
      */
-    protected static <T> void delete(ArrayList<T> list) throws IndexOutOfBoundsException, InputMismatchException {
+    protected static void delete(ArrayList<?> list) throws IndexOutOfBoundsException, InputMismatchException {
         if (!list.isEmpty()) {
             int index = 0;
             if (list.size() > 1) {
@@ -54,7 +56,7 @@ abstract class Gestion {
             }
             out.println("Supprimer le numéro " + index + " (0 : non | plus : oui) ?");
             if (Menu.scanner.nextInt() >= 1) {
-                T deletedItem = list.remove(index);
+                Object deletedItem = list.remove(index);
                 out.println("Suppression du numéro " + index + " :");
                 out.println(deletedItem);
             } else {
@@ -71,10 +73,10 @@ abstract class Gestion {
      * @param list - la liste générique
      * @param <T>  - Generique type
      */
-    protected static <T> void display(ArrayList<T> list) {
+    protected static void display(ArrayList<?> list) {
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                T item = list.get(i);
+                Object item = list.get(i);
                 out.print("* n°" + i + " : ");
                 out.println(item.toString());
             }

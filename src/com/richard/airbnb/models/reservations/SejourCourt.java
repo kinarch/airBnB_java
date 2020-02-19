@@ -35,9 +35,6 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterface
     @Override
     public void afficher() {
         System.out.println(toString());
-//        super.afficher();
-//        System.out.println("Le prix de se séjour est de " + getTarif() + "€.");
-//        System.out.println("--->    Sejour court");
     }
 
     @Override

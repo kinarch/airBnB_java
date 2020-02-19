@@ -169,40 +169,14 @@ public final class GestionReservation extends Gestion {
 
         System.out.println("=> Supprimer une réservation.");
         Gestion.delete(reservationList);
-//        if (!reservationList.isEmpty()) {
-//
-//            int index = 0;
-//
-//            if (reservationList.size() > 1) {
-//                System.out.println("Numéro ? (entre 0 et " + (reservationList.size() - 1) + ") : ");
-//                index = Menu.choose(reservationList.size());
-//            } else {
-//                System.out.println("Une seul réservation enregistré.");
-//            }
-//
-//            System.out.println("Etes-vous certains de supprimer la réservation n°" + index + " (0 : non | plus : oui) : ");
-//            if (Menu.scanner.nextInt() > 1) {
-//                reservationList.remove(index);
-//            }
-//        } else {
-//            System.out.println("Aucune reservation à supprimer.");
-//        }
     }
 
     /**
      * Permet à l'utilisateur d'afficher la liste dans la console.
      */
     private static void display() {
+        System.out.println("=> Afficher les réservations.");
         Gestion.display(reservationList);
-//        if (reservationList.size() > 0) {
-//            for (int i = 0; i < reservationList.size(); i++) {
-//                Reservation reservation = reservationList.get(i);
-//                System.out.println("* n°" + i + " : ");
-//                reservation.afficher();
-//            }
-//        } else {
-//            System.out.println("Aucune reservation enregistrée.");
-//        }
     }
 
     /**

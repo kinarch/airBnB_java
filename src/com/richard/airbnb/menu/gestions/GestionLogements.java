@@ -149,47 +149,21 @@ public final class GestionLogements extends Gestion {
 
         System.out.println("=> Supprimer un logement.");
         Gestion.delete(logementList);
-
-//        if (!logementList.isEmpty()) {
-//
-//            int index = 0;
-//
-//            if (logementList.size() > 1) {
-//                System.out.println("Numéro ? (entre 0 et " + (logementList.size() - 1) + ") : ");
-//                index = Menu.scanner.nextInt();
-//            } else {
-//                System.out.println("Un seul logement enregistré.");
-//            }
-//
-//            System.out.println("Etes-vous certains de supprimer le logement n°" + index + " (0 : non | plus : oui) : ");
-//            if (Menu.scanner.nextInt() > 1) {
-//                logementList.remove(index);
-//            }
-//        } else {
-//            System.out.println("Aucun logement à supprimer.");
-//        }
     }
 
     /**
      * Permet a l'utilisateur d'afficher la liste dans la console
      */
     private static void display() {
+        System.out.println("=> Afficher les logements.");
         Gestion.display(logementList);
-//        if (logementList.size() > 0) {
-//            for (int i = 0; i < logementList.size(); i++) {
-//                Logement logement = logementList.get(i);
-//                System.out.print("* n°" + i + " : ");
-//                logement.afficher();
-//            }
-//        } else {
-//            System.out.println("Aucun logement enregistré.");
-//        }
     }
 
     /**
      * Retour au menu initial.
      */
     protected static void back() {
+        System.out.println("Retour.");
         Gestion.back();
     }
 }

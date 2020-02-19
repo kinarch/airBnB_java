@@ -26,16 +26,6 @@ public class Appartement extends Logement {
     @Override
     public void afficher() {
         System.out.println(toString());
-//        getHote().afficher();
-//        System.out.println();
-//        System.out.println("Le logement est un appartement situé " + getAdresse() + " à l'étage " + numeroEtage + ".");
-//        System.out.println("superficie : " + getSuperficieTotal() + "m²");
-//        System.out.print("Balcon : ");
-//        if (superficieBalcon > 0) {
-//            System.out.println("Oui (" + superficieBalcon + "m²).");
-//        } else {
-//            System.out.println("Non.");
-//        }
     }
 
     @Override

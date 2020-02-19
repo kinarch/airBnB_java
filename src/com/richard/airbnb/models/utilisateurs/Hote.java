@@ -23,12 +23,6 @@ public class Hote extends Personne {
 
     public void afficher() {
         super.afficher();
-//        System.out.print(" qui s'engage à répondre dans ");
-//        if (delaiDeReponse <= 1) {
-//            System.out.print("l'heure.");
-//        } else {
-//            System.out.print("les " + delaiDeReponse + " heures.");
-//        }
     }
 
     @Override

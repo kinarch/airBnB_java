@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
  * ASCII Art Generator in Java.
  * Prints a given text as an ASCII text art on the console.
  * This code is licensed under - CC Attribution CC BY 4.0.
- * @author www.quickprogrammingtips.com
  *
+ * @author www.quickprogrammingtips.com
  */
 public final class ASCIIArtGenerator {
 
@@ -25,7 +25,7 @@ public final class ASCIIArtGenerator {
 
     public enum ASCIIArtFont {
         ART_FONT_DIALOG("Dialog"), ART_FONT_DIALOG_INPUT("DialogInput"),
-        ART_FONT_MONO("Monospaced"),ART_FONT_SERIF("Serif"), ART_FONT_SANS_SERIF("SansSerif");
+        ART_FONT_MONO("Monospaced"), ART_FONT_SERIF("Serif"), ART_FONT_SANS_SERIF("SansSerif");
 
         private String value;
 
@@ -41,10 +41,11 @@ public final class ASCIIArtGenerator {
     /**
      * Prints ASCII art for the specified text. For size, you can use predefined sizes or a custom size.
      * Usage - printTextArt("Hi",30,ASCIIArtFont.ART_FONT_SERIF,"@");
+     *
      * @param artText
      * @param textHeight - Use a predefined size or a custom type
-     * @param fontType - Use one of the available fonts
-     * @param artSymbol - Specify the character for printing the ascii art
+     * @param fontType   - Use one of the available fonts
+     * @param artSymbol  - Specify the character for printing the ascii art
      * @throws Exception
      */
     public static void printTextArt(String artText, int textHeight, ASCIIArtFont fontType, String artSymbol) throws Exception {
@@ -72,6 +73,7 @@ public final class ASCIIArtGenerator {
     /**
      * Convenience method for printing ascii text art.
      * Font default - Dialog,  Art symbol default - *
+     *
      * @param artText
      * @param textHeight
      * @throws Exception
@@ -82,6 +84,7 @@ public final class ASCIIArtGenerator {
 
     /**
      * Using the Current font and current art text find the width of the full image
+     *
      * @param textHeight
      * @param artText
      * @param fontName
@@ -96,6 +99,7 @@ public final class ASCIIArtGenerator {
 
     /**
      * Find where the text baseline should be drawn so that the characters are within image
+     *
      * @param g
      * @param font
      * @return

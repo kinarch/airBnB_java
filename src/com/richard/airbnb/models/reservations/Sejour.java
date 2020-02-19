@@ -41,11 +41,6 @@ public abstract class Sejour implements SejourInterface {
     @Override
     public void afficher() {
         System.out.println(toString());
-//        logement.afficher();
-//        System.out.println(
-//                "La date d'arrivée est le " + dateArrivee + " pour " + nbNuits + " nuits pour " + nbVoyageurs +
-//                        (nbVoyageurs > 1 ? " personnes" : " personne") + "."
-//        );
     }
 
     @Override

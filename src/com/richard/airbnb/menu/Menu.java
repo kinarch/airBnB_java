@@ -40,6 +40,7 @@ public final class Menu {
         -   Faire la methode qui parse le XML avec XPath ? Recursive ?
         -   Faire la methode qui écrit dans un fichier texte les réservations.
      */
+
     /**
      * [ M A I N ]
      * Methode principale a l'execution de l'application du Menu
@@ -118,7 +119,7 @@ public final class Menu {
             System.out.println("Pas de logement générique");
         }
 
-//        System.out.println("********** " + TITLE + " **********");
+        System.out.println("********** " + TITLE + " **********");
         init();
         scanner.close();
     }
@@ -129,6 +130,7 @@ public final class Menu {
     public static void init() {
 
         //  console list display
+        System.out.println("# MENU");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Liste des hotes");
         System.out.println("2 : Liste des logements");
@@ -139,7 +141,6 @@ public final class Menu {
         switch (choose(5)) {
             case 1:
                 GestionHotes.init();
-
                 break;
             case 2:
                 GestionLogements.init();
@@ -248,7 +249,7 @@ public final class Menu {
         return null;
     }
 
-    public static Logement getLogementByName (String name) {
+    public static Logement getLogementByName(String name) {
         for (Logement l : logementList) {
             if (l.getNom().equals(name)) {
                 return l;
@@ -257,7 +258,7 @@ public final class Menu {
         return null;
     }
 
-    public static <T extends Logement> T getLogementByNameWithGenericity (String name) {
+    public static <T extends Logement> T getLogementByNameWithGenericity(String name) {
         for (Logement l : logementList) {
             if (l.getNom().equals(name)) {
                 return (T) l;
