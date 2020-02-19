@@ -45,6 +45,18 @@ public abstract class Personne {
         System.out.println(toString());
     }
 
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     @Override
     public String toString() {
         return prenom + " " + nom + " (" + age + "ans)";

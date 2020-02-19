@@ -7,9 +7,9 @@ import com.richard.airbnb.menu.gestions.GestionReservation;
 import com.richard.airbnb.menu.gestions.GestionVoyageurs;
 import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Logement;
-import com.richard.airbnb.models.logements.Maison;
 import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
+import com.richard.airbnb.models.utilisateurs.Personne;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
 import com.richard.airbnb.tools.ASCIIArtGenerator;
 import com.richard.airbnb.tools.AirBnBXMLParser;
@@ -18,11 +18,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public final class Menu {
 
-    private static final String TITLE = "AirBnB";
+    private static final String TITLE = "AirB&B";
     public static Scanner scanner;
 
     //  la liste pour chaque gestion
@@ -66,60 +67,13 @@ public final class Menu {
         }
 
         try {
-            ASCIIArtGenerator.printTextArt("A i r B & B", 5);
+            ASCIIArtGenerator.printTextArt(TITLE, ASCIIArtGenerator.ART_SIZE_SMALL);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Maison maison = getMaisonByName("Maison 1234");
-        Appartement appartement = getAppartementByName("Neverland");
-
-        Maison logement = (Maison) getLogementByName("Maison 1");
-        Maison maison2 = getLogementByNameWithGenericity("Maison 2");
-        Appartement appartement2 = getLogementByNameWithGenericity("Appartement 1234");
-
-        System.out.println();
-        System.out.println("MAISON 1 : getMaisonByName(Maison 1)");
-        if (maison != null) {
-            maison.afficher();
-        } else {
-            System.out.println("Pas de maison");
-        }
-
-        System.out.println();
-        System.out.println("MAISON 1 : getLogementByName(Maison 1)");
-        if (logement != null) {
-            logement.afficher();
-        } else {
-            System.out.println("Pas de logement");
-        }
-
-
-        System.out.println();
-        System.out.println("APP 1 : getAppartementByName(Neverland)");
-        if (appartement != null) {
-            appartement.afficher();
-        } else {
-            System.out.println("Pas d'appartement");
-        }
-
-        System.out.println();
-        System.out.println("MAISON 2 : getLogementByNameWithGenericity(Maison 2)");
-        if (maison2 != null) {
-            maison2.afficher();
-        } else {
-            System.out.println("Pas de logement générique");
-        }
-
-        System.out.println();
-        System.out.println("APP 2 : getLogementByNameWithGenericity(Appartement 2)");
-        if (appartement2 != null) {
-            appartement2.afficher();
-        } else {
-            System.out.println("Pas de logement générique");
-        }
-
-        System.out.println("********** " + TITLE + " **********");
+        Optional<Appartement> a = getLogementByName("Neverland12");
+        a.ifPresent(Appartement::afficher);
         init();
         scanner.close();
     }
@@ -181,9 +135,7 @@ public final class Menu {
         return userInput;
     }
 
-    /*
-        TODO ... Ecrire dans un fichier texte
-     */
+    //  TODO ... Reflechir pour écrire dans le fichier texte (réunir les bonnes informations)
 
     /**
      * Ecrit un nouveau fichier texte avec les réservations.
@@ -227,43 +179,40 @@ public final class Menu {
         writeReservation(filePath, false);
     }
 
-    /*
-        TODO ... GENERICITY
+    //  TODO ... Généricité
+
+    /**
+     * Retour un logement de la liste en fonction de son nom.
+     *
+     * @param name - le nom du logement.
+     * @param <T>  - Type générique hérité de Logement.
+     * @return un logement de son type.
      */
-
-    public static Maison getMaisonByName(String name) {
-        for (Logement l : logementList) {
-            if (l.getNom().equals(name) && l instanceof Maison) {
-                return (Maison) l;
-            }
-        }
-        return null;
-    }
-
-    public static Appartement getAppartementByName(String name) {
-        for (Logement l : logementList) {
-            if (l.getNom().equals(name) && l instanceof Appartement) {
-                return (Appartement) l;
-            }
-        }
-        return null;
-    }
-
-    public static Logement getLogementByName(String name) {
+    public static <T extends Logement> Optional<T> getLogementByName(String name) {
+        T logement = null;
         for (Logement l : logementList) {
             if (l.getNom().equals(name)) {
-                return l;
+                logement = (T) l;
+                break;
             }
         }
-        return null;
+        return Optional.ofNullable(logement);
     }
 
-    public static <T extends Logement> T getLogementByNameWithGenericity(String name) {
-        for (Logement l : logementList) {
-            if (l.getNom().equals(name)) {
-                return (T) l;
+    /**
+     * @param name    - nom.
+     * @param surname - prenom.
+     * @param <T>     - Type générique hérité de Personne.
+     * @return une personne de son type
+     */
+    public static <T extends Personne> Optional<T> getPersonneByNames(String name, String surname, ArrayList<Personne> list) {
+        T personne = null;
+        for (Personne p : list) {
+            if (p.getNom().equals(name) && p.getPrenom().equals(surname)) {
+                personne = (T) p;
+                break;
             }
         }
-        return null;
+        return Optional.ofNullable(personne);
     }
 }

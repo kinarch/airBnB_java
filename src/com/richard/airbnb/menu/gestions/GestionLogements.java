@@ -163,7 +163,7 @@ public final class GestionLogements extends Gestion {
      * Retour au menu initial.
      */
     protected static void back() {
-        System.out.println("Retour.");
+        System.out.println("=> Retour.");
         Gestion.back();
     }
 }

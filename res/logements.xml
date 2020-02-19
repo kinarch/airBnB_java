@@ -76,4 +76,19 @@
         <possedePiscine>1</possedePiscine>
     </Maison>
 
+    <Maison name="MyMaison">
+        <hote>
+            <nom>K</nom>
+            <prenom>Richard</prenom>
+            <age>28</age>
+            <delaiReponse>72</delaiReponse>
+        </hote>
+        <tarifParNuit>150</tarifParNuit>
+        <adresse>666 rue de l'Enfer</adresse>
+        <superficie>333</superficie>
+        <nbVoyageursMax>6</nbVoyageursMax>
+        <superficieJardin>999</superficieJardin>
+        <possedePiscine>1</possedePiscine>
+    </Maison>
+
 </Logements>

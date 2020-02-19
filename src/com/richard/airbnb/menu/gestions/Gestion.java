@@ -71,7 +71,6 @@ abstract class Gestion {
      * Affichage de la liste en console.
      *
      * @param list - la liste générique
-     * @param <T>  - Generique type
      */
     protected static void display(ArrayList<?> list) {
         if (list.size() > 0) {

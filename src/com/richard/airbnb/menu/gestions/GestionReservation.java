@@ -155,8 +155,6 @@ public final class GestionReservation extends Gestion {
 
         Reservation reservation = new Reservation(sejour, voyageur, new MaDate());
         Gestion.add(reservationList, reservation);
-//        reservationList.add(reservation);
-//        Menu.writeReservation("res/reservations.txt");
     }
 
     /**
@@ -166,7 +164,6 @@ public final class GestionReservation extends Gestion {
      * @throws InputMismatchException
      */
     private static void delete() throws IndexOutOfBoundsException, InputMismatchException {
-
         System.out.println("=> Supprimer une réservation.");
         Gestion.delete(reservationList);
     }
@@ -183,6 +180,7 @@ public final class GestionReservation extends Gestion {
      * Retour au menu initial.
      */
     protected static void back() {
+        System.out.println("=> Retour.");
         Gestion.back();
     }
 }

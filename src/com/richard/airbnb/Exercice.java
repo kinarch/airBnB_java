@@ -129,9 +129,32 @@ public class Exercice {
         reservation2.afficher();
     }
 
-    public static void menu() {
-
-    }
+//    public static Maison getMaisonByName(String name) {
+//        for (Logement l : logementList) {
+//            if (l.getNom().equals(name) && l instanceof Maison) {
+//                return (Maison) l;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public static Appartement getAppartementByName(String name) {
+//        for (Logement l : logementList) {
+//            if (l.getNom().equals(name) && l instanceof Appartement) {
+//                return (Appartement) l;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public static Logement getLogementByName(String name) {
+//        for (Logement l : logementList) {
+//            if (l.getNom().equals(name)) {
+//                return l;
+//            }
+//        }
+//        return null;
+//    }
 
 
 }
