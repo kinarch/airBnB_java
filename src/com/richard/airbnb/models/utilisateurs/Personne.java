@@ -1,11 +1,15 @@
 package com.richard.airbnb.models.utilisateurs;
 
+import com.richard.airbnb.models.MyComparable;
+
 import java.util.Objects;
 
-public abstract class Personne {
+public abstract class Personne implements MyComparable<Personne> {
 
+    //  constantes
     private static final int NOM_MAX_LENGHT = 100;
     private static final int AGE_MAJORITE = 18;
+
     private final String prenom;
     private final String nom;
     private final int age;
@@ -81,5 +85,10 @@ public abstract class Personne {
     @Override
     public int hashCode() {
         return Objects.hash(prenom, nom, age);
+    }
+
+    @Override
+    public int getValueToCompare() {
+        return getAge();
     }
 }

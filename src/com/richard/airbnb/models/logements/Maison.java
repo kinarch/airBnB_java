@@ -4,13 +4,13 @@ import com.richard.airbnb.models.utilisateurs.Hote;
 
 import java.util.Objects;
 
-public class Maison extends Logement {
+public final class Maison extends Logement {
 
     private final int superficieJardin;
     private final boolean possedePiscine;
 
-    public Maison(Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax, int superficieJardin, boolean possedePiscine) throws Exception {
-        super(hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
+    public Maison(String nom, Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax, int superficieJardin, boolean possedePiscine) throws Exception {
+        super(nom, hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
         if (superficieJardin < 0) {
             throw new Exception("Impossible pour une maison de posséder un jardin avec un superficie négative.");
         }

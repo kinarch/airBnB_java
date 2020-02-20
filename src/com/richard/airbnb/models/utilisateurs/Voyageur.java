@@ -1,6 +1,6 @@
 package com.richard.airbnb.models.utilisateurs;
 
-public class Voyageur extends Personne {
+public final class Voyageur extends Personne {
 
     /**
      * Constructeur d'une Personne.
@@ -26,5 +26,10 @@ public class Voyageur extends Personne {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    @Override
+    public int getValueToCompare() {
+        return super.getValueToCompare();
     }
 }

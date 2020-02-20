@@ -93,6 +93,11 @@ public final class AirBnBXMLParser {
                 final Element eltSuperficie = (Element) eltLogement.getElementsByTagName("superficie").item(0);
                 final Element eltNbVoyageursMax = (Element) eltLogement.getElementsByTagName("nbVoyageursMax").item(0);
                 //  Récupération des valeurs du logement
+                //  Préparation du nom du logement
+                String nom = "";
+                if (eltLogement.hasAttribute("name")) {
+                    nom = eltLogement.getAttribute("name");
+                }
                 final String adresse = eltAdresse.getTextContent();
                 final int tarifParNuit = Integer.parseInt(eltTarifParNuit.getTextContent());
                 final int superficie = Integer.parseInt(eltSuperficie.getTextContent());
@@ -110,7 +115,7 @@ public final class AirBnBXMLParser {
                     final int numeroEtage = Integer.parseInt(eltNumeroEtage.getTextContent());
                     final int superficieBalcon = Integer.parseInt(eltSuperficieBalcon.getTextContent());
                     //  instanciation
-                    logement = new Appartement(hote, adresse, tarifParNuit, superficie, nbVoyageursMax, numeroEtage, superficieBalcon);
+                    logement = new Appartement(nom, hote, adresse, tarifParNuit, superficie, nbVoyageursMax, numeroEtage, superficieBalcon);
                 }
                 //  Maison ?
                 else if (eltLogement.getNodeName().equals("Maison")) {
@@ -121,13 +126,7 @@ public final class AirBnBXMLParser {
                     final int superficieJardin = Integer.parseInt(eltSuperficieJardin.getTextContent());
                     final boolean possedePiscine = eltPossedePiscine.getTextContent().equals("1");
                     //  instanciation
-                    logement = new Maison(hote, adresse, tarifParNuit, superficie, nbVoyageursMax, superficieJardin, possedePiscine);
-                }
-
-                //  Préparation du nom du logement
-                String nameAtt = "name";
-                if (eltLogement.hasAttribute(nameAtt) && logement != null) {
-                    logement.setNom(eltLogement.getAttribute(nameAtt));
+                    logement = new Maison(nom, hote, adresse, tarifParNuit, superficie, nbVoyageursMax, superficieJardin, possedePiscine);
                 }
 
                 //  ajout du logement
@@ -138,7 +137,6 @@ public final class AirBnBXMLParser {
             }
         }
         //  end...
-        System.out.println("Parse completed.");
     }
 
     //  TODO... Essayer de finir cette methode avec XPath

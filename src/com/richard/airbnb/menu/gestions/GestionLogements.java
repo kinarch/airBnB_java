@@ -8,6 +8,7 @@ import com.richard.airbnb.menu.Menu;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Optional;
 
 public final class GestionLogements extends Gestion {
 
@@ -86,6 +87,9 @@ public final class GestionLogements extends Gestion {
                 return;
             }
 
+            System.out.print("Nom : ");
+            String nom = Menu.scanner.next();
+
             if (hoteList.size() == 1) {
                 System.out.println("Un seul hote trouvé. L'enregister ? (0 : non, 1 ou plus : oui).");
                 if (Menu.scanner.nextInt() > 0) {
@@ -122,7 +126,7 @@ public final class GestionLogements extends Gestion {
                     System.out.print("Piscine ? (0 non, 1 oui)");
                     boolean possedePiscine = Menu.scanner.nextInt() > 0;
 
-                    Gestion.add(logementList, new Maison(hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
+                    Gestion.add(logementList, new Maison(nom, hote, adresse, tarifParNuit, superficie, voyageurMax, superficieJardin, possedePiscine));
                     break;
                 case TYPE_APPARTEMENT:
                     System.out.print("Saisissez le numéro de l'étage :");
@@ -131,7 +135,7 @@ public final class GestionLogements extends Gestion {
                     System.out.print("Superficie du balcon ? (0 : pas de balcon)");
                     int superficieBalcon = Menu.scanner.nextInt();
 
-                    Gestion.add(logementList, new Appartement(hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));
+                    Gestion.add(logementList, new Appartement(nom, hote, adresse, tarifParNuit, superficie, voyageurMax, numeroEtage, superficieBalcon));
                     break;
             }
         } else {
@@ -165,5 +169,20 @@ public final class GestionLogements extends Gestion {
     protected static void back() {
         System.out.println("=> Retour.");
         Gestion.back();
+    }
+
+    /**
+     * Retour un logement de la liste en fonction de son nom.
+     *
+     * @param name - le nom du logement.
+     * @param <T>  - Type générique hérité de Logement.
+     * @return un logement de son type.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends Logement> Optional<T> getLogementByName(String name) {
+
+        T logement = (T) logementList.stream().filter(l -> l.getNom().equals(name)).findFirst().orElse(null);
+
+        return Optional.ofNullable(logement);
     }
 }

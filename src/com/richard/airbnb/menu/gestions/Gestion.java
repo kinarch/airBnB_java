@@ -88,6 +88,6 @@ abstract class Gestion {
      * Retour au meni initial.
      */
     protected static void back() {
-        Menu.init();
+        Menu.displayOptions();
     }
 }

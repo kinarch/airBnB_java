@@ -1,6 +1,7 @@
 package com.richard.airbnb.models.reservations;
 
 import com.richard.airbnb.models.logements.Logement;
+import com.richard.airbnb.tools.MaDate;
 
 import java.util.Date;
 

@@ -1,49 +1,82 @@
 package com.richard.airbnb.models.reservations;
 
+import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
+import com.richard.airbnb.tools.MaDate;
 
 import java.util.Date;
 
-public class Reservation {
+public class Reservation implements Cloneable {
 
-    private static int id = 0;
+    private static int identifiant = 0;
 
-    private int identifiant;
-    private Sejour sejour;
-    private Voyageur voyageur;
+    private final int id;
+    private final Sejour sejour;
+    private final Voyageur voyageur;
+    private final Date dateDeReservation;
     private boolean estValidee;
-    private Date dateDeReservation;
 
     /**
-     * @param sejour            Le sejour
-     * @param voyageur          La personne qui a reservé
-     * @param dateDeReservation La date de réservation
+     * @param sejour   Le sejour
+     * @param voyageur La personne qui a reservé
      */
-    public Reservation(Sejour sejour, Voyageur voyageur, Date dateDeReservation) throws Exception {
+    public Reservation(Sejour sejour, Voyageur voyageur) throws IllegalArgumentException {
 
-        if (sejour == null || voyageur == null || dateDeReservation == null) {
-            throw new Exception("Impossible de créer une réservation car l'un des arguments est nul.");
+        if (sejour == null || voyageur == null) {
+            throw new IllegalArgumentException("Un des arguments est nul.");
         }
 
-        if (!sejour.verificationDateArrivee()) {
-            throw new Exception("Impossible d'effectuer une réservation avant la date actuelle.");
-        }
-
-        if (!sejour.verificationNombreDeVoyageurs()) {
-            throw new Exception("Impossible d'effectuer une réservation avec " + sejour.nbVoyageurs + " voyageurs, supérieur à " + sejour.logement.getNbVoyageursMax() + " nombre de voyageurs max.");
-        }
-
-        if (!sejour.verificationNombreDeNuits()) {
-            throw new Exception("Impossible d'effectuer une réservation car le nombre de nuit est invalide");
-        }
-
-        this.identifiant = ++id;
-        this.estValidee = false;
+        this.id = ++identifiant;
         this.sejour = sejour;
         this.voyageur = voyageur;
-        this.dateDeReservation = dateDeReservation;
+        this.dateDeReservation = new MaDate();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    /*
+        Je renvoie un clone du sejour
+     */
+    public Sejour getSejour() {
+        try {
+            return (Sejour) sejour.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /*
+        Le voyageur ne peut changer
+     */
+    public Voyageur getVoyageur() {
+        return voyageur;
+    }
+
+    /*
+        Je retourne une nouvelle MaDate crée a partir du timestamp de la date.
+     */
+    public MaDate getDateDeReservation() {
+        return (MaDate) dateDeReservation.clone();
+    }
+
+    public boolean isEstValidee() {
+        return estValidee;
+    }
+
+    /*
+        N'est valide qu'une réservation avec un sejour valide
+     */
+    public void setEstValidee(boolean estValidee) {
+//        estValidee = (
+//                sejour.verificationDateArrivee()
+//                        && sejour.verificationNombreDeVoyageurs()
+//                        && sejour.verificationNombreDeNuits()
+//        );
+        this.estValidee = estValidee;
+    }
 
     /**
      * Affiche les information du voyageur et du sejour
@@ -55,5 +88,10 @@ public class Reservation {
     @Override
     public String toString() {
         return "Réservation n°" + identifiant + "\n\r" + voyageur.toString() + " a fait une réservation chez " + sejour.toString();
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

@@ -1,6 +1,7 @@
 package com.richard.airbnb.models.reservations;
 
 import com.richard.airbnb.models.logements.Logement;
+import com.richard.airbnb.tools.MaDate;
 
 import java.util.Date;
 
@@ -15,7 +16,7 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterface 
      * @param logement    Le logement du sejour de type Logement
      * @param nbVoyageurs Le nombre de voyageurs durant le sejour
      */
-    public SejourLong(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) throws Exception {
+    public SejourLong(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) {
         super(dateArrivee, nbNuits, logement, nbVoyageurs);
     }
 

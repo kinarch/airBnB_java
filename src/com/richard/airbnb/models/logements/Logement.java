@@ -1,19 +1,23 @@
 package com.richard.airbnb.models.logements;
 
+import com.richard.airbnb.models.MyComparable;
 import com.richard.airbnb.models.utilisateurs.Hote;
 
 import java.util.Objects;
 
-public abstract class Logement {
+public abstract class Logement implements MyComparable<Logement> {
 
     private final Hote hote;
     private final String adresse;
     private final int tarifParNuit;
     private final int superficie;
     private final int nbVoyageursMax;
-    private String nom;
+    private final String nom;
 
-    public Logement(Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax) throws Exception {
+    public Logement(String nom, Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax) throws Exception {
+        if (nom.isBlank()) {
+            throw new Exception("Le nom du logement est blanc.");
+        }
         if (hote == null) {
             throw new Exception("L'hote n'existe pas, le logement ne peut poursuivre sa construction.");
         }
@@ -29,6 +33,7 @@ public abstract class Logement {
         if (nbVoyageursMax <= 0) {
             throw new Exception("Impossible pour un logement de supporter aucun ou un nombre négatif de voyageur.");
         }
+        this.nom = nom;
         this.hote = hote;
         this.adresse = adresse;
         this.tarifParNuit = tarifParNuit;
@@ -64,10 +69,6 @@ public abstract class Logement {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,5 +84,10 @@ public abstract class Logement {
     @Override
     public int hashCode() {
         return Objects.hash(hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
+    }
+
+    @Override
+    public int getValueToCompare() {
+        return getTarifParNuit();
     }
 }

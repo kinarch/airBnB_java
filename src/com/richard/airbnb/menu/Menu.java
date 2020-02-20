@@ -9,10 +9,10 @@ import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Logement;
 import com.richard.airbnb.models.reservations.Reservation;
 import com.richard.airbnb.models.utilisateurs.Hote;
-import com.richard.airbnb.models.utilisateurs.Personne;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
 import com.richard.airbnb.tools.ASCIIArtGenerator;
 import com.richard.airbnb.tools.AirBnBXMLParser;
+import com.richard.airbnb.tools.MyListComparator;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -21,20 +21,21 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static java.lang.System.out;
+
 public final class Menu {
 
     private static final String TITLE = "AirB&B";
     public static Scanner scanner;
 
     //  la liste pour chaque gestion
-    public static ArrayList<Hote> hoteList = new ArrayList<>();
-    public static ArrayList<Logement> logementList = new ArrayList<>();
-    public static ArrayList<Voyageur> voyageurList = new ArrayList<>();
-    public static ArrayList<Reservation> reservationList = new ArrayList<>();
+    public static final ArrayList<Hote> hoteList = new ArrayList<>();
+    public static final ArrayList<Logement> logementList = new ArrayList<>();
+    public static final ArrayList<Voyageur> voyageurList = new ArrayList<>();
+    public static final ArrayList<Reservation> reservationList = new ArrayList<>();
 
     private Menu() {
     }
-
 
     /*
         TODO ...
@@ -43,15 +44,23 @@ public final class Menu {
      */
 
     /**
-     * [ M A I N ]
      * Methode principale a l'execution de l'application du Menu
      *
      * @param args
      */
     public static void main(String[] args) {
+        scanner = new Scanner(System.in).useDelimiter("\n");
 
-        scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
+        init();
+
+        scanner.close();
+    }
+
+
+    /**
+     * Initialise le menu
+     */
+    public static void init() {
 
         //  Parser le fichier xml et préparer les listes
         try {
@@ -62,7 +71,7 @@ public final class Menu {
             voyageurList.add(new Voyageur("Voyageur", "du Temp", 30));
             voyageurList.add(new Voyageur("Doctor", "Who", 100));
         } catch (Exception ex) {
-            System.out.println("[Error] " + ex.getMessage());
+            out.println("[Error] " + ex.getMessage());
             ex.printStackTrace();
         }
 
@@ -72,25 +81,29 @@ public final class Menu {
             e.printStackTrace();
         }
 
-        Optional<Appartement> a = getLogementByName("Neverland12");
-        a.ifPresent(Appartement::afficher);
-        init();
-        scanner.close();
+//        Optional<Appartement> a = GestionLogements.getLogementByName("Truc");
+//        a.ifPresent(Appartement::afficher);
+//
+//        MyListComparator<Hote> myListComparator = new MyListComparator<>(hoteList);
+//        try {
+//            out.println(myListComparator.getHigher());
+//            out.println(myListComparator.getLower());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        displayOptions();
     }
 
-    /**
-     * Initialise le menu
-     */
-    public static void init() {
+    public static void displayOptions() {
 
-        //  console list display
-        System.out.println("# MENU");
-        System.out.println("Saisir une option : ");
-        System.out.println("1 : Liste des hotes");
-        System.out.println("2 : Liste des logements");
-        System.out.println("3 : Liste des voyageurs");
-        System.out.println("4 : Liste des reservations");
-        System.out.println("5 : Fermer le programme");
+        out.println("# MENU");
+        out.println("Saisir une option : ");
+        out.println("1 : Liste des hotes");
+        out.println("2 : Liste des logements");
+        out.println("3 : Liste des voyageurs");
+        out.println("4 : Liste des reservations");
+        out.println("5 : Fermer le programme");
 
         switch (choose(5)) {
             case 1:
@@ -106,7 +119,7 @@ public final class Menu {
                 GestionReservation.init();
                 break;
             case 5:
-                System.out.println("A bientôt.");
+                out.println("A bientôt.");
                 break;
         }
     }
@@ -128,7 +141,7 @@ public final class Menu {
                 userInput = scanner.nextInt();
             } catch (Exception e) {
                 String s = scanner.next();
-                System.out.println(s + " est une valeur incorecte.");
+                out.println(s + " est une valeur incorecte.");
             }
         } while (userInput < 1 || userInput > maxValue);
 
@@ -177,42 +190,5 @@ public final class Menu {
      */
     public static void writeReservation(String filePath) {
         writeReservation(filePath, false);
-    }
-
-    //  TODO ... Généricité
-
-    /**
-     * Retour un logement de la liste en fonction de son nom.
-     *
-     * @param name - le nom du logement.
-     * @param <T>  - Type générique hérité de Logement.
-     * @return un logement de son type.
-     */
-    public static <T extends Logement> Optional<T> getLogementByName(String name) {
-        T logement = null;
-        for (Logement l : logementList) {
-            if (l.getNom().equals(name)) {
-                logement = (T) l;
-                break;
-            }
-        }
-        return Optional.ofNullable(logement);
-    }
-
-    /**
-     * @param name    - nom.
-     * @param surname - prenom.
-     * @param <T>     - Type générique hérité de Personne.
-     * @return une personne de son type
-     */
-    public static <T extends Personne> Optional<T> getPersonneByNames(String name, String surname, ArrayList<Personne> list) {
-        T personne = null;
-        for (Personne p : list) {
-            if (p.getNom().equals(name) && p.getPrenom().equals(surname)) {
-                personne = (T) p;
-                break;
-            }
-        }
-        return Optional.ofNullable(personne);
     }
 }

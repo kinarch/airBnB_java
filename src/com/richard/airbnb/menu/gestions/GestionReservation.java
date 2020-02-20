@@ -139,7 +139,7 @@ public final class GestionReservation extends Gestion {
         if (nbNuit >= NB_NUIT_POUR_SEJOUR_LONG) {
             //  sejour long
             sejour = new SejourLong(
-                    dateArrivee,
+                    (MaDate) dateArrivee,
                     nbNuit,
                     logement,
                     nbVoyageurs);
@@ -153,7 +153,7 @@ public final class GestionReservation extends Gestion {
             );
         }
 
-        Reservation reservation = new Reservation(sejour, voyageur, new MaDate());
+        Reservation reservation = new Reservation(sejour, voyageur);
         Gestion.add(reservationList, reservation);
     }
 

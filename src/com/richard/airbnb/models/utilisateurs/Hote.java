@@ -2,9 +2,9 @@ package com.richard.airbnb.models.utilisateurs;
 
 import java.util.Objects;
 
-public class Hote extends Personne {
+public final class Hote extends Personne {
 
-    private int delaiDeReponse;
+    private final int delaiDeReponse;
 
     /**
      * Constructeur d'une Personne.
@@ -19,6 +19,10 @@ public class Hote extends Personne {
             throw new Exception("Delai de réponse négatif.");
         }
         this.delaiDeReponse = delaiDeReponse;
+    }
+
+    public int getDelaiDeReponse() {
+        return delaiDeReponse;
     }
 
     public void afficher() {
@@ -47,5 +51,10 @@ public class Hote extends Personne {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), delaiDeReponse);
+    }
+
+    @Override
+    public int getValueToCompare() {
+        return getDelaiDeReponse();
     }
 }

@@ -4,18 +4,18 @@ import com.richard.airbnb.models.utilisateurs.Hote;
 
 import java.util.Objects;
 
-public class Appartement extends Logement {
+public final class Appartement extends Logement {
 
     private final int numeroEtage;
     private final int superficieBalcon;
 
-    public Appartement(Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax, int numeroEtage, int superficieBalcon) throws Exception {
-        super(hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
+    public Appartement(String nom, Hote hote, String adresse, int tarifParNuit, int superficie, int nbVoyageursMax, int numeroEtage, int superficieBalcon) throws Exception {
+        super(nom, hote, adresse, tarifParNuit, superficie, nbVoyageursMax);
         if (superficieBalcon < 0) {
             throw new Exception("Impossible pour un appartement de posséder un balcon avec superficie négative.");
         }
         this.numeroEtage = numeroEtage;
-        this.superficieBalcon = superficieBalcon > 0 ? superficieBalcon : 0;
+        this.superficieBalcon = superficieBalcon;
     }
 
     @Override
