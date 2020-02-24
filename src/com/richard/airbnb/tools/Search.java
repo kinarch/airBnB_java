@@ -26,9 +26,9 @@ public class Search {
     //  optionnal
     private int tarifMinParNuit;
     private int tarifMaxParNuit;
-    private int possedePiscine;
-    private int possedeJardin;
-    private int possedeBalcon;
+    private int withPiscine;
+    private int withJardin;
+    private int withBalcon;
 
     /**
      * @param builder to construct the search.
@@ -37,18 +37,18 @@ public class Search {
         this.nbVoyageurs = builder.nbVoyageurs;
         this.tarifMinParNuit = builder.tarifMinParNuit;
         this.tarifMaxParNuit = builder.tarifMaxParNuit;
-        this.possedePiscine = builder.possedePiscine;
-        this.possedeJardin = builder.possedeJardin;
-        this.possedeBalcon = builder.possedeBalcon;
+        this.withPiscine = builder.possedePiscine;
+        this.withJardin = builder.possedeJardin;
+        this.withBalcon = builder.possedeBalcon;
     }
 
     public void displayOptions() {
         out.println("voyageurs => " + getNbVoyageurs());
         out.println("tarif min => " + getTarifMinParNuit());
         out.println("tarif max => " + getTarifMaxParNuit());
-        out.println("piscine   => " + getPossedePiscine());
-        out.println("jardin    => " + getPossedeJardin());
-        out.println("balcon    => " + getPossedeBalcon());
+        out.println("piscine   => " + getWithPiscine());
+        out.println("jardin    => " + getWithJardin());
+        out.println("balcon    => " + getWithBalcon());
     }
 
     /*
@@ -60,6 +60,7 @@ public class Search {
      * @return the filtered logements list.
      */
     public List<Logement> result() {
+        out.println("FILTER");
         displayOptions();
 //        return AirBnBData.getInstance().logementList.stream()
 //                .filter(predNbVoyageur()
@@ -95,8 +96,8 @@ public class Search {
         return l -> {
             if (l instanceof Maison) {
                 Maison m = (Maison) l;
-                boolean filter = m.getSuperficieJardin() > 0;
-                return with(possedeJardin, filter);
+                boolean hasJardin = m.getSuperficieJardin() > 0;
+                return affirm(withJardin, hasJardin);
             }
             return true;
         };
@@ -105,8 +106,8 @@ public class Search {
     private Predicate<Logement> predPiscine() {
         return l -> {
             if (l instanceof Maison) {
-                boolean filter = ((Maison) l).isPossedePiscine();
-                return with(possedePiscine, filter);
+                boolean hasPiscine = ((Maison) l).isPossedePiscine();
+                return affirm(withPiscine, hasPiscine);
             }
             return true;
         };
@@ -115,8 +116,8 @@ public class Search {
     private Predicate<Logement> predBalcon() {
         return l -> {
             if (l instanceof Appartement) {
-                boolean filter = ((Appartement) l).getSuperficieBalcon() > 0;
-                return with(possedeBalcon, filter);
+                boolean hasBalcon = ((Appartement) l).getSuperficieBalcon() > 0;
+                return affirm(withBalcon, hasBalcon);
             }
             return true;
         };
@@ -147,7 +148,7 @@ public class Search {
                 continue;
 
             // Test pour la piscine
-            if (possedePiscine == YES) {
+            if (withPiscine == YES) {
                 // Oui pour la piscine du coup c'est forcément une maison
                 if (l instanceof Maison) {
                     Maison maison = (Maison) l;
@@ -157,7 +158,7 @@ public class Search {
                 } else
                     continue;
 
-            } else if (possedePiscine == NO) {
+            } else if (withPiscine == NO) {
                 // Non pour la piscine
                 if (l instanceof Maison) {
                     Maison maison = (Maison) l;
@@ -168,7 +169,7 @@ public class Search {
             }
 
             // Test pour le jardin
-            if (possedeJardin == YES) {
+            if (withJardin == YES) {
                 // Oui pour le jardin du coup c'est forcément une maison
                 if (l instanceof Maison) {
                     Maison maison = (Maison) l;
@@ -177,7 +178,7 @@ public class Search {
                         continue;
                 } else
                     continue;
-            } else if (possedeJardin == NO) {
+            } else if (withJardin == NO) {
                 // Non pour le jardin
                 if (l instanceof Maison) {
                     Maison maison = (Maison) l;
@@ -188,7 +189,7 @@ public class Search {
             }
 
             // Test pour le balcon
-            if (possedeBalcon == YES) {
+            if (withBalcon == YES) {
                 // Oui pour le balcon, c'est forcément un appartement
                 if (l instanceof Appartement) {
                     Appartement appartement = (Appartement) l;
@@ -197,7 +198,7 @@ public class Search {
                         continue;
                 } else
                     continue;
-            } else if (possedeBalcon == NO) {
+            } else if (withBalcon == NO) {
                 // Non pour le balcon
                 if (l instanceof Appartement) {
                     Appartement appartement = (Appartement) l;
@@ -226,29 +227,31 @@ public class Search {
         return tarifMaxParNuit;
     }
 
-    public int getPossedePiscine() {
-        return possedePiscine;
+    public int getWithPiscine() {
+        return withPiscine;
     }
 
-    public int getPossedeJardin() {
-        return possedeJardin;
+    public int getWithJardin() {
+        return withJardin;
     }
 
-    public int getPossedeBalcon() {
-        return possedeBalcon;
+    public int getWithBalcon() {
+        return withBalcon;
     }
 
     /**
+     * Return a boolean represent if the option affirm condition.
+     *
      * @param option the option with YES, NO or UNDEFINED value
-     * @param filter the condition of the filter
+     * @param condition the condition of the filter
      * @return boolean between option and condition
      */
-    private boolean with(int option, boolean filter) {
+    private boolean affirm(int option, boolean condition) {
         switch (option) {
             case YES:
-                return filter;
+                return condition;
             case NO:
-                return !filter;
+                return !condition;
             default:
                 return true;
         }
