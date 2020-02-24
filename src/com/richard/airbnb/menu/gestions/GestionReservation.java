@@ -6,6 +6,7 @@ import com.richard.airbnb.models.reservations.Sejour;
 import com.richard.airbnb.models.reservations.SejourCourt;
 import com.richard.airbnb.models.reservations.SejourLong;
 import com.richard.airbnb.models.utilisateurs.Voyageur;
+import com.richard.airbnb.tools.AirBnBData;
 import com.richard.airbnb.tools.MaDate;
 import com.richard.airbnb.menu.Menu;
 
@@ -67,8 +68,8 @@ public final class GestionReservation extends Gestion {
 
         System.out.println("=> Ajouter une réservation.");
 
-        final ArrayList<Logement> logementList = Menu.logementList;
-        final ArrayList<Voyageur> voyageurList = Menu.voyageurList;
+        final ArrayList<Logement> logementList = AirBnBData.getInstance().logementList;
+        final ArrayList<Voyageur> voyageurList = AirBnBData.getInstance().voyageurList;
 
         if (voyageurList.isEmpty()) {
             System.out.println("Aucun voyageur enregistré, réservation d'un sejour impossible.");
@@ -140,20 +141,20 @@ public final class GestionReservation extends Gestion {
             //  sejour long
             sejour = new SejourLong(
                     (MaDate) dateArrivee,
-                    nbNuit,
                     logement,
+                    nbNuit,
                     nbVoyageurs);
         } else {
             //  sejour cours
             sejour = new SejourCourt(
                     dateArrivee,
-                    nbNuit,
                     logement,
+                    nbNuit,
                     nbVoyageurs
             );
         }
 
-        Reservation reservation = new Reservation(sejour, voyageur);
+        Reservation reservation = new Reservation(sejour, voyageur, new Date());
         Gestion.add(reservationList, reservation);
     }
 

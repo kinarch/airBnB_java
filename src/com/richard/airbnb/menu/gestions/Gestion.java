@@ -19,7 +19,7 @@ abstract class Gestion {
     /**
      * Affichage des options en console
      */
-    protected static void displayOptions() {
+    public static void displayOptions() {
         out.println("Saisir une option :");
         out.println(ADD + " : Ajouter");
         out.println(DELETE + " : Supprimer");

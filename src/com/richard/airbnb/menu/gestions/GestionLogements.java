@@ -5,6 +5,7 @@ import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Maison;
 import com.richard.airbnb.models.utilisateurs.Hote;
 import com.richard.airbnb.menu.Menu;
+import com.richard.airbnb.tools.AirBnBData;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -12,9 +13,9 @@ import java.util.Optional;
 
 public final class GestionLogements extends Gestion {
 
-    private static final ArrayList<Logement> logementList = Menu.logementList;
     private static final int TYPE_MAISON = 1;
     private static final int TYPE_APPARTEMENT = 2;
+    private static ArrayList<Logement> logementList;
 
     private GestionLogements() {
     }
@@ -33,6 +34,9 @@ public final class GestionLogements extends Gestion {
             back();
         } else {
             try {
+
+                logementList = AirBnBData.getInstance().logementList;
+
                 switch (userInput) {
                     case ADD:
                         add();
@@ -65,7 +69,7 @@ public final class GestionLogements extends Gestion {
 
         System.out.println("=> Ajouter un logement.");
 
-        final ArrayList<Hote> hoteList = Menu.hoteList;
+        final ArrayList<Hote> hoteList = AirBnBData.getInstance().hoteList;
 
         if (!hoteList.isEmpty()) {
 

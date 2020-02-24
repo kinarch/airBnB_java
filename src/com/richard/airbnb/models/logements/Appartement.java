@@ -18,6 +18,14 @@ public final class Appartement extends Logement {
         this.superficieBalcon = superficieBalcon;
     }
 
+    public int getNumeroEtage() {
+        return numeroEtage;
+    }
+
+    public int getSuperficieBalcon() {
+        return superficieBalcon;
+    }
+
     @Override
     public int getSuperficieTotal() {
         return super.getSuperficie() + superficieBalcon;
@@ -33,7 +41,8 @@ public final class Appartement extends Logement {
         String s = getHote().toString() + "\n\r";
         s += "Le logement est un appartement situé " + getAdresse() + " à l'étage " + numeroEtage + "." + "\n\r";
         s += "superficie : " + getSuperficieTotal() + "m²" + "\n\r";
-        s += "Balcon : " + (superficieBalcon > 0 ? "Oui (" + superficieBalcon + "m²)." : "Non.");
+        s += "Balcon : " + (superficieBalcon > 0 ? "Oui (" + superficieBalcon + "m²)." : "Non.") + "\n\r";
+        s += "Tarif par nuit : " + getTarifParNuit() + "€.";
         return s;
     }
 

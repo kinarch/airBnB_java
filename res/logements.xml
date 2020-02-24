@@ -76,6 +76,21 @@
         <possedePiscine>1</possedePiscine>
     </Maison>
 
+    <Maison name="Maison qui a piscine">
+        <hote>
+            <nom>Monsieurs</nom>
+            <prenom>"Qui a piscine mais pas de jardin"</prenom>
+            <age>25</age>
+            <delaiReponse>6</delaiReponse>
+        </hote>
+        <tarifParNuit>200</tarifParNuit>
+        <adresse>50 Rue de La piscine, Tours</adresse>
+        <superficie>200</superficie>
+        <nbVoyageursMax>8</nbVoyageursMax>
+        <superficieJardin>0</superficieJardin>
+        <possedePiscine>1</possedePiscine>
+    </Maison>
+
     <Maison name="MyMaison">
         <hote>
             <nom>K</nom>
@@ -88,7 +103,7 @@
         <superficie>333</superficie>
         <nbVoyageursMax>6</nbVoyageursMax>
         <superficieJardin>999</superficieJardin>
-        <possedePiscine>1</possedePiscine>
+        <possedePiscine>0</possedePiscine>
     </Maison>
 
 </Logements>

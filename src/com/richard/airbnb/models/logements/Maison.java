@@ -29,13 +29,22 @@ public final class Maison extends Logement {
         s += "Le logement est une maison situé " + getAdresse() + "." + "\n\r";
         s += "superficie : " + getSuperficieTotal() + "m²" + "\n\r";
         s += "Jardin : " + (superficieJardin > 0 ? "Oui (" + superficieJardin + "m²)." : "Non.") + "\n\r";
-        s += "Piscine : " + (possedePiscine ? "Oui." : "Non.");
+        s += "Piscine : " + (possedePiscine ? "Oui." : "Non.") + "\n\r";
+        s += "Tarif par nuit : " + getTarifParNuit() + "€.";
         return s;
     }
 
     @Override
     public int getSuperficieTotal() {
         return super.getSuperficie() + superficieJardin;
+    }
+
+    public int getSuperficieJardin() {
+        return superficieJardin;
+    }
+
+    public boolean isPossedePiscine() {
+        return possedePiscine;
     }
 
     @Override

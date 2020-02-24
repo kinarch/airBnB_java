@@ -16,8 +16,8 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterface 
      * @param logement    Le logement du sejour de type Logement
      * @param nbVoyageurs Le nombre de voyageurs durant le sejour
      */
-    public SejourLong(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) {
-        super(dateArrivee, nbNuits, logement, nbVoyageurs);
+    public SejourLong(Date dateArrivee, Logement logement, int nbNuits, int nbVoyageurs) {
+        super(dateArrivee, logement, nbNuits, nbVoyageurs);
     }
 
     @Override

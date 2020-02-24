@@ -14,6 +14,7 @@ import com.richard.airbnb.tools.MaDate;
 import java.util.Date;
 
 public class App {
+
     public static void main(String[] args) throws Exception {
 
         //  personne : voyageur
@@ -96,19 +97,19 @@ public class App {
             //  sejour cours
             sejour = new SejourCourt(
                     dateArrive,
-                    nbNuitVoyageur,
                     logement,
+                    nbNuitVoyageur,
                     nbVoyageurs
             );
         } else {
             //  sejour long
             sejour = new SejourLong(
                     dateArrive,
-                    nbNuitVoyageur,
                     logement,
+                    nbNuitVoyageur,
                     nbVoyageurs);
         }
 
-        return new Reservation(sejour, voyageur);
+        return new Reservation(sejour, voyageur, new Date());
     }
 }

@@ -9,8 +9,8 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterface
 
     public static final int MAX_NUITS = 6;
 
-    public SejourCourt(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) throws Exception {
-        super(dateArrivee, nbNuits, logement, nbVoyageurs);
+    public SejourCourt(Date dateArrivee, Logement logement, int nbNuits, int nbVoyageurs) throws Exception {
+        super(dateArrivee, logement, nbNuits, nbVoyageurs);
     }
 
     @Override

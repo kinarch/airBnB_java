@@ -13,10 +13,10 @@ public final class Hote extends Personne {
      * @param nom    son nom
      * @param age    son age
      */
-    public Hote(String prenom, String nom, int age, int delaiDeReponse) throws Exception {
+    public Hote(String prenom, String nom, int age, int delaiDeReponse) throws IllegalArgumentException {
         super(prenom, nom, age);
-        if (delaiDeReponse < 0) {
-            throw new Exception("Delai de réponse négatif.");
+        if (delaiDeReponse <= 0) {
+            throw new IllegalArgumentException("Delai de réponse inférieur ou égal à 0.");
         }
         this.delaiDeReponse = delaiDeReponse;
     }

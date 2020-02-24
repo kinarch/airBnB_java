@@ -2,13 +2,14 @@ package com.richard.airbnb.menu.gestions;
 
 import com.richard.airbnb.models.utilisateurs.Voyageur;
 import com.richard.airbnb.menu.Menu;
+import com.richard.airbnb.tools.AirBnBData;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public final class GestionVoyageurs extends Gestion {
 
-    private static final ArrayList<Voyageur> voyageurList = Menu.voyageurList;
+    private static ArrayList<Voyageur> voyageurList;
 
     private GestionVoyageurs() {
     }
@@ -23,11 +24,15 @@ public final class GestionVoyageurs extends Gestion {
         System.out.println("# Gestion des voyageurs");
         Gestion.displayOptions();
 
+
         int userInput = Menu.choose(N_OPTIONS);
         if (userInput == BACK) {
             back();
         } else {
             try {
+
+                voyageurList = AirBnBData.getInstance().voyageurList;
+
                 switch (userInput) {
                     case ADD:
                         add();

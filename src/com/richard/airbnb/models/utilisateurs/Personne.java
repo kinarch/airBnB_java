@@ -4,7 +4,7 @@ import com.richard.airbnb.models.MyComparable;
 
 import java.util.Objects;
 
-public abstract class Personne implements MyComparable<Personne> {
+public abstract class Personne implements MyComparable<Personne>, Cloneable {
 
     //  constantes
     private static final int NOM_MAX_LENGHT = 100;
@@ -21,21 +21,24 @@ public abstract class Personne implements MyComparable<Personne> {
      * @param nom    son nom
      * @param age    son age
      */
-    public Personne(String prenom, String nom, int age) throws Exception {
+    public Personne(String prenom, String nom, int age) throws IllegalArgumentException {
+        if (prenom == null || nom == null) {
+            throw new IllegalArgumentException("Arguments null.");
+        }
         if (prenom.isBlank()) {
-            throw new Exception("Prenom vide.");
+            throw new IllegalArgumentException("Prenom vide.");
         }
         if (prenom.length() > NOM_MAX_LENGHT) {
-            throw new Exception("Prenom trop grand.");
+            throw new IllegalArgumentException("Prenom trop grand.");
         }
         if (nom.isBlank()) {
-            throw new Exception("Nom vide.");
+            throw new IllegalArgumentException("Nom vide.");
         }
         if (nom.length() > NOM_MAX_LENGHT) {
-            throw new Exception("Nom trop grand.");
+            throw new IllegalArgumentException("Nom trop grand.");
         }
         if (age < AGE_MAJORITE) {
-            throw new Exception("Seul les adultes (age supérieur ou égal à " + AGE_MAJORITE + ") peuvent être enregistré.");
+            throw new IllegalArgumentException("Seul les adultes (age supérieur ou égal à " + AGE_MAJORITE + ") peuvent être enregistré.");
         }
         this.prenom = prenom;
         this.nom = nom;
@@ -90,5 +93,10 @@ public abstract class Personne implements MyComparable<Personne> {
     @Override
     public int getValueToCompare() {
         return getAge();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

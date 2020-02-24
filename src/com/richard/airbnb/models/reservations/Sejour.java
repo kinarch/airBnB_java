@@ -13,7 +13,13 @@ public abstract class Sejour implements SejourInterface, Cloneable {
     protected int nbNuits;
     protected int tarif;
 
-    public Sejour(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) throws IllegalArgumentException {
+    public Sejour(Date dateArrivee, Logement logement, int nbNuits, int nbVoyageurs) throws IllegalArgumentException {
+        if (nbNuits < 1) {
+            throw new IllegalArgumentException("Nombre de nuit non valide.");
+        }
+        if (nbVoyageurs < 1) {
+            throw new IllegalArgumentException("Nombre de voyageurs non valide.");
+        }
         this.nbNuits = nbNuits;
         this.nbVoyageurs = nbVoyageurs;
         setDateArrivee(dateArrivee);
@@ -90,6 +96,8 @@ public abstract class Sejour implements SejourInterface, Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return (Sejour) super.clone();
+        Sejour clone = (Sejour) super.clone();
+        clone.setDateArrivee(new MaDate(dateArrivee.getTime()));
+        return clone;
     }
 }

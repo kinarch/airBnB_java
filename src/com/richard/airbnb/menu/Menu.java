@@ -5,20 +5,17 @@ import com.richard.airbnb.menu.gestions.GestionHotes;
 import com.richard.airbnb.menu.gestions.GestionLogements;
 import com.richard.airbnb.menu.gestions.GestionReservation;
 import com.richard.airbnb.menu.gestions.GestionVoyageurs;
-import com.richard.airbnb.models.logements.Appartement;
 import com.richard.airbnb.models.logements.Logement;
 import com.richard.airbnb.models.reservations.Reservation;
-import com.richard.airbnb.models.utilisateurs.Hote;
-import com.richard.airbnb.models.utilisateurs.Voyageur;
 import com.richard.airbnb.tools.ASCIIArtGenerator;
-import com.richard.airbnb.tools.AirBnBXMLParser;
-import com.richard.airbnb.tools.MyListComparator;
+import com.richard.airbnb.tools.AirBnBData;
+import com.richard.airbnb.tools.Search;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -29,9 +26,7 @@ public final class Menu {
     public static Scanner scanner;
 
     //  la liste pour chaque gestion
-    public static final ArrayList<Hote> hoteList = new ArrayList<>();
-    public static final ArrayList<Logement> logementList = new ArrayList<>();
-    public static final ArrayList<Voyageur> voyageurList = new ArrayList<>();
+    public static AirBnBData data;
     public static final ArrayList<Reservation> reservationList = new ArrayList<>();
 
     private Menu() {
@@ -62,37 +57,31 @@ public final class Menu {
      */
     public static void init() {
 
-        //  Parser le fichier xml et préparer les listes
         try {
-            AirBnBXMLParser.parseListDOM("res/logements.xml", hoteList, logementList);
-            /*
-                exemple voyageurs
-             */
-            voyageurList.add(new Voyageur("Voyageur", "du Temp", 30));
-            voyageurList.add(new Voyageur("Doctor", "Who", 100));
-        } catch (Exception ex) {
-            out.println("[Error] " + ex.getMessage());
-            ex.printStackTrace();
-        }
-
-        try {
+            data = AirBnBData.getInstance();
             ASCIIArtGenerator.printTextArt(TITLE, ASCIIArtGenerator.ART_SIZE_SMALL);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-//        Optional<Appartement> a = GestionLogements.getLogementByName("Truc");
-//        a.ifPresent(Appartement::afficher);
-//
-//        MyListComparator<Hote> myListComparator = new MyListComparator<>(hoteList);
-//        try {
-//            out.println(myListComparator.getHigher());
-//            out.println(myListComparator.getLower());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Search search = new Search.SearchBuilder(1)
+                    .possedePiscine(true)
+                    .build();
+            List<Logement> list = search.result();
+            out.println("Resultat : ");
+            if (list.isEmpty()) {
+                out.println("Aucun résultat");
+            } else {
+                for (Logement l : list) {
+                    l.afficher();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        displayOptions();
+//        displayOptions();
     }
 
     public static void displayOptions() {

@@ -2,13 +2,14 @@ package com.richard.airbnb.menu.gestions;
 
 import com.richard.airbnb.menu.Menu;
 import com.richard.airbnb.models.utilisateurs.Hote;
+import com.richard.airbnb.tools.AirBnBData;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public final class GestionHotes extends Gestion {
 
-    private static final ArrayList<Hote> hoteList = Menu.hoteList;
+    private static ArrayList<Hote> hoteList;
 
     private GestionHotes() {
     }
@@ -22,11 +23,15 @@ public final class GestionHotes extends Gestion {
         System.out.println("# Gestion des hotes");
         Gestion.displayOptions();
 
+
         int userInput = Menu.choose(N_OPTIONS);
         if (userInput == BACK) {
             back();
         } else {
             try {
+
+                hoteList = AirBnBData.getInstance().hoteList;
+
                 switch (userInput) {
                     case ADD:
                         add();
