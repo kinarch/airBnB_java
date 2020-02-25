@@ -62,14 +62,6 @@ public class Search {
     public List<Logement> result() {
         out.println("FILTER");
         displayOptions();
-//        return AirBnBData.getInstance().logementList.stream()
-//                .filter(predNbVoyageur()
-//                        .and(predTarifMin())
-//                        .and(predTarifMax())
-//                        .and(
-//                                predJardin().and(predPiscine()).or(predBalcon())
-//                        )
-//                ).collect(Collectors.toList());
         return AirBnBData.getInstance().logementList.stream()
                 .filter(predNbVoyageur()
                         .and(predTarifMin())
@@ -95,21 +87,20 @@ public class Search {
     private Predicate<Logement> predJardin() {
         return l -> {
             if (l instanceof Maison) {
-                Maison m = (Maison) l;
-                boolean hasJardin = m.getSuperficieJardin() > 0;
+                boolean hasJardin = ((Maison) l).getSuperficieJardin() > 0;
                 return affirm(withJardin, hasJardin);
             }
-            return true;
+            return withJardin != YES;
         };
     }
 
     private Predicate<Logement> predPiscine() {
         return l -> {
             if (l instanceof Maison) {
-                boolean hasPiscine = ((Maison) l).isPossedePiscine();
+                boolean hasPiscine = ((Maison) l).hasPiscine();
                 return affirm(withPiscine, hasPiscine);
             }
-            return true;
+            return withPiscine != YES;
         };
     }
 
@@ -119,7 +110,7 @@ public class Search {
                 boolean hasBalcon = ((Appartement) l).getSuperficieBalcon() > 0;
                 return affirm(withBalcon, hasBalcon);
             }
-            return true;
+            return withBalcon != YES;
         };
     }
 
@@ -153,7 +144,7 @@ public class Search {
                 if (l instanceof Maison) {
                     Maison maison = (Maison) l;
                     // La maison n'a pas de piscine, on ne la prend pas
-                    if (!maison.isPossedePiscine())
+                    if (!maison.hasPiscine())
                         continue;
                 } else
                     continue;
@@ -163,7 +154,7 @@ public class Search {
                 if (l instanceof Maison) {
                     Maison maison = (Maison) l;
                     // Si la maison a une piscine, on ne la prend pas
-                    if (maison.isPossedePiscine())
+                    if (maison.hasPiscine())
                         continue;
                 }
             }
@@ -242,7 +233,7 @@ public class Search {
     /**
      * Return a boolean represent if the option affirm condition.
      *
-     * @param option the option with YES, NO or UNDEFINED value
+     * @param option    the option with YES, NO or UNDEFINED value
      * @param condition the condition of the filter
      * @return boolean between option and condition
      */
@@ -271,7 +262,11 @@ public class Search {
 
         public SearchBuilder(int nbVoyageurs) {
             this.nbVoyageurs = nbVoyageurs;
+            this.tarifMinParNuit = 0;
             this.tarifMaxParNuit = Integer.MAX_VALUE;
+            this.possedePiscine = UNDEFINED;
+            this.possedeJardin = UNDEFINED;
+            this.possedeBalcon = UNDEFINED;
         }
 
         public SearchBuilder tarifMinParNuit(int tarifMinParNuit) {
@@ -382,3 +377,13 @@ public class Search {
 //        }
 //
 //        return result;
+
+
+//        return AirBnBData.getInstance().logementList.stream()
+//                .filter(predNbVoyageur()
+//                        .and(predTarifMin())
+//                        .and(predTarifMax())
+//                        .and(
+//                                predJardin().and(predPiscine()).or(predBalcon())
+//                        )
+//                ).collect(Collectors.toList());

@@ -66,7 +66,9 @@ public final class Menu {
 
         try {
             Search search = new Search.SearchBuilder(1)
-                    .possedeBalcon(true)
+                    .possedePiscine(true)
+//                    .possedeJardin(true)
+//                    .possedeBalcon(true)
                     .build();
             List<Logement> list = search.result();
             out.println("Resultat : ");

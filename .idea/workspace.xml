@@ -30,6 +30,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../SnakeGame" />
@@ -133,9 +137,10 @@
       <screen x="0" y="0" width="1473" height="864" />
     </state>
     <state x="712" y="320" width="426" height="236" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1473.864@0.0.1473.864" timestamp="1582211200926" />
-    <state x="242" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1582123968188">
-      <screen x="0" y="0" width="1473" height="864" />
+    <state x="135" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1582620177505">
+      <screen x="0" y="0" width="1470" height="864" />
     </state>
+    <state x="135" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1470.864@0.0.1470.864" timestamp="1582620177505" />
     <state x="242" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1473.864@0.0.1473.864" timestamp="1582123968188" />
     <state x="227" y="84" key="#com.intellij.unscramble.UnscrambleDialog" timestamp="1581930002294">
       <screen x="0" y="0" width="1473" height="864" />
@@ -154,25 +159,25 @@
     </state>
     <state x="360" y="186" key="FileChooserDialogImpl/0.0.1470.864@0.0.1470.864" timestamp="1582366255704" />
     <state x="361" y="186" key="FileChooserDialogImpl/0.0.1473.864@0.0.1473.864" timestamp="1582124987399" />
-    <state width="1428" height="302" key="GridCell.Tab.0.bottom" timestamp="1582572610205">
+    <state width="1428" height="302" key="GridCell.Tab.0.bottom" timestamp="1582621066041">
       <screen x="0" y="0" width="1470" height="864" />
     </state>
-    <state width="1428" height="302" key="GridCell.Tab.0.bottom/0.0.1470.864@0.0.1470.864" timestamp="1582572610205" />
+    <state width="1428" height="302" key="GridCell.Tab.0.bottom/0.0.1470.864@0.0.1470.864" timestamp="1582621066041" />
     <state width="1430" height="379" key="GridCell.Tab.0.bottom/0.0.1473.864@0.0.1473.864" timestamp="1582296966868" />
-    <state width="1428" height="302" key="GridCell.Tab.0.center" timestamp="1582572610204">
+    <state width="1428" height="302" key="GridCell.Tab.0.center" timestamp="1582621066040">
       <screen x="0" y="0" width="1470" height="864" />
     </state>
-    <state width="1428" height="302" key="GridCell.Tab.0.center/0.0.1470.864@0.0.1470.864" timestamp="1582572610204" />
+    <state width="1428" height="302" key="GridCell.Tab.0.center/0.0.1470.864@0.0.1470.864" timestamp="1582621066040" />
     <state width="1430" height="379" key="GridCell.Tab.0.center/0.0.1473.864@0.0.1473.864" timestamp="1582296966868" />
-    <state width="1428" height="302" key="GridCell.Tab.0.left" timestamp="1582572610204">
+    <state width="1428" height="302" key="GridCell.Tab.0.left" timestamp="1582621066040">
       <screen x="0" y="0" width="1470" height="864" />
     </state>
-    <state width="1428" height="302" key="GridCell.Tab.0.left/0.0.1470.864@0.0.1470.864" timestamp="1582572610204" />
+    <state width="1428" height="302" key="GridCell.Tab.0.left/0.0.1470.864@0.0.1470.864" timestamp="1582621066040" />
     <state width="1430" height="379" key="GridCell.Tab.0.left/0.0.1473.864@0.0.1473.864" timestamp="1582296966868" />
-    <state width="1428" height="302" key="GridCell.Tab.0.right" timestamp="1582572610205">
+    <state width="1428" height="302" key="GridCell.Tab.0.right" timestamp="1582621066041">
       <screen x="0" y="0" width="1470" height="864" />
     </state>
-    <state width="1428" height="302" key="GridCell.Tab.0.right/0.0.1470.864@0.0.1470.864" timestamp="1582572610205" />
+    <state width="1428" height="302" key="GridCell.Tab.0.right/0.0.1470.864@0.0.1470.864" timestamp="1582621066041" />
     <state width="1430" height="379" key="GridCell.Tab.0.right/0.0.1473.864@0.0.1473.864" timestamp="1582296966868" />
     <state width="1430" height="276" key="GridCell.Tab.1.bottom" timestamp="1582451377175">
       <screen x="0" y="0" width="1470" height="864" />
@@ -207,6 +212,10 @@
     </state>
     <state x="242" y="249" key="com.intellij.ide.util.TipDialog/0.0.1470.864@0.0.1470.864" timestamp="1582451395702" />
     <state x="242" y="249" key="com.intellij.ide.util.TipDialog/0.0.1473.864@0.0.1473.864" timestamp="1581930352765" />
+    <state x="465" y="326" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1582619151387">
+      <screen x="0" y="0" width="1470" height="864" />
+    </state>
+    <state x="465" y="326" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1470.864@0.0.1470.864" timestamp="1582619151387" />
     <state x="168" y="128" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1580507177282">
       <screen x="0" y="0" width="1473" height="864" />
     </state>
