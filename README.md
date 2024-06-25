@@ -1,0 +1,1 @@
+Exercice de formation.
